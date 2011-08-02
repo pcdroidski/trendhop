@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  trend_category_id: 1
+  description: MyString
+  like_count: 1
+  trend_count: 1
+
+two:
+  name: MyString
+  trend_category_id: 1
+  description: MyString
+  like_count: 1
+  trend_count: 1

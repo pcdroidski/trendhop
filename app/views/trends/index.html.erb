@@ -1,0 +1,31 @@
+<h1>Listing trends</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Trend category</th>
+    <th>Description</th>
+    <th>Like count</th>
+    <th>Trend count</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @trends.each do |trend| %>
+  <tr>
+    <td><%= trend.name %></td>
+    <td><%= trend.trend_category_id %></td>
+    <td><%= trend.description %></td>
+    <td><%= trend.like_count %></td>
+    <td><%= trend.trend_count %></td>
+    <td><%= link_to 'Show', trend %></td>
+    <td><%= link_to 'Edit', edit_trend_path(trend) %></td>
+    <td><%= link_to 'Destroy', trend, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Trend', new_trend_path %>

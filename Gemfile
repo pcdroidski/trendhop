@@ -1,11 +1,15 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc4'
+gem 'rails', '3.1.0.rc5'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+#Rails database
+gem 'mysql2', "0.3.2"
+
+# Rails 3.1 - Pagination - Use the head for rails 3.1
+gem 'kaminari', :git => "git://github.com/amatsuda/kaminari.git"
 
 # Asset template engines
 gem 'json'
@@ -24,3 +28,18 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug'
 
+# Rails 3.1 - Image - Use the head for rails 3.1
+#gem 'rmagick' # Image Manipulation
+#gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git" # Image Database
+#gem 'aws-s3', :require => 'aws/s3' # Image Storage
+
+# Search Engine
+#gem 'thinking-sphinx', :branch => "rails3", :git => "git://github.com/freelancing-god/thinking-sphinx.git", :require => 'thinking_sphinx'
+
+# Authentication
+# Decided to not go with restful authentication as it's not RAILS 3 by default
+# gem 'restful-authentication', :git => 'git://github.com/technoweenie/restful-authentication'
+# Instead using devise
+
+gem 'devise'
+#gem 'cancan'

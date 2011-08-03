@@ -1,4 +1,6 @@
 Trendhop::Application.routes.draw do
+  devise_for :users
+
   resources :trends
 
   resources :blogs

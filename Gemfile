@@ -6,7 +6,7 @@ gem 'rails', '3.1.0.rc5'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 #Rails database
-gem 'mysql2', "0.3.2"
+gem 'mysql2', "0.3.6"
 
 # Rails 3.1 - Pagination - Use the head for rails 3.1
 gem 'kaminari', :git => "git://github.com/amatsuda/kaminari.git"

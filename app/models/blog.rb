@@ -1,6 +1,8 @@
 class Blog < ActiveRecord::Base
-  
+
   belongs_to :user
-  
-  has_many :trends
+
+  has_many :blog_trends
+  has_many :trends, :through => :blog_trends
+
 end

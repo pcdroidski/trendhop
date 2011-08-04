@@ -1,13 +1,20 @@
 Trendhop::Application.routes.draw do
+
   devise_for :users
 
   resources :trends
 
-  resources :blogs
+  resources :blogs do
+    resources :trends
+  end
 
-  get "home/index"
 
-  resources :users
+  resources :users do
+    resources :blogs
+  end
+
+
+  root :to => 'home#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

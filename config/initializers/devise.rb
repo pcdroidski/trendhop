@@ -35,7 +35,7 @@ Devise.setup do |config|
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
   config.case_insensitive_keys = [ :email ]
-  
+
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
@@ -64,7 +64,7 @@ Devise.setup do |config|
   config.stretches = 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = "34c2ff50777c2699bf9b59eab4f7f1e50a27576aeb4aee06f9f2beb2bcb8ace692006e091d0e36ddcf1584d89d244ea639be587fad80cd70837236d823f7fc46"
+  # config.pepper = "4c215e71d3c43dd1a73d4f12b1749e822c6775568acf0fae8d0d7aea317409403f4178db1a41ebaf85afa5a2bb3afc995ade3e877cfe7ac79e9d3fb7b5a7866c"
 
   # ==> Configuration for :confirmable
   # The time you want to give your user to confirm his account. During this time
@@ -161,7 +161,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+   config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).

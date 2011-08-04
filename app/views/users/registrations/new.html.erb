@@ -1,0 +1,38 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <h4>User Information </h4>
+  <p><%= f.label :first_name %><br />
+  <%= f.email_field :first_name %></p>
+  <p><%= f.label :last_name %><br />
+  <%= f.email_field :last_name %></p>
+  <p><%= f.label :city %><br />
+  <%= f.email_field :city %></p>
+  <p><%= f.label :state_id %><br />
+  <%= f.email_field :state_id %></p>
+  <p><%= f.label :sex %><br />
+  <%= f.email_field :sex %></p>
+  <p><%= f.label :birth_day %><br />
+  <%= f.email_field :birth_day %></p>
+  <p><%= f.label :birth_month %><br />
+  <%= f.email_field :birth_month %></p>
+  <p><%= f.label :birth_year %><br />
+  <%= f.email_field :birth_year %></p>
+  <br/>
+
+  <h4>Log in Information: </h4>
+  <p><%= f.label :email %><br />
+  <%= f.email_field :email %></p>
+
+  <p><%= f.label :password %><br />
+  <%= f.password_field :password %></p>
+
+  <p><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></p>
+
+  <p><%= f.submit "Sign up" %></p>
+<% end %>
+
+<%= render :partial => "devise/shared/links" %>

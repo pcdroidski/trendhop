@@ -1,10 +1,9 @@
 <!-- Header -->
 <div id="header_container">
-  <div class="header_xx styles 16">
-    <div class="omegea" id="header">
+  <div class="container_16">
+    <div class="grid_16" id="header">
       <header>
-        <div class="user">
-
+        <div class="login">
         <% if user_signed_in? %>
           <div>Welcome to TrendHop, <%= current_user.name %> </div><br/>
             <%= link_to "Sign out!", destroy_user_session_path %>

@@ -1,9 +1,9 @@
 <!-- Header -->
 <div id="header_container">
   <div class="container_16">
-    <div class="grid_16" id="header">
+    <div id="header">
       <header>
-        <div class="login">
+       <div class="grid_4 omega fl">
         <% if user_signed_in? %>
           <div>Welcome to TrendHop, <%= current_user.name %> </div><br/>
             <%= link_to "Sign out!", destroy_user_session_path %>
@@ -12,7 +12,16 @@
             <%= link_to "Sign in!", new_user_session_path %>
         <% end%>
         </div>
-      </header>
+        <div class="grid_8 fl">
+          <h2>TrendHop </h2>
+        </div>
+        <div class="grid_4 fl">
+          <%= link_to "Home", root_path %>
+          <%= link_to "Profile", user_path(current_user) %>
+          <%= link_to "Trends", trends_path%>
+        </div>
+        
+        </header>
     </div>
   </div>
 </div>

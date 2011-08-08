@@ -4,6 +4,7 @@ class BlogsController < ApplicationController
   def index
     @blogs = Blog.all
 
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @blogs }
@@ -42,8 +43,52 @@ class BlogsController < ApplicationController
   def create
     @blog = Blog.new(params[:blog])
 
+    trend_array=[]
+    @blog.description.split(" ").each do |str|
+      if str.include?("#")
+        trend_array << str.delete_chars.downcase
+      end
+    end
+
     respond_to do |format|
       if @blog.save
+        trend_array.each do |t|
+          @trend = Trend.where(:name => t).first
+          if @trend.blank?
+            @trend = Trend.new()
+            @trend.name = t
+            @trend.trend_count = 0
+          end
+          raise @trend.inspect
+          @trend.trend_count += 1
+          @trend.save
+
+
+          hop_array = trend_array.reject{ |a| a== t}
+          hop_array.each do |hop|
+            @hop = Trend.where(:name => hop).first
+            @trend_hop = TrendHop.where(:trend_id => @trend.id, :related_trend_id => @hop.id).first unless @hop.blank? || @trend.blank?
+
+            if @trend_hop.blank?
+              @trend_hop = TrendHop.new()
+              @trend_hop.trend_id = @trend.id
+              if @hop.blank?
+                @hop = Trend.new()
+                @hop.name = hop
+                @hop.save
+              end
+              @trend_hop.related_trend_id = @hop.id
+              @trend_hop.count = 0
+            end
+            @trend_hop.count += 1
+            @trend_hop.save
+          end
+          @blog_trend = BlogTrend.new()
+          @blog_trend.blog_id = @blog.id
+          @blog_trend.trend_id = @trend.id
+          @blog_trend.save
+        end
+
         format.html { redirect_to @blog, :notice => 'Blog was successfully created.' }
         format.json { render :json => @blog, :status => :created, :location => @blog }
       else
@@ -80,4 +125,11 @@ class BlogsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  private
+
+  def delete_chars
+    self.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")")
+  end
+
 end

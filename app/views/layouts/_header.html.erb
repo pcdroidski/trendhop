@@ -17,10 +17,11 @@
         </div>
         <div class="grid_4 fl">
           <%= link_to "Home", root_path %>
-          <%= link_to "Profile", user_path(current_user) %>
+          <%= link_to "Profile", user_path(current_user) unless current_user.blank? %>
+          <%= link_to "Blogs", blogs_path %>
           <%= link_to "Trends", trends_path%>
         </div>
-        
+
         </header>
     </div>
   </div>

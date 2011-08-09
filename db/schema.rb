@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(:version => 20110808182242) do
   create_table "blogs", :force => true do |t|
     t.integer  "user_id"
     t.integer  "category_id"
-    t.string   "name"
-    t.text     "description"
+    t.string   "title"
+    t.text     "post"
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(:version => 20110808182242) do
   create_table "trends", :force => true do |t|
     t.string   "name"
     t.integer  "trend_category_id"
-    t.string   "description"
     t.integer  "like_count"
     t.integer  "trend_count"
     t.datetime "created_at"

@@ -42,13 +42,17 @@ class BlogsController < ApplicationController
   # POST /blogs.json
   def create
     @blog = Blog.new(params[:blog])
+    @user = current_user
 
     trend_array=[]
-    @blog.description.split(" ").each do |str|
+    @blog.post.split(" ").each do |str|
       if str.include?("#")
-        trend_array << str.delete_chars.downcase
+        trend = delete_chars(str)
+ #         raise "#{trend.inspect} #{trend_array.inspect}"
+        trend_array << trend if !trend_array.include?(trend)
       end
     end
+
 
     respond_to do |format|
       if @blog.save
@@ -59,10 +63,18 @@ class BlogsController < ApplicationController
             @trend.name = t
             @trend.trend_count = 0
           end
-          raise @trend.inspect
-          @trend.trend_count += 1
+          @trend.trend_count.blank? ? @trend.trend_count = 1 : @trend.trend_count += 1
           @trend.save
 
+          @user_trend = UserTrend.where(:user_id => @user, :trend_id => @trend).first
+          if @user_trend.blank?
+            @user_trend = UserTrend.new()
+            @user_trend.user_id = @user.id
+            @user_trend.trend_id = @trend.id
+            @user_trend.save
+          else
+            @user_trend.update_attributes()
+          end
 
           hop_array = trend_array.reject{ |a| a== t}
           hop_array.each do |hop|
@@ -128,8 +140,8 @@ class BlogsController < ApplicationController
 
   private
 
-  def delete_chars
-    self.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")")
+  def delete_chars(trend)
+    trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").downcase
   end
 
 end

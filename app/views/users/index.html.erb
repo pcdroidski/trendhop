@@ -4,14 +4,11 @@
   <tr>
     <th>Email</th>
     <th>Domain</th>
-    <th>First name</th>
-    <th>Last name</th>
+    <th>Name</th>
     <th>City</th>
     <th>State</th>
     <th>Sex</th>
-    <th>Birth day</th>
-    <th>Birth month</th>
-    <th>Birth year</th>
+    <th>Birth Date</th>
     <th></th>
     <th></th>
     <th></th>
@@ -21,14 +18,11 @@
   <tr>
     <td><%= user.email %></td>
     <td><%= user.domain %></td>
-    <td><%= user.first_name %></td>
-    <td><%= user.last_name %></td>
+    <td><%= user.name %></td>
     <td><%= user.city %></td>
     <td><%= user.state_id %></td>
     <td><%= user.sex %></td>
-    <td><%= user.birth_day %></td>
-    <td><%= user.birth_month %></td>
-    <td><%= user.birth_year %></td>
+    <td><%= user.birth_date%></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>

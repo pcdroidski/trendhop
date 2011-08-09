@@ -11,15 +11,20 @@
 </p>
 
 <p>
-  <b>Name:</b>
-  <%= @blog.name %>
+  <b>Title:</b>
+  <%= @blog.title %>
 </p>
 
 <p>
-  <b>Description:</b>
-  <%= @blog.description %>
+  <b>Post:</b>
+  <%= @blog.post %>
 </p>
-
+<p>
+  <b>Trends: <b>
+    <% @blog.trends.each do |trend| %>
+      <%= link_to trend.name, trend_path(trend)%><br/>
+    <%end %>
+</p>
 <p>
   <b>Url:</b>
   <%= @blog.url %>

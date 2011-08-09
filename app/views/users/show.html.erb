@@ -11,13 +11,8 @@
 </p>
 
 <p>
-  <b>First name:</b>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <b>Last name:</b>
-  <%= @user.last_name %>
+  <b>Name</b>
+  <%= @user.name %>
 </p>
 
 <p>
@@ -36,20 +31,23 @@
 </p>
 
 <p>
-  <b>Birth day:</b>
-  <%= @user.birth_day %>
+  <b>Birth date:</b>
+  <%= @user.birth_date %>
 </p>
+
+<hr/>
 
 <p>
-  <b>Birth month:</b>
-  <%= @user.birth_month %>
+  <b>Blogs: </b>
+  <%= render :partial => "blogs/index"%>
 </p>
-
-<p>
-  <b>Birth year:</b>
-  <%= @user.birth_year %>
-</p>
-
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+
+<hr/>
+
+<p>
+  <b>Trends: </b>
+  <%= render :partial => "trends/index" %>
+</p>

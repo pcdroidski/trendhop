@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
     [first_name,last_name].join(" ")
   end
 
+  def birth_date
+    [birth_day, birth_month, birth_year].join("/")
+  end
+
 end

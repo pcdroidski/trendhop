@@ -17,7 +17,7 @@
     <td><%= blog.category_id %></td>
     <td><%= blog.title %></td>
     <td><%= blog.post %></td>
-    <td><% blog.trends.each do |trend| %> <%= link_to trend.name, trend_path(trend) %><br/> <% end%></td>
+    <td><% blog.trends.each do |trend| %> <%= link_to trend.name, trend_path(trend.name) %><br/> <% end%></td>
     <td><%= blog.url %></td>
     <td><%= link_to 'Show', blog %></td>
     <td><%= link_to 'Edit', edit_blog_path(blog) %></td>

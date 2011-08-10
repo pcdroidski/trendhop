@@ -22,7 +22,7 @@
 <p>
   <b>Trends: <b>
     <% @blog.trends.each do |trend| %>
-      <%= link_to trend.name, trend_path(trend)%><br/>
+      <%= link_to trend.name, trend_path(trend.name)%><br/>
     <%end %>
 </p>
 <p>

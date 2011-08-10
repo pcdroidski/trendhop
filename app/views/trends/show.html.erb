@@ -19,6 +19,19 @@
   <%= @trend.trend_count %>
 </p>
 
+<p>
+  <b>Hop to another trend / Related trends: </b><br/>
+  <% @trend.trends.each do |trend|%>
+  <%= link_to trend.name, trend_path(trend.name) %><br/>
+  <% end%>
+</p>
+
+<hr/>
+
+<p>
+  <b>Blogs: </b>
+  <%= render :partial => "blogs/index"%>
+</p>
 
 <%= link_to 'Edit', edit_trend_path(@trend) %> |
 <%= link_to 'Back', trends_path %>

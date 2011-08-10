@@ -1,4 +1,5 @@
 class TrendsController < ApplicationController
+    before_filter :authenticate_user!
   # GET /trends
   # GET /trends.json
   def index
@@ -13,7 +14,8 @@ class TrendsController < ApplicationController
   # GET /trends/1
   # GET /trends/1.json
   def show
-    @trend = Trend.find(params[:id])
+    @trend = Trend.where(:name => params[:id]).first
+    @blogs = @trend.blogs
 
     respond_to do |format|
       format.html # show.html.erb

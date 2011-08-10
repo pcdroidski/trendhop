@@ -1,4 +1,5 @@
 class BlogsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /blogs
   # GET /blogs.json
   def index
@@ -71,16 +72,18 @@ class BlogsController < ApplicationController
             @user_trend = UserTrend.new()
             @user_trend.user_id = @user.id
             @user_trend.trend_id = @trend.id
+            @user_trend.count = 1
             @user_trend.save
           else
-            @user_trend.update_attributes()
+            @user_trend.count.blank? ? @user_trend.count = 1 : @user_trend.count += 1
+            @user_trend.save
           end
 
           hop_array = trend_array.reject{ |a| a== t}
           hop_array.each do |hop|
             @hop = Trend.where(:name => hop).first
+            
             @trend_hop = TrendHop.where(:trend_id => @trend.id, :related_trend_id => @hop.id).first unless @hop.blank? || @trend.blank?
-
             if @trend_hop.blank?
               @trend_hop = TrendHop.new()
               @trend_hop.trend_id = @trend.id
@@ -95,10 +98,18 @@ class BlogsController < ApplicationController
             @trend_hop.count += 1
             @trend_hop.save
           end
-          @blog_trend = BlogTrend.new()
-          @blog_trend.blog_id = @blog.id
-          @blog_trend.trend_id = @trend.id
-          @blog_trend.save
+          
+         @blog_trend = BlogTrend.where(:blog_id => @blog, :trend_id => @trend).first
+         if @blog_trend.blank?
+            @blog_trend = BlogTrend.new()
+            @blog_trend.blog_id = @blog.id
+            @blog_trend.trend_id = @trend.id
+            @blog_trend.count = 1
+            @blog_trend.save
+          else
+            @blog_trend.count += 1
+            @blog_trend.save
+          end
         end
 
         format.html { redirect_to @blog, :notice => 'Blog was successfully created.' }

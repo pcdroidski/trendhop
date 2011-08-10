@@ -1,5 +1,6 @@
 class BlogsController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource
   # GET /blogs
   # GET /blogs.json
   def index
@@ -15,7 +16,7 @@ class BlogsController < ApplicationController
   # GET /blogs/1
   # GET /blogs/1.json
   def show
-    @blog = Blog.find(params[:id])
+ #   @blog = Blog.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +27,7 @@ class BlogsController < ApplicationController
   # GET /blogs/new
   # GET /blogs/new.json
   def new
-    @blog = Blog.new
+ #   @blog = Blog.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +37,13 @@ class BlogsController < ApplicationController
 
   # GET /blogs/1/edit
   def edit
-    @blog = Blog.find(params[:id])
+ #   @blog = Blog.find(params[:id])
   end
 
   # POST /blogs
   # POST /blogs.json
   def create
-    @blog = Blog.new(params[:blog])
+  #  @blog = Blog.new(params[:blog])
     @user = current_user
 
     trend_array=[]
@@ -82,7 +83,7 @@ class BlogsController < ApplicationController
           hop_array = trend_array.reject{ |a| a== t}
           hop_array.each do |hop|
             @hop = Trend.where(:name => hop).first
-            
+
             @trend_hop = TrendHop.where(:trend_id => @trend.id, :related_trend_id => @hop.id).first unless @hop.blank? || @trend.blank?
             if @trend_hop.blank?
               @trend_hop = TrendHop.new()
@@ -98,7 +99,7 @@ class BlogsController < ApplicationController
             @trend_hop.count += 1
             @trend_hop.save
           end
-          
+
          @blog_trend = BlogTrend.where(:blog_id => @blog, :trend_id => @trend).first
          if @blog_trend.blank?
             @blog_trend = BlogTrend.new()
@@ -124,7 +125,7 @@ class BlogsController < ApplicationController
   # PUT /blogs/1
   # PUT /blogs/1.json
   def update
-    @blog = Blog.find(params[:id])
+#    @blog = Blog.find(params[:id])
 
     respond_to do |format|
       if @blog.update_attributes(params[:blog])
@@ -140,7 +141,7 @@ class BlogsController < ApplicationController
   # DELETE /blogs/1
   # DELETE /blogs/1.json
   def destroy
-    @blog = Blog.find(params[:id])
+ #   @blog = Blog.find(params[:id])
     @blog.destroy
 
     respond_to do |format|

@@ -1,5 +1,6 @@
 class TrendsController < ApplicationController
-    before_filter :authenticate_user!
+  #  before_filter :authenticate_user!
+    load_and_authorize_resource
   # GET /trends
   # GET /trends.json
   def index
@@ -14,7 +15,7 @@ class TrendsController < ApplicationController
   # GET /trends/1
   # GET /trends/1.json
   def show
-    @trend = Trend.where(:name => params[:id]).first
+#    @trend = Trend.where(:name => params[:id]).first
     @blogs = @trend.blogs
 
     respond_to do |format|
@@ -26,7 +27,7 @@ class TrendsController < ApplicationController
   # GET /trends/new
   # GET /trends/new.json
   def new
-    @trend = Trend.new
+  #  @trend = Trend.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +37,13 @@ class TrendsController < ApplicationController
 
   # GET /trends/1/edit
   def edit
-    @trend = Trend.find(params[:id])
+ #   @trend = Trend.find(params[:id])
   end
 
   # POST /trends
   # POST /trends.json
   def create
-    @trend = Trend.new(params[:trend])
+ #   @trend = Trend.new(params[:trend])
 
     respond_to do |format|
       if @trend.save
@@ -58,7 +59,7 @@ class TrendsController < ApplicationController
   # PUT /trends/1
   # PUT /trends/1.json
   def update
-    @trend = Trend.find(params[:id])
+ #   @trend = Trend.find(params[:id])
 
     respond_to do |format|
       if @trend.update_attributes(params[:trend])
@@ -74,7 +75,7 @@ class TrendsController < ApplicationController
   # DELETE /trends/1
   # DELETE /trends/1.json
   def destroy
-    @trend = Trend.find(params[:id])
+ #   @trend = Trend.find(params[:id])
     @trend.destroy
 
     respond_to do |format|

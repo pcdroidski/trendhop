@@ -11,6 +11,15 @@ class User < ActiveRecord::Base
   has_many :user_trends
   has_many :trends, :through => :user_trends
 
+  ROLES = %w[admin moderator standard]
+
+  def role?(role)
+    roles.include? role.to_s
+  end
+
+  def role_symbols
+    [role.to_sym]
+  end
 
   def name
     [first_name,last_name].join(" ")
@@ -19,5 +28,7 @@ class User < ActiveRecord::Base
   def birth_date
     [birth_month, birth_day, birth_year].join("/")
   end
+
+
 
 end

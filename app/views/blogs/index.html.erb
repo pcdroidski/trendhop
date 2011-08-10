@@ -6,7 +6,7 @@
     <th>Post</th>
     <th>Trends </th>
     <th>Url</th>
-    <th>Category</th>    
+    <th>Category</th>
     <th>User</th>
     <th></th>
     <th></th>
@@ -19,11 +19,15 @@
     <td><%= blog.post %></td>
     <td><% blog.trends.each do |trend| %> <%= link_to trend.name, trend_path(trend.name) %><br/> <% end%></td>
     <td><%= blog.url %></td>
-    <td><%= blog.category_id %></td>    
+    <td><%= blog.category_id %></td>
     <td><%= blog.user.name %></td>
     <td><%= link_to 'Show', blog %></td>
-    <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-    <td><%= link_to 'Destroy', blog, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if can? :update, @blogs %>
+      <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+    <% end%>
+    <% if can? :destroy, @blogs %>
+      <td><%= link_to 'Destroy', blog, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end%>
   </tr>
 <% end %>
 </table>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110809204921) do
+ActiveRecord::Schema.define(:version => 20110810201334) do
 
   create_table "blog_trends", :force => true do |t|
     t.integer  "blog_id"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(:version => 20110809204921) do
     t.datetime "updated_at"
   end
 
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "blog_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["blog_id"], :name => "index_comments_on_blog_id"
+
   create_table "trend_hops", :force => true do |t|
     t.integer  "trend_id"
     t.integer  "related_trend_id"
@@ -43,6 +53,13 @@ ActiveRecord::Schema.define(:version => 20110809204921) do
     t.integer  "trend_category_id"
     t.integer  "like_count"
     t.integer  "trend_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_followings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "following_user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -77,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20110809204921) do
     t.integer  "birth_year"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

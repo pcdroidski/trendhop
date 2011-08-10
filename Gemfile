@@ -42,7 +42,7 @@ gem 'jquery-rails'
 # Instead using devise
 
 gem 'devise'
-#gem 'cancan'
+gem 'cancan'
 
 
 #Test gems

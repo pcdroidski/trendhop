@@ -38,6 +38,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    check_user(@user)    
   end
 
   # POST /users
@@ -60,7 +61,8 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
-
+    check_user(@user)
+    
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to @user, :notice => 'User was successfully updated.' }
@@ -83,4 +85,13 @@ class UsersController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  private 
+  
+  def check_user(user)
+    if user != current_user
+      redirect_to root_url, :notice => "Incorrect credentials" 
+    end    
+  end
+  
 end

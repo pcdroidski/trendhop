@@ -15,6 +15,13 @@
   <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></p>
 
+  <p>
+    <%= f.label :role %><br />
+    <%= f.collection_select :role, User::ROLES, :to_s, :titleize %>
+  </p>
+
+
+
   <p><%= f.submit "Update" %></p>
 <% end %>
 

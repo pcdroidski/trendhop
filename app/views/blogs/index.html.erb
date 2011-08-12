@@ -22,10 +22,11 @@
     <td><%= blog.category_id %></td>
     <td><%= blog.user.name %></td>
     <td><%= link_to 'Show', blog %></td>
-    <% if can? :update, @blogs %>
+    <%# raise (cannot? :update, blog).inspect%>
+    <% if can? :update, blog %>
       <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
     <% end%>
-    <% if can? :destroy, @blogs %>
+    <% if can? :destroy, blog %>
       <td><%= link_to 'Destroy', blog, :confirm => 'Are you sure?', :method => :delete %></td>
     <% end%>
   </tr>

@@ -1,10 +1,10 @@
 class BlogsController < ApplicationController
-  before_filter :authenticate_user!
+ # before_filter :authenticate_user!
   load_and_authorize_resource
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.all
+  #  @blogs = Blog.all
 
 
     respond_to do |format|

@@ -10,11 +10,16 @@ class User < ActiveRecord::Base
   has_many :blogs
   has_many :user_trends
   has_many :trends, :through => :user_trends
+  
+
+  has_many :roles
 
   ROLES = %w[admin moderator standard]
 
   def role?(role)
-    ROLES.include? role.to_s
+    ROLES.any? {|r| r.level.underscore.to_sym == role}
+    # raise (ROLES.include? role.to_s).inspect
+    # ROLES.include? role.to_s
   end
 
   def role_symbols

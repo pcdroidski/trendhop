@@ -26,14 +26,14 @@ $text-color: #000;
   padding: 0;
   margin: 10px 0 5px 0;
   width: 560px;
-  
+
   .trend {
     margin: 5px 0 10px 0;
     display: block;
     border: 1px solid $border-color;
     @include rounded-corners(10px);
-    
-    
+
+
     .trend_info {
       display: block;
       width: 180px;
@@ -43,7 +43,7 @@ $text-color: #000;
         text-align: center;
         margin: 5px 5px 5px 5px;
         display:block;
-      
+
         a {
           margin-top: auto;
           margin-bottom: auto;
@@ -53,64 +53,64 @@ $text-color: #000;
           &:hover {
             text-decoration: underline;
             }
-      
+
         }
       }
-      
+
       span {
         font-size: 12px;
         color: $text-color;
         margin-left: 10px;
       }
     }
-    
+
     #trend_blogs{
       width: 377px;
       display: block;
       border-bottom: 1px solid #000;
-      
-      
+
+
       .trend_blog {
         padding:0;
         list-style: none;
         margin: 5px 5px 5px 5px;
-        
+
         li {
           float: left;
           margin-left: 10px;
           font-size: 15px;
-          
+
           a {
             text-decoration: none;}
-          }  
-          
+          }
+
         }
       }
-      
+
       #trend_hops {
         width: 370px;
         display: block;
-      
+
         .trend_hop {
-        
+
           display: table;
           padding: 0;
           list-style:none;
           margin: 5px 5px 5px 5px;
-          
+
           li {
             float: left;
             margin-left: 15px;
             font-size: 15px;
-            
+
             a{
               text-decoration: none;
             }
           }
         }
       }
-    
+
   }
-  
-  
+
+
 }

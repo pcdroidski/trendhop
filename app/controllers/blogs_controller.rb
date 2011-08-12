@@ -153,7 +153,7 @@ class BlogsController < ApplicationController
   private
 
   def delete_chars(trend)
-    trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").downcase
+    trend.delete("!").delete("@").delete("#").delete("?").delete("*").delete("(").delete(")").downcase
   end
 
 end

@@ -1,38 +1,38 @@
-<h1>Listing blogs</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Post</th>
-    <th>Trends </th>
-    <th>Url</th>
-    <th>Category</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @blogs.each do |blog| %>
-  <tr>
-    <td><%= blog.title %></td>
-    <td><%= blog.post %></td>
-    <td><% blog.trends.each do |trend| %> <%= link_to trend.name, trend_path(trend.name) %><br/> <% end%></td>
-    <td><%= blog.url %></td>
-    <td><%= blog.category_id %></td>
-    <td><%= blog.user.name %></td>
-    <td><%= link_to 'Show', blog %></td>
-    <%# raise (cannot? :update, blog).inspect%>
-    <% if can? :update, blog %>
-      <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-    <% end%>
-    <% if can? :destroy, blog %>
-      <td><%= link_to 'Destroy', blog, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end%>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Blog', new_blog_path %>
+<div id="content">
+  <div class="title"><span>Blog Hop</span></div>
+  <div class="blogs">
+      <% @blogs.each do |blog| %>
+      <div class="blog">
+        <div class="blog_title">
+          <span><%= link_to blog.title, blog%></span>
+          <div class="blog_options fr">
+            <span class="option">Re-Trend</span>
+            <span class="option">Comment</span><br/>
+            <% if can? :update, blog %>
+              <%= link_to 'Edit', edit_blog_path(blog) %>
+            <% end%>
+            <% if can? :destroy, blog %>
+              <%= link_to 'Destroy', blog, :confirm => 'Are you sure?', :method => :delete %>
+            <% end%>
+          </div>
+        </div>
+        <div class='clear'></div>
+        <div class="blog_info">
+          <span class="fl">Category: <%= blog.category_id %></span>
+          <span class="fl">Posted by: <%= blog.user.name %></span>
+        </div>
+        <div class="blog_content">
+          <p><%= blog.post %></p>
+          <span><%= blog.url %></span>
+        </div>
+        <div class="blog_trends">
+          <p>Trends in this blog: </p>
+          <% blog.trends.each do |trend| %>
+            <span> <%= link_to trend.name, trend_path(trend.name) %></span>
+          <% end%>
+        </div>
+      </div>
+      <% end %>
+  </div>
+  <%= link_to 'New Blog', new_blog_path %>
+</div>

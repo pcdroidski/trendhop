@@ -13,13 +13,13 @@ class User < ActiveRecord::Base
 
   ROLES = %w[admin moderator standard]
 
-  def role?(role)
-    ROLES.include? role.to_s
-  end
+  # def role?(role)
+  #   user.role == role.to_s
+  # end
 
-  def role_symbols
-    [role.to_sym]
-  end
+  # def role_symbols
+  #   [role.to_sym]
+  # end
 
   def name
     [first_name,last_name].join(" ")

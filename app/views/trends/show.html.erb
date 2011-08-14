@@ -1,37 +1,43 @@
-<p>
-  <b>Trend:</b>
-  <%= @trend.name %>
-</p>
-
-<p>
-  <b>Trend category:</b>
-  <%= @trend.trend_category_id %>
-</p>
-
-
-<p>
-  <b>Like count:</b>
-  <%= @trend.like_count %>
-</p>
-
-<p>
-  <b>Trend count:</b>
-  <%= @trend.trend_count %>
-</p>
-
-<p>
-  <b>Hop to another trend / Related trends: </b><br/>
-  <% @trend.trends.each do |trend|%>
-  <%= link_to trend.name, trend_path(trend.name) %><br/>
-  <% end%>
-</p>
-
-<hr/>
-
-<p>
-  <b>Blogs: </b>
-  <%= render :partial => "blogs/index"%>
-</p>
-
-<%= link_to 'Edit', edit_trend_path(@trend) %> |
-<%= link_to 'Back', trends_path %>
+<div class='content' id="trend">
+  
+  <div class="trend-title">
+    <div>Trend:  <%= @trend.name %> </div>
+  
+  <div class="trend-info"> 
+    <div class="trend-category">
+      <b>Trend category:</b>
+      <%= @trend.trend_category_id %>
+    </div>
+    <div class="count">
+      <b>Trend count: <%= @trend.trend_count %>
+    </div>
+  </div>
+  
+  <div class="trend_hops">
+    <span>Hop to another trend / Related trends: </span>
+    <div class='trend_list'>
+      <% @trend.trends.each do |trend|%>
+      <div class="trend_item">
+        <div class="trend-row">  
+          <span class="hop-title"><%= link_to trend.name, trend_path(trend.name) %></span>
+        <div class="trend-row">
+          <span class="hop-count"><%= trend.count %> </span>
+        </div>
+      </div>
+      <% end%>
+    </div>
+    
+  </div>
+  
+  <hr/>
+  
+  <div class="blogs">
+    <span>Blogs: </span>
+    
+    <%= render :partial => "blogs/index"%>
+  </div>
+  
+  <%= link_to 'Edit', edit_trend_path(@trend) %> |
+  <%= link_to 'Back', trends_path %>
+  
+</div>

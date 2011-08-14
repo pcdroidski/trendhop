@@ -11,7 +11,7 @@
             <% if can? :update, blog %>
               <%= link_to 'Edit', edit_blog_path(blog) %>
             <% end%>
-            <% if can? :destroy, blog %>
+            <% if can? :update, blog %>
               <%= link_to 'Destroy', blog, :confirm => 'Are you sure?', :method => :delete %>
             <% end%>
           </div>

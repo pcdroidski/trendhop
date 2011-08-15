@@ -1,12 +1,12 @@
 <div class='content' id="blog">
-  
+
   <div class="blog-title">
      <%= @blog.title %>
   </div>
-  
+
   <div class="blog-info">
-    <div class="fl" style="width:300px;">Posted by: <span id="user"><%= @blog.user_id %></span> </div>
-    <div class="fl">Category: <span id="category"><%= @blog.category_id %> </span> </div>
+    <div class="fl">Posted by: <span id="user"><%= @blog.user.name %></span> </div>
+    <div class="fr" style="width:200px;">Category: <span id="category"><%= @blog.category_id %> </span> </div>
   </div>
   <div class="clear"></div>
   <div class="blog-content">
@@ -14,7 +14,7 @@
     <b>Attached websites:</b>
     <%= @blog.url %>
   </p>
-  
+
   </div>
   <div class="blog-trends">
     <span class="section_title">Trends: </span>

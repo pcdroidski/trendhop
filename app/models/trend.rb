@@ -7,4 +7,10 @@ class Trend < ActiveRecord::Base
   has_many :trend_hops
   has_many :trends, :through => :trend_hops
 
+# Trend filtering #
+  #Ages:
+  def age_set(age)
+
+  end
+
 end

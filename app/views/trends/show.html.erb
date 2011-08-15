@@ -1,9 +1,9 @@
 <div class='content' id="trend">
-  
+
   <div class="trend-title">
     Viewing trendormation on <span id="title"><%= @trend.name %> </span>
   </div>
-  <div class="trend-info"> 
+  <div class="trend-info">
     <div class="fl" id="category">
       Category:
       <%= @trend.trend_category_id %>
@@ -12,13 +12,18 @@
       Trend count: <%= @trend.trend_count %>
     </div>
   </div>
-  
+
   <div class="trend_hops">
     <span class="section_title">Hop to another trend / Related trends: </span>
     <div class='trend_list'>
+      <% if @trend.trends.blank? %>
+      <div class="trend_item" style="margin-left: auto; margin-right: auto; width: 220px;">
+        <p>There are no Trends to hop to! </p>
+      </div>
+      <% else%>
       <% @trend.trends.each do |trend|%>
       <div class="trend_item fl">
-        <div class="trend-row">  
+        <div class="trend-row">
           <span id="hop-title"><%= link_to trend.name, trend_path(trend.name) %></span>
         </div>
         <div class="trend-row">
@@ -26,18 +31,18 @@
         </div>
       </div>
       <% end%>
-                  <div class="clear"></div>  
-      
+      <div class="clear"></div>
+      <% end%>
     </div>
   </div>
-        <div class="clear"></div>  
+        <div class="clear"></div>
   <div class="trend_blogs">
     <span class="section_title">Blogs: </span>
-    
+
     <%= render :partial => "blogs/index"%>
   </div>
-  
+
   <%= link_to 'Edit', edit_trend_path(@trend) %> |
   <%= link_to 'Back', trends_path %>
-  
+
 </div>

@@ -1,37 +1,32 @@
-<div class='content'>
-
-<p>
-  <b>User:</b>
-  <%= @blog.user_id %>
-</p>
-
-<p>
-  <b>Category:</b>
-  <%= @blog.category_id %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @blog.title %>
-</p>
-
-<p>
-  <b>Post:</b>
-  <%= @blog.post %>
-</p>
-<p>
-  <b>Trends: <b>
-    <% @blog.trends.each do |trend| %>
-      <%= link_to trend.name, trend_path(trend.name)%><br/>
-    <%end %>
-</p>
-<p>
-  <b>Url:</b>
-  <%= @blog.url %>
-</p>
-
-<% if can? :update, @blogs %>
-  <%= link_to 'Edit', edit_blog_path(@blog) %> |
-<% end %>
-<%= link_to 'Back', blogs_path %>
+<div class='content' id="blog">
+  
+  <div class="blog-title">
+     <%= @blog.title %>
+  </div>
+  
+  <div class="blog-info">
+    <div class="fl" style="width:300px;">Posted by: <span id="user"><%= @blog.user_id %></span> </div>
+    <div class="fl">Category: <span id="category"><%= @blog.category_id %> </span> </div>
+  </div>
+  <div class="clear"></div>
+  <div class="blog-content">
+    <p><%= @blog.post %></p>
+    <b>Attached websites:</b>
+    <%= @blog.url %>
+  </p>
+  
+  </div>
+  <div class="blog-trends">
+    <span class="section_title">Trends: </span>
+    <div class="blog-list">
+      <% @blog.trends.each do |trend| %>
+      <div class="blog-trend fl"><%= link_to trend.name, trend_path(trend.name)%></div>
+      <%end %>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <% if can? :update, @blogs %>
+    <%= link_to 'Edit', edit_blog_path(@blog) %> |
+  <% end %>
+  <%= link_to 'Back', blogs_path %>
 </div>

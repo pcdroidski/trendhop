@@ -1,10 +1,10 @@
-<div id="content">
+<div class="content" id="blogs">
   <div class="title"><span>Blog Hop</span></div>
   <div class="blogs">
       <% @blogs.each do |blog| %>
       <div class="blog">
         <div class="blog_title">
-          <span><%= link_to blog.title, blog%></span>
+          <div class="fl" id="title"><%= link_to blog.title, blog%></div>
           <div class="blog_options fr">
             <span class="option">Re-Trend</span>
             <span class="option">Comment</span><br/>
@@ -26,7 +26,7 @@
           <span><%= blog.url %></span>
         </div>
         <div class="blog_trends">
-          <p>Trends in this blog: </p>
+          <span>Trends in this blog: </span>
           <% blog.trends.each do |trend| %>
             <span> <%= link_to trend.name, trend_path(trend.name) %></span>
           <% end%>

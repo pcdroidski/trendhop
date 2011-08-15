@@ -11,7 +11,7 @@ $text-color: #000;
   -webkit-border-radius: $radius;
   }
 
-
+#blogs{
 
   .title {
     height: 40px;
@@ -35,14 +35,14 @@ $text-color: #000;
       @include rounded-corners(10px);
 
       .blog_title {
-        padding-top: 10px;
         height: 35px;
         text-align: left;
         display: block;
         border-bottom: 1px solid #000;
 
 
-        span {
+        #title {
+          margin-top: 10px;
           margin-left: 15px;
           font-size: 23px;
           text-decoration: none;
@@ -55,14 +55,17 @@ $text-color: #000;
 
         .blog_options {
           border-left: 1px solid #000;
-          padding: 0;
-          margin: -5px 5px 5px 5px;
+          height: 35px;
+          
 
           .option {
+            width: 25px;
             font-size: 12px;
+            margin: 0 5px 0 5px;
           }
           a {
-            margin-left: 15px;
+             width: 25px;
+            margin: 0 10px 0 15px;
             font-size: 12px;
 
           }
@@ -109,8 +112,51 @@ $text-color: #000;
 
     }
 
-
-
   }
+}
 
+/* SHOW */
+
+#blog {
+  
+  
+  .blog-title {
+    height: 35px;
+    font-size: 30px;
+    border-bottom: 1px solid #000;
+  }
+  
+  .blog-info {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 20px;
+    font-size: 14px;
+    border-bottom: 1px solid #000;
+  }
+  
+  .blog-content {
+    border-bottom: 1px solid #000;
+    
+    p {
+      font-size: 20px;
+      text-align: justify;
+    }
+  }
+  
+  .blog-trends {
+    border-bottom: 1px solid #000;
+    margin: 5px 0 5px 0;
+    
+    
+    .blog-trend {
+        display: block;
+        padding: 5px;
+        margin: 10px 10px 10px 10px;
+        border: 1px solid $border-color;
+        @include rounded-corners(5px);
+        font-size: 16px;
+    }
+  }
+  
+}
 

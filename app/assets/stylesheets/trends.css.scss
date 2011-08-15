@@ -10,7 +10,9 @@ $text-color: #000;
   -moz-border-radius: $radius;
   -webkit-border-radius: $radius;
   }
-
+  
+/* INDEX */
+#trends {
 .title {
   height: 40px;
   display: block;
@@ -109,8 +111,95 @@ $text-color: #000;
           }
         }
       }
+    }
+  }
+}
+  /* SHOW*/
+  
+  #trend {
+    
+    .trend-title {
+      height: 35px;
+      font-size: 22px;
+      border-bottom: 1px solid #000;
+      
+      #title {
+        font-size: 35px;
+        margin-left: 15px;
+      }
+      
+    }
+    
+    .trend-info {
+      margin: 4px 0 2px 0;
+      height: 20px;
+      border-bottom: 1px solid #000;
+      font-size: 15px;
+      
+      #category {
+        width: 350px;
+      }
+      #count {
 
+      }
+      
+    }
+    
+    .trend_hops {
+      margin: 5px 0 10px 0;
+      border-bottom: 1px solid #000;
+      
+      .trend_list {
+        width: 560px;
+        
+        .trend_item {
+          padding: 5px;
+          margin: 5px 5px 5px 5px;
+          border: 1px solid $border-color;
+          @include rounded-corners(5px);
+          width: 160px;
+          
+          .trend_row {
+            
+          }
+          #hop-count{
+            
+          }
+          #hop-title{
+            font-size: 18px;
+          }
+        }
+      }
+    }
+    
+    .trend_blogs {
+      
+      .blogs {
+        margin: 5px 0;
+        
+        .blog {
+          
+          border-bottom: 1px solid #000;
+          border-top: 1px solid #000;
+          
+          .blog_title {
+            padding: 5px 0 5px 0;
+            width: 300px;
+            font-size: 18px;
+          }
+          .blog_info {
+            padding: 5px;
+            border-right: 1px solid #000;
+            border-left: 1px solid #000;
+          }
+          .blog_options {
+            
+          }
+        }
+      }
+      
+    }
+    
   }
 
 
-}

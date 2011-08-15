@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" id="trends">
   <div class="title"><span>What's Trending? </span> </div>
   <ul class="trends_list"><% @trends.each do |trend| %>
     <li class="trend">
@@ -9,7 +9,7 @@
         <span><%= pluralize (trend.blogs.count, "blog is", "blogs are") %> trending this.</span>
       </div>
       <div id="trend_blogs" class="fl">
-        <span>Recent posts: </span>
+        <span class="subsection_title">Recent posts: </span>
         <ul class="trend_blog">
           <% trend.blogs.each do |blog| %>
           <li>  <%= link_to blog.title, blog_path(blog) %><br/></li>
@@ -17,7 +17,7 @@
         </ul>
       </div>
       <div id="trend_hops" class="fl">
-        <span>Hop to a related trend: </span>
+        <span class="subsection_title">Hop to a related trend: </span>
         <ul class="trend_hop">
           <% trend.trends.each do |hop| %>
           <li>  <%= link_to hop.name, trend_path(hop.name) %><br/></li>

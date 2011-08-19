@@ -1,63 +1,59 @@
-class BlogsController < ApplicationController
- # before_filter :authenticate_user!
+class PostsController < ApplicationController
   load_and_authorize_resource
-  # GET /blogs
-  # GET /blogs.json
+  # GET /posts
+  # GET /posts.json
   def index
-  #  @blogs = Blog.all
-
+  #  @posts = Post.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @blogs }
+      format.json { render :json => @posts }
     end
   end
 
-  # GET /blogs/1
-  # GET /blogs/1.json
+  # GET /posts/1
+  # GET /posts/1.json
   def show
- #   @blog = Blog.find(params[:id])
+  #  @post = Post.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @blog }
+      format.json { render :json => @post }
     end
   end
 
-  # GET /blogs/new
-  # GET /blogs/new.json
+  # GET /posts/new
+  # GET /posts/new.json
   def new
- #   @blog = Blog.new
+ #   @post = Post.new
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @blog }
+      format.json { render :json => @post }
     end
   end
 
-  # GET /blogs/1/edit
+  # GET /posts/1/edit
   def edit
- #   @blog = Blog.find(params[:id])
+ #   @post = Post.find(params[:id])
   end
 
-  # POST /blogs
-  # POST /blogs.json
+  # POST /posts
+  # POST /posts.json
   def create
-  #  @blog = Blog.new(params[:blog])
-    @user = current_user
+ #   @post = Post.new(params[:post])
 
     trend_array=[]
-    @blog.post.split(" ").each do |str|
+    @post.content.split(" ").each do |str|
       if str.include?("#")
         trend = delete_chars(str)
  #         raise "#{trend.inspect} #{trend_array.inspect}"
         trend_array << trend if !trend_array.include?(trend)
       end
-    end
-
+    end    
 
     respond_to do |format|
-      if @blog.save
+      if @post.save
         trend_array.each do |t|
           @trend = Trend.where(:name => t).first
           if @trend.blank?
@@ -100,60 +96,61 @@ class BlogsController < ApplicationController
             @trend_hop.save
           end
 
-         @blog_trend = BlogTrend.where(:blog_id => @blog, :trend_id => @trend).first
-         if @blog_trend.blank?
-            @blog_trend = BlogTrend.new()
-            @blog_trend.blog_id = @blog.id
-            @blog_trend.trend_id = @trend.id
-            @blog_trend.count = 1
-            @blog_trend.save
+         @post_trend = PostTrend.where(:blog_id => @blog, :trend_id => @trend).first
+         if @post_trend.blank?
+            @post_trend = PostTrend.new()
+            @post_trend.post_id = @post.id
+            @post_trend.trend_id = @trend.id
+            @post_trend.count = 1
+            @post_trend.save
           else
-            @blog_trend.count += 1
-            @blog_trend.save
+            @post_trend.count += 1
+            @post_trend.save
           end
         end
-
-        format.html { redirect_to @blog, :notice => 'Blog was successfully created.' }
-        format.json { render :json => @blog, :status => :created, :location => @blog }
+        
+        
+        format.html { redirect_to @post, :notice => 'Post was successfully created.' }
+        format.json { render :json => @post, :status => :created, :location => @post }
       else
         format.html { render :action => "new" }
-        format.json { render :json => @blog.errors, :status => :unprocessable_entity }
+        format.json { render :json => @post.errors, :status => :unprocessable_entity }
       end
     end
   end
-
-  # PUT /blogs/1
-  # PUT /blogs/1.json
+  
+  # PUT /posts/1
+  # PUT /posts/1.json
   def update
-#    @blog = Blog.find(params[:id])
+  #  @post = Post.find(params[:id])
 
     respond_to do |format|
-      if @blog.update_attributes(params[:blog])
-        format.html { redirect_to @blog, :notice => 'Blog was successfully updated.' }
+      if @post.update_attributes(params[:post])
+        format.html { redirect_to @post, :notice => 'Post was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
-        format.json { render :json => @blog.errors, :status => :unprocessable_entity }
+        format.json { render :json => @post.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /blogs/1
-  # DELETE /blogs/1.json
+  # DELETE /posts/1
+  # DELETE /posts/1.json
   def destroy
- #   @blog = Blog.find(params[:id])
-    @blog.destroy
+  #  @post = Post.find(params[:id])
+    @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to blogs_url }
+      format.html { redirect_to posts_url }
       format.json { head :ok }
     end
   end
-
-  private
+  
+    private
 
   def delete_chars(trend)
     trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").downcase
   end
-
+  
 end

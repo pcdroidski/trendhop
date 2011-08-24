@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110810201334) do
+ActiveRecord::Schema.define(:version => 20110819015509) do
 
   create_table "blog_trends", :force => true do |t|
     t.integer  "blog_id"
@@ -39,6 +39,22 @@ ActiveRecord::Schema.define(:version => 20110810201334) do
   end
 
   add_index "comments", ["blog_id"], :name => "index_comments_on_blog_id"
+
+  create_table "post_trends", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "trend_id"
+    t.integer  "post_counter"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "posts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "trend_hops", :force => true do |t|
     t.integer  "trend_id"

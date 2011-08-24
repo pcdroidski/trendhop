@@ -8,9 +8,9 @@ class Trend < ActiveRecord::Base
   has_many :trends, :through => :trend_hops
 
 # Trend filtering #
-  #Ages:
+  #Ages: 13 & younger, 13-15, 16-18, 19-21, 21-24, 25-29, 30-35, 36-40,
   def age_set(age)
-
+    age = self.where(:user)
   end
 
 end

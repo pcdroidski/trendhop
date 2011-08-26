@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_night, :birth_day, :birth_month, :birth_year, :address, :sex, :email, :password, :password_confirmation, :remember_me, :role
 
   has_many :blogs
+  has_many :posts
   has_many :user_trends
   has_many :trends, :through => :user_trends
 

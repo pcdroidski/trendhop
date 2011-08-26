@@ -1,8 +1,28 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :post_from_anywhere
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = "Access denied."
     redirect_to root_url
   end
+
+
+
+  private
+
+  def post_from_anywhere
+    @post = Post.new
+    @user = current_user
+  end
+
+  def list_trends(post)
+    trend_list = []
+    post.trends.map do |trend|
+      trend_list << "<a id='trend' href='#{url_for(trend_path(trend.name))}'>#{trend.name} </a>"
+    end
+    trend_list.to_sentence
+  end
+  helper_method :list_trends
+
 end

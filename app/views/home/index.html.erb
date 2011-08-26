@@ -2,25 +2,21 @@
   <div class="title"><span>Who's Trending What? </span> </div>
   <ul class="posts_list"><% @posts.each do |post| %>
     <li class="post">
+      <div class="post_content">
+        <div class="post_title"><%= link_to post.user.name, user_path(post.user), :id=>"name"%> is trending <%= raw(list_trends(post)) %></div> on <%= post.created_at.to_s(:mdy_dots)%>
+        <div class="content"> <%= post.content %> </div>
+            <div class="clear"></div>
+      </div>
       <div class="post_info fl">
-        <h4 class="post_title"><%= link_to post.name, post_path(post) %></h4>
-        <span>Category: <%= post.trend_category_id %> </span><br/>
-        <span><%= pluralize (post.trend_count, "person is", "people are") %> trending this.</span><br/>
-        <span><%= pluralize (post.blogs.count, "blog is", "blogs are") %> trending this.</span>
+        <%#raise post.trends.classify.inspect%>
+        <!-- <span>Category: <%#= post.category_id %> </span><br/> -->
+        <span><%= pluralize (post.trends.count, "person is", "people are") %> trending this.</span>
       </div>
-      <div id="post_blogs" class="fl">
-        <span class="subsection_title">Recent posts: </span>
-        <ul class="post_blog">
-          <% post.blogs.each do |blog| %>
-          <li>  <%= link_to blog.title, blog_path(blog) %><br/></li>
-          <% end%>
-        </ul>
-      </div>
-      <div id="trend_hops" class="fl">
+      <div class="trend_hops fl">
         <span class="subsection_title">Hop to a related trend: </span>
         <ul class="trend_hop">
           <% post.trends.each do |hop| %>
-          <li>  <%= link_to hop.name, trend_path(hop.name) %><br/></li>
+          <li id='hop'>  <%= link_to hop.name, trend_path(hop.name) %></li>
           <% end%>
         </ul>
       </div>

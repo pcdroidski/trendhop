@@ -13,4 +13,8 @@ class Trend < ActiveRecord::Base
     age = self.where(:user)
   end
 
+  def list
+    self.trends.map(&:name)
+  end
+
 end

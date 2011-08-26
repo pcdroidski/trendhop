@@ -42,6 +42,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
  #   @post = Post.new(params[:post])
+    @user = current_user
 
     trend_array=[]
     @post.content.split(" ").each do |str|
@@ -50,7 +51,8 @@ class PostsController < ApplicationController
  #         raise "#{trend.inspect} #{trend_array.inspect}"
         trend_array << trend if !trend_array.include?(trend)
       end
-    end    
+    end
+
 
     respond_to do |format|
       if @post.save
@@ -96,20 +98,20 @@ class PostsController < ApplicationController
             @trend_hop.save
           end
 
-         @post_trend = PostTrend.where(:blog_id => @blog, :trend_id => @trend).first
+         @post_trend = PostTrend.where(:post_id => @post, :trend_id => @trend).first
          if @post_trend.blank?
             @post_trend = PostTrend.new()
             @post_trend.post_id = @post.id
             @post_trend.trend_id = @trend.id
-            @post_trend.count = 1
+            @post_trend.post_counter = 1
             @post_trend.save
           else
-            @post_trend.count += 1
+            @post_trend.post_counter += 1
             @post_trend.save
           end
         end
-        
-        
+
+
         format.html { redirect_to @post, :notice => 'Post was successfully created.' }
         format.json { render :json => @post, :status => :created, :location => @post }
       else
@@ -118,7 +120,7 @@ class PostsController < ApplicationController
       end
     end
   end
-  
+
   # PUT /posts/1
   # PUT /posts/1.json
   def update
@@ -146,11 +148,12 @@ class PostsController < ApplicationController
       format.json { head :ok }
     end
   end
-  
+
     private
 
   def delete_chars(trend)
     trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").downcase
   end
-  
+
+
 end

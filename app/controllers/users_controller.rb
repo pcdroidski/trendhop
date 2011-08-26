@@ -17,6 +17,8 @@ class UsersController < ApplicationController
   def show
  #   @user = User.find(params[:id])
     @blogs = @user.blogs
+    @post = Post.new
+    @posts = @user.posts
     @trends = @user.trends
 
     respond_to do |format|

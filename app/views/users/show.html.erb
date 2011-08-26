@@ -1,52 +1,56 @@
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+<div class="content">
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+  <p>
+    <b>Email:</b>
+    <%= @user.email %>
+  </p>
 
-<p>
-  <b>Domain:</b>
-  <%= @user.domain %>
-</p>
+  <p>
+    <b>Domain:</b>
+    <%= @user.domain %>
+  </p>
 
-<p>
-  <b>Name</b>
-  <%= @user.name %>
-</p>
+  <p>
+    <b>Name</b>
+    <%= @user.name %>
+  </p>
 
-<p>
-  <b>City:</b>
-  <%= @user.city %>
-</p>
+  <p>
+    <b>City:</b>
+    <%= @user.city %>
+  </p>
 
-<p>
-  <b>State:</b>
-  <%= @user.state_id %>
-</p>
+  <p>
+    <b>State:</b>
+    <%= @user.state_id %>
+  </p>
 
-<p>
-  <b>Sex:</b>
-  <%= @user.sex %>
-</p>
+  <p>
+    <b>Sex:</b>
+    <%= @user.sex %>
+  </p>
 
-<p>
-  <b>Birth date:</b>
-  <%= @user.birth_date %>
-</p>
+  <p>
+    <b>Birth date:</b>
+    <%= @user.birth_date %>
+  </p>
 
-<hr/>
+  <hr/>
 
-<p>
-  <b>Blogs: </b>
-  <%= render :partial => "blogs/index"%>
-</p>
+  <hr/>
+  <p>
+    <b>Posts by You: </b>
+    <%= render :partial => "posts/index"%>
+  </p>
 
 
-<hr/>
+  <hr/>
 
-<p>
-  <b>Trends: </b>
-  <%= render :partial => "trends/index" %>
-</p>
+  <p>
+    <b>Trends: </b>
+    <%= render :partial => "trends/index" %>
+  </p>
+
+</div>

@@ -12,6 +12,10 @@ $text-color: #000;
   -webkit-border-radius: $radius;
   }
 
+@mixin border($color) {
+  border-bottom: 1px solid $color;
+}
+
 #posts{
 
   .title {
@@ -24,60 +28,51 @@ $text-color: #000;
     }
   }
 
-  .posts {
+  .posts_list {
     margin: 10px 0 10px 0;
     padding: 0;
     width: 560px;
+    list-style: none;
 
-    .post {
-      margin: 5px 0 10px 0;
+    li.post {
+      margin: 2px 0 2px 0;
       display: block;
-      border: 1px solid $border-color;
-      @include rounded-corners(10px);
+      @include border($border-color);
 
-      .blog_title {
-        height: 35px;
+      .post_content {
         text-align: left;
         display: block;
-        border-bottom: 1px solid #000;
+
+        .post_title {
+          text-align: left;
+          font-size: 16px;
+          margin: 0 0 5px 0;
 
 
-        #title {
-          margin-top: 10px;
-          margin-left: 15px;
-          font-size: 23px;
-          text-decoration: none;
-
-        }
-
-        a {
-          text-decoration:none;
-        }
-
-        .post_options {
-          border-left: 1px solid #000;
-          height: 35px;
-
-
-          .option {
-            width: 25px;
-            font-size: 12px;
-            margin: 0 5px 0 5px;
+          #trend{
+            text-decoration: none;
+            font-size: 18px;
           }
-          a {
-             width: 25px;
-            margin: 0 10px 0 15px;
-            font-size: 12px;
 
+          #name {
+            text-decoration: none;
+            font-size: 18px;
           }
 
         }
+
+        .content {
+          margin: 5px 0 10px 20px;
+          font-size: 14px;
+        }
+
+
       }
 
       .post_info {
         display: block;
         height: 20px;
-        border-bottom: 1px solid #000;
+
 
         span {
           margin-left: 10px;
@@ -89,27 +84,21 @@ $text-color: #000;
 
       }
 
-      .post_content {
-        padding: 5px;
+     .trend_hops {
 
-        p {
-          font-size: 15px;
-          text-align: justify;
-        }
-        span {
-
-        }
-
-      }
-
-      .post_trends {
-        padding: 4px;
-        border-top: 1px solid #000;
-        span {
-          margin-left: 10px;
+        .subsection_title {
           font-size: 12px;
         }
-      }
+
+        #hop {
+          list-style: none;
+          float: left;
+          margin: 0 10px 5px 0;
+
+
+        }
+
+     }
 
     }
 

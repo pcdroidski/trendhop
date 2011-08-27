@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_filter :authenticate_user!
   load_and_authorize_resource
   # GET /posts
   # GET /posts.json
@@ -41,9 +42,9 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
- #   @post = Post.new(params[:post])
+    @post = Post.new(params[:post])
     @user = current_user
-
+  #  raise @post.inspect
     trend_array=[]
     @post.content.split(" ").each do |str|
       if str.include?("#")

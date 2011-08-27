@@ -10,13 +10,22 @@
       <div class="post_info fl">
         <%#raise post.trends.classify.inspect%>
         <!-- <span>Category: <%#= post.category_id %> </span><br/> -->
-        <span><%= pluralize (post.trends.count, "person is", "people are") %> trending this.</span>
+        <% post.trends.each do |trend| %>
+        <span> <%= pluralize (trend.trend_count, "person is", "people are") %> trending <%= trend.name%>.</span>
+        <%end%>
       </div>
       <div class="trend_hops fl">
-        <span class="subsection_title">Hop to a related trend: </span>
+        <span class="subsection_title">Hop to related trends: </span>
         <ul class="trend_hop">
+          <% check_for_unique = true%>
           <% post.trends.each do |hop| %>
-          <li id='hop'>  <%= link_to hop.name, trend_path(hop.name) %></li>
+            <% if !post.trends.include?(hop)%>
+              <% check_for_unique = false%>
+              <li id='hop'>  <%= link_to hop.name, trend_path(hop.name) %></li>
+            <%end%>
+          <% end%>
+          <% if check_for_unique == true %>
+            <li>-- none -- </li>
           <% end%>
         </ul>
       </div>

@@ -12,9 +12,15 @@ class ApplicationController < ActionController::Base
   private
 
   def post_from_anywhere
-    @post = Post.new
+    @special_post = Post.new
     @user = current_user
   end
+  
+  def check_user?
+    user_signed_in?
+  end
+  helper_method :check_user?
+  
 
   def list_trends(post)
     trend_list = []

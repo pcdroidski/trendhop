@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
- # before_filter :authenticate_user!
+  before_filter :authenticate_user!
   load_and_authorize_resource
   # GET /blogs
   # GET /blogs.json
@@ -151,6 +151,7 @@ class BlogsController < ApplicationController
   end
 
   private
+
 
   def delete_chars(trend)
     trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").downcase

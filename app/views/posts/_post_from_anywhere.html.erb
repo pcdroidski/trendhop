@@ -1,0 +1,16 @@
+<%= form_for(@special_post) do |f| %>
+  <div class="field">
+    <%= f.hidden_field :user_id, :value => @user.id %>
+  </div>
+  <!-- <div class="field">
+    <%#= f.label :category_id %><br />
+    <%#= f.number_field :category_id %>
+  </div> -->
+  <div class="field" >
+    <%= f.text_area :content, :rows=>'4', :style=>"width:550px;" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  <hr/>
+<% end %>

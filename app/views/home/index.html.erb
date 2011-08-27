@@ -2,11 +2,15 @@
   <div class="title"><span>Who's Trending What? </span> </div>
   <ul class="posts_list"><% @posts.each do |post| %>
     <li class="post">
+      <div class="fr">
+        <%= link_to "Retrend", new_post_path(:content => post.content)%>
+      </div>  
       <div class="post_content">
         <div class="post_title"><%= link_to post.user.name, user_path(post.user), :id=>"name"%> is trending <%= raw(list_trends(post)) %></div> on <%= post.created_at.to_s(:mdy_dots)%>
         <div class="content"> <%= post.content %> </div>
             <div class="clear"></div>
       </div>
+
       <div class="post_info fl">
         <%#raise post.trends.classify.inspect%>
         <!-- <span>Category: <%#= post.category_id %> </span><br/> -->

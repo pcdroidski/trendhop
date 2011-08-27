@@ -26,7 +26,10 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
- #   @post = Post.new
+    retrend_post = params[:content]
+    @post = Post.new(:content => retrend_post)
+    @retrend = Trend.where(:id => params[:trend]).first
+ #   @post.content = params[:post]
 
     respond_to do |format|
       format.html # new.html.erb

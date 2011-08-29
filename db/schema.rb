@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110819015509) do
+ActiveRecord::Schema.define(:version => 20110829142625) do
 
   create_table "blog_trends", :force => true do |t|
     t.integer  "blog_id"
@@ -54,6 +54,9 @@ ActiveRecord::Schema.define(:version => 20110819015509) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "retrend_user_id"
+    t.integer  "retrend_count"
+    t.integer  "retrend_post_id"
   end
 
   create_table "trend_hops", :force => true do |t|

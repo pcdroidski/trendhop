@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource
+#  load_and_authorize_resource
   # GET /posts
   # GET /posts.json
   def index
@@ -26,8 +26,8 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
-    retrend_post = params[:content]
-    @post = Post.new(:content => retrend_post)
+
+    @post = Post.new()
     @retrend = Trend.where(:id => params[:trend]).first
  #   @post.content = params[:post]
 
@@ -42,12 +42,66 @@ class PostsController < ApplicationController
  #   @post = Post.find(params[:id])
   end
 
+  # POST /retrends
+  #POST /retrends.json
+  def retrend
+    retrend = Post.where(:id => params[:post_id]).first
+
+    PostTrend.where(:post_id => retrend.id).each do |trend|
+      trend.increment(:post_counter)
+      trend.save
+    end
+
+    @user = current_user
+    @post = Post.new(:content => retrend.content, :retrend_user_id => retrend.user_id, :retrend_post_id => retrend.id, :user_id => @user.id)
+
+    retrend.increment(:retrend_count)
+
+    @post.content.split(" ").each do |str|
+      if str.include?("#")
+        trend = delete_chars(str)
+        trend_array << trend if !trend_array.include?(trend)
+      end
+    end
+
+    respond_to do |format|
+      if @post.save
+        retrend.save
+
+        trend_array.each do |t|
+
+          @trend = Trend.where(:name => t).first
+          @trend.increment(:trend_count)
+          @trend.save
+
+          @user_trend = UserTrend.where(:user_id => @user, :trend_id => @trend).first
+          if @user_trend.blank?
+            @user_trend = UserTrend.new()
+            @user_trend.user_id = @user.id
+            @user_trend.trend_id = @trend.id
+          end
+
+          @user_trend.increment(:count)
+          @user_trend.save
+        end
+
+        format.html { redirect_to root_path, :notice => 'Post was successfully retrended!' }
+        format.json { render :json => @post, :status => :created, :location => @post }
+      else
+        format.html { render :action => "new" }
+        format.json { render :json => @post.errors, :status => :unprocessable_entity }
+      end
+
+    end
+  end
+
   # POST /posts
   # POST /posts.json
   def create
+    raise
     @post = Post.new(params[:post])
     @user = current_user
-  #  raise @post.inspect
+
     trend_array=[]
     @post.content.split(" ").each do |str|
       if str.include?("#")
@@ -57,7 +111,7 @@ class PostsController < ApplicationController
       end
     end
 
-
+    raise
     respond_to do |format|
       if @post.save
         trend_array.each do |t|
@@ -65,9 +119,9 @@ class PostsController < ApplicationController
           if @trend.blank?
             @trend = Trend.new()
             @trend.name = t
-            @trend.trend_count = 0
+            @trend.increment(:trend_count)
           end
-          @trend.trend_count.blank? ? @trend.trend_count = 1 : @trend.trend_count += 1
+          @trend.increment(:trend_count)
           @trend.save
 
           @user_trend = UserTrend.where(:user_id => @user, :trend_id => @trend).first
@@ -75,12 +129,9 @@ class PostsController < ApplicationController
             @user_trend = UserTrend.new()
             @user_trend.user_id = @user.id
             @user_trend.trend_id = @trend.id
-            @user_trend.count = 1
-            @user_trend.save
-          else
-            @user_trend.count.blank? ? @user_trend.count = 1 : @user_trend.count += 1
-            @user_trend.save
           end
+            @user_trend.increment(:count)
+            @user_trend.save
 
           hop_array = trend_array.reject{ |a| a== t}
           hop_array.each do |hop|
@@ -96,9 +147,9 @@ class PostsController < ApplicationController
                 @hop.save
               end
               @trend_hop.related_trend_id = @hop.id
-              @trend_hop.count = 0
+              @trend_hop.increment(:count)
             end
-            @trend_hop.count += 1
+            @trend_hop.increment(:count)
             @trend_hop.save
           end
 
@@ -110,7 +161,7 @@ class PostsController < ApplicationController
             @post_trend.post_counter = 1
             @post_trend.save
           else
-            @post_trend.post_counter += 1
+            @post_trend.increment(:post_counter)
             @post_trend.save
           end
         end

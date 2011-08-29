@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
   has_many :user_trends
   has_many :trends, :through => :user_trends
 
-
   has_many :roles
 
   ROLES = %w[admin moderator standard]

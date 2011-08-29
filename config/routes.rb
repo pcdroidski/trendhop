@@ -1,10 +1,15 @@
 Trendhop::Application.routes.draw do
 
-  resources :posts
+  resources :posts do
+    collection do
+      get 'retrend'
+      post :retrend
+    end
+  end
 
   devise_for :users
-  
-  
+
+
   resources :trends
 
   resources :blogs do

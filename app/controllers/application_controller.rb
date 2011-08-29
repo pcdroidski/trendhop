@@ -15,17 +15,25 @@ class ApplicationController < ActionController::Base
     @special_post = Post.new
     @user = current_user
   end
-  
+
   def check_user?
     user_signed_in?
   end
   helper_method :check_user?
-  
+
 
   def list_trends(post)
     trend_list = []
-    post.trends.map do |trend|
-      trend_list << "<a id='trend' href='#{url_for(trend_path(trend.name))}'>#{trend.name} </a>"
+
+    if (post.retrend_post_id == nil)
+      post.trends.map do |trend|
+        trend_list << "<a id='trend' href='#{url_for(trend_path(trend.name))}'>#{trend.name} </a>"
+      end
+    else
+      repost = Post.where(:id => post.retrend_post_id).first
+       repost.trends.map do |trend|
+          trend_list << "<a id='trend' href='#{url_for(trend_path(trend.name))}'>#{trend.name} </a>"
+        end
     end
     trend_list.to_sentence
   end

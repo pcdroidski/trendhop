@@ -3,10 +3,13 @@
   <ul class="posts_list"><% @posts.each do |post| %>
     <li class="post">
       <div class="fr">
-        <%= link_to "Retrend", new_post_path(:content => post.content)%>
-      </div>  
+        <%= link_to "Retrend", retrend_posts_path(:post_id => post.id)%>
+      </div>
       <div class="post_content">
-        <div class="post_title"><%= link_to post.user.name, user_path(post.user), :id=>"name"%> is trending <%= raw(list_trends(post)) %></div> on <%= post.created_at.to_s(:mdy_dots)%>
+        <div class="post_title">
+          <%= link_to post.user.name, user_path(post.user), :id=>"name"%> <%= post.retrend_post_id.blank? ? "is trending " : "is RE-trending " %> <%= raw(list_trends(post)) %>
+          <% if !post.retrend_post_id.blank?%> from <%= link_to post.retrend_user.name, user_path(post.retrend_user)%> <% end%>
+          </div> on <%= post.created_at.to_s(:mdy_dots)%>
         <div class="content"> <%= post.content %> </div>
             <div class="clear"></div>
       </div>
@@ -14,7 +17,8 @@
       <div class="post_info fl">
         <%#raise post.trends.classify.inspect%>
         <!-- <span>Category: <%#= post.category_id %> </span><br/> -->
-        <% post.trends.each do |trend| %>
+        <% post.retrend_post_id.blank? ? posted = post : posted = Post.where(:id => post.retrend_post_id).first %>
+        <% posted.trends.each do |trend| %>
         <span> <%= pluralize (trend.trend_count, "person is", "people are") %> trending <%= trend.name%>.</span>
         <%end%>
       </div>

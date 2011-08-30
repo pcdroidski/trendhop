@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-  #  @posts = Post.all
+    @posts = Post.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
- #   @post = Post.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   # POST /retrends
@@ -56,7 +56,8 @@ class PostsController < ApplicationController
     @post = Post.new(:content => retrend.content, :retrend_user_id => retrend.user_id, :retrend_post_id => retrend.id, :user_id => @user.id)
 
     retrend.increment(:retrend_count)
-
+  
+    trend_array =[]
     @post.content.split(" ").each do |str|
       if str.include?("#")
         trend = delete_chars(str)
@@ -98,7 +99,6 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    raise
     @post = Post.new(params[:post])
     @user = current_user
 
@@ -111,7 +111,6 @@ class PostsController < ApplicationController
       end
     end
 
-    raise
     respond_to do |format|
       if @post.save
         trend_array.each do |t|
@@ -167,7 +166,7 @@ class PostsController < ApplicationController
         end
 
 
-        format.html { redirect_to @post, :notice => 'Post was successfully created.' }
+        format.html { redirect_to root_path, :notice => 'Post was successfully created.' }
         format.json { render :json => @post, :status => :created, :location => @post }
       else
         format.html { render :action => "new" }
@@ -179,7 +178,7 @@ class PostsController < ApplicationController
   # PUT /posts/1
   # PUT /posts/1.json
   def update
-  #  @post = Post.find(params[:id])
+    @post = Post.find(params[:id])
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
@@ -207,7 +206,7 @@ class PostsController < ApplicationController
     private
 
   def delete_chars(trend)
-    trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").downcase
+    trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")")
   end
 
 

@@ -5,6 +5,8 @@
 
 $border-color: #000;
 $text-color: #000;
+$name-color: #0000FF;
+$trend-color: #339966;
 
 @mixin rounded-corners($radius) {
   border-radius: $radius;
@@ -47,25 +49,28 @@ $text-color: #000;
 
         .post_title {
           text-align: left;
-          font-size: 16px;
+          font-size: 14px;
           margin: 0 0 5px 0;
 
 
           #trend{
             text-decoration: none;
-            font-size: 18px;
+            font-size: 16px;
+            color: $trend-color;
+            font-weight: bold;
           }
 
           #name {
             text-decoration: none;
-            font-size: 18px;
+            font-size: 16px;
+            color: $name-color;
           }
 
         }
 
         .content {
           margin: 5px 0 10px 20px;
-          font-size: 14px;
+          font-size: 16px;
         }
 
 
@@ -73,7 +78,7 @@ $text-color: #000;
 
       .post_info {
         display: block;
-        width: 270px;
+        width: 300px;
 
 
         span {
@@ -115,7 +120,7 @@ $text-color: #000;
   .post-title {
     height: 35px;
     font-size: 30px;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid $border-color;
   }
 
   .post-info {
@@ -123,11 +128,11 @@ $text-color: #000;
     padding-bottom: 5px;
     height: 20px;
     font-size: 14px;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid $border-color;
   }
 
   .post-content {
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid $border-color;
 
     p {
       font-size: 20px;
@@ -136,7 +141,7 @@ $text-color: #000;
   }
 
   .post-trends {
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid $border-color;
     margin: 5px 0 5px 0;
 
 

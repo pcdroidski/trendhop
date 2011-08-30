@@ -1,4 +1,4 @@
-<%= form_for(@special_post) do |f| %>
+<%= form_for (@special_post) do |f| %>
   <div class="field">
     <%= f.hidden_field :user_id, :value => @user.id %>
   </div>
@@ -6,9 +6,11 @@
     <%#= f.label :category_id %><br />
     <%#= f.number_field :category_id %>
   </div> -->
-  <div class="field" >
-    <%= f.text_area :content, :rows=>'4', :style=>"width:550px;" %>
-  </div>
+  <%= f.fields_for :post_content do |post_form| %>
+    <div class="field" >
+      <%= post_form.text_area :content, :rows=>'4', :style=>"width:550px;" %>
+    </div>
+  <% end%>
   <div class="actions">
     <%= f.submit %>
   </div>

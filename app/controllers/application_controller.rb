@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   private
 
   def post_from_anywhere
-    @special_post = Post.new
+    @special_post = Post.new()
     @user = current_user
   end
 

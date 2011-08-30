@@ -26,10 +26,8 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
-
+    @post_content = PostContent.new()
     @post = Post.new()
-    @retrend = Trend.where(:id => params[:trend]).first
- #   @post.content = params[:post]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -56,7 +54,7 @@ class PostsController < ApplicationController
     @post = Post.new(:content => retrend.content, :retrend_user_id => retrend.user_id, :retrend_post_id => retrend.id, :user_id => @user.id)
 
     retrend.increment(:retrend_count)
-  
+
     trend_array =[]
     @post.content.split(" ").each do |str|
       if str.include?("#")
@@ -99,11 +97,17 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(params[:post])
+#    raise params[:post][:post_content].inspect
+    @post_content = PostContent.new(params[:post][:post_content])
+    @post_content.save
+ #   params[:post][:post_content_id] = @post_content.id.to_s
+
+  # raise params[:post].inspect
+    @post = Post.new(:user_id => params[:post][:user_id], :post_content_id => @post_content.id)
     @user = current_user
 
     trend_array=[]
-    @post.content.split(" ").each do |str|
+    @post.post_content.content.split(" ").each do |str|
       if str.include?("#")
         trend = delete_chars(str)
  #         raise "#{trend.inspect} #{trend_array.inspect}"
@@ -152,19 +156,18 @@ class PostsController < ApplicationController
             @trend_hop.save
           end
 
-         @post_trend = PostTrend.where(:post_id => @post, :trend_id => @trend).first
+         @post_trend = PostTrend.where(:post_content_id => @post_content, :trend_id => @trend).first
          if @post_trend.blank?
             @post_trend = PostTrend.new()
-            @post_trend.post_id = @post.id
+            @post_trend.post_content_id = @post_content.id
             @post_trend.trend_id = @trend.id
-            @post_trend.post_counter = 1
+#            @post_trend.post_counter = 1
             @post_trend.save
           else
-            @post_trend.increment(:post_counter)
+#            @post_trend.increment(:post_counter)
             @post_trend.save
           end
         end
-
 
         format.html { redirect_to root_path, :notice => 'Post was successfully created.' }
         format.json { render :json => @post, :status => :created, :location => @post }

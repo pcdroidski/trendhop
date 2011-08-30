@@ -4,8 +4,8 @@ class Post < ActiveRecord::Base
 
   belongs_to :retrend_user, :class_name => "User", :foreign_key => :retrend_user_id
 
-  has_many :post_trends
-  has_many :trends, :through => :post_trends
+  belongs_to :post_content
+  has_many :trends, :through => :post_content
 
   def delete_chars
     self.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")")

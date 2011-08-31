@@ -3,7 +3,7 @@ class TrendsController < ApplicationController
     before_filter :authenticate_user!
     layout "trends"
  #   load_and_authorize_resource, :only => [:index, :new, :edit, :create, :update, :destroy ]
- 
+
   # GET /trends
   # GET /trends.json
   def index

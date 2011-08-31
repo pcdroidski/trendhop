@@ -1,4 +1,4 @@
-<div class="content" id="posts">
+<div class="content" id="post_index">
   <div class="title"><span>Who's Trending What? </span> </div>
   <ul class="posts_list">
 
@@ -18,11 +18,11 @@
       <div class="post_content">
         <div class="post_title">
           <%= link_to post.user.name, user_path(post.user), :id=>"name"%> <%= post.retrend_post_id.blank? ? "is trending " : "is RE-trending " %> <%= raw(list_trends(post)) %>
-          
+
           <% if post.retrend%>
             <span class='fr'>from <%= link_to post.retrend_user.name, user_path(post.retrend_user_id)%> </span>
           <% end%>
-          
+
           </div> on <%= post.created_at.to_s(:mdy_dots) unless post.created_at.blank?%>
         <div class="content"> <%= post.post_content.content %> </div>
             <div class="clear"></div>
@@ -38,10 +38,10 @@
         <span class="subsection_title">Hop to related trends: </span>
         <ul class="trend_hop">
           <%  post.trend_hop.each do |hop|%>
-            <li id='hop'>  <%= link_to hop.name, trend_path(hop.name) %></li> 
+            <li id='hop'>  <%= link_to hop.name, trend_path(hop.name) %></li>
           <% end%>
           <% if post.trend_hop.blank?%>
-            <li>-- none -- </li> 
+            <li>-- none -- </li>
           <% end%>
 
         </ul>

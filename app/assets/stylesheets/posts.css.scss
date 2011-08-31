@@ -18,7 +18,7 @@ $trend-color: #339966;
   border-bottom: 1px solid $color;
 }
 
-#posts{
+#post_index{
 
   .title {
     height: 40px;
@@ -96,7 +96,7 @@ $trend-color: #339966;
         .subsection_title {
           font-size: 12px;
         }
-        
+
         .trend_hop {
           padding: 0;
           width: 250px;
@@ -106,7 +106,7 @@ $trend-color: #339966;
           list-style: none;
           float: left;
           margin: 0 10px 5px 0;
-          
+
           a {
           text-decoration: none;
           color: $trend-color;
@@ -125,7 +125,7 @@ $trend-color: #339966;
 
 /* SHOW */
 
-#post {
+#post_show {
 
 
   .post-title {

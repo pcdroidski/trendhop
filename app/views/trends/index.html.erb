@@ -3,24 +3,25 @@
   <ul class="trends_list"><% @trends.each do |trend| %>
     <li class="trend">
       <div class="trend_info fl">
-        <h4 class="trend_title"><%= link_to trend.name, trend_path(trend.name) %></h4>
+        <h4 class="trend_title"><%= link_to trend.name, trend_path(trend.name), :id=> "trend"%></h4>
         <span>Category: <%= trend.trend_category_id %> </span><br/>
         <span><%= pluralize (trend.trend_count, "person is", "people are") %> trending this.</span><br/>
         <span><%= pluralize (trend.post_contents.count, "post is", "posts are") %> trending this.</span>
       </div>
-      <div id="trend_blogs" class="fl">
+      <div class="trend_posts" class="fl">
         <span class="subsection_title">Recent posts: </span>
-        <ul class="trend_blog">
+        <ul class="trend_post">
           <% trend.post_contents.each do |post| %>
-          <li>  <%= link_to post.content, post_path(post.posts.first) %><br/></li>
+          <li>  <%= link_to post.content, post_path(post.posts.first), :id=> "post" %><br/></li>
           <% end%>
         </ul>
       </div>
-      <div id="trend_hops" class="fl">
-        <span class="subsection_title">Hop to a related trend: </span>
-        <ul class="trend_hop">
+            <div class="clear"></div>
+      <div class="trend_hops" class="fl">
+        <span class="trend_section_info fl">Hop to a related trend: </span>
+        <ul class="trend_hop fl">
           <% trend.trends.each do |hop| %>
-          <li>  <%= link_to hop.name, trend_path(hop.name) %><br/></li>
+          <li>  <%= link_to hop.name, trend_path(hop.name), :id => "trend" %><br/></li>
           <% end%>
         </ul>
       </div>

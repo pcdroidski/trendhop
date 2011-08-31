@@ -1,6 +1,7 @@
 class Trend < ActiveRecord::Base
 
-
+  has_many :post_trends
+  has_many :post_contents, :through => :post_trends
 
   has_many :blog_trends
   has_many :blogs, :through => :blog_trends

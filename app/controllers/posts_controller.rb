@@ -45,31 +45,18 @@ class PostsController < ApplicationController
   def retrend
     retrend = Post.where(:id => params[:post_id]).first
 
-    PostTrend.where(:post_id => retrend.id).each do |trend|
-      trend.increment(:post_counter)
-      trend.save
-    end
-
     @user = current_user
-    @post = Post.new(:content => retrend.content, :retrend_user_id => retrend.user_id, :retrend_post_id => retrend.id, :user_id => @user.id)
-
+    @post = Post.new(:post_content_id => retrend.post_content_id, :retrend_user_id => retrend.user_id, :retrend_post_id => retrend.id, :user_id => @user.id, :retrend => true)
+    
     retrend.increment(:retrend_count)
-
-    trend_array =[]
-    @post.content.split(" ").each do |str|
-      if str.include?("#")
-        trend = delete_chars(str)
-        trend_array << trend if !trend_array.include?(trend)
-      end
-    end
 
     respond_to do |format|
       if @post.save
         retrend.save
 
-        trend_array.each do |t|
+        retrend.trends.each do |t|
 
-          @trend = Trend.where(:name => t).first
+          @trend = Trend.where(:name => t.name).first
           @trend.increment(:trend_count)
           @trend.save
 
@@ -103,7 +90,7 @@ class PostsController < ApplicationController
  #   params[:post][:post_content_id] = @post_content.id.to_s
 
   # raise params[:post].inspect
-    @post = Post.new(:user_id => params[:post][:user_id], :post_content_id => @post_content.id)
+    @post = Post.new(:user_id => params[:post][:user_id], :post_content_id => @post_content.id, :retrend => false)
     @user = current_user
 
     trend_array=[]
@@ -122,7 +109,6 @@ class PostsController < ApplicationController
           if @trend.blank?
             @trend = Trend.new()
             @trend.name = t
-            @trend.increment(:trend_count)
           end
           @trend.increment(:trend_count)
           @trend.save
@@ -137,10 +123,11 @@ class PostsController < ApplicationController
             @user_trend.save
 
           hop_array = trend_array.reject{ |a| a== t}
+
           hop_array.each do |hop|
             @hop = Trend.where(:name => hop).first
 
-            @trend_hop = TrendHop.where(:trend_id => @trend.id, :related_trend_id => @hop.id).first unless @hop.blank? || @trend.blank?
+            @trend_hop = TrendHop.where(:trend_id => @trend.id, :related_trend_id => @hop.id).first unless @hop.blank?
             if @trend_hop.blank?
               @trend_hop = TrendHop.new()
               @trend_hop.trend_id = @trend.id
@@ -150,23 +137,19 @@ class PostsController < ApplicationController
                 @hop.save
               end
               @trend_hop.related_trend_id = @hop.id
-              @trend_hop.increment(:count)
             end
             @trend_hop.increment(:count)
             @trend_hop.save
           end
 
-         @post_trend = PostTrend.where(:post_content_id => @post_content, :trend_id => @trend).first
-         if @post_trend.blank?
+          @post_trend = PostTrend.where(:post_content_id => @post_content, :trend_id => @trend).first
+          if @post_trend.blank?
             @post_trend = PostTrend.new()
-            @post_trend.post_content_id = @post_content.id
             @post_trend.trend_id = @trend.id
-#            @post_trend.post_counter = 1
-            @post_trend.save
-          else
-#            @post_trend.increment(:post_counter)
-            @post_trend.save
+            @post_trend.post_content_id = @post_content.id
           end
+          @post_trend.save
+          
         end
 
         format.html { redirect_to root_path, :notice => 'Post was successfully created.' }
@@ -209,7 +192,7 @@ class PostsController < ApplicationController
     private
 
   def delete_chars(trend)
-    trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")")
+    trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").delete("?")
   end
 
 

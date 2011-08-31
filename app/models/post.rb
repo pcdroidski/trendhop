@@ -14,5 +14,17 @@ class Post < ActiveRecord::Base
   def trends_list
     self.trends.map(&:name).to_sentence
   end
+  
+  def trend_hop
+    array = []
+    self.trends.each do |trend|
+      trend.trend_hops.each do |hop|
+        if !self.trends.include?(hop.trend)
+          array << hop.trend
+        end
+      end
+    end    
+    return array
+  end
 
 end

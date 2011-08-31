@@ -4,7 +4,7 @@
 
   <% @posts.each do |post| %>
     <li class="post">
-      <% if  post.retrend_post_id.blank? %>
+      <%if !post.retrend %>
       <div class="fr">
         <%= link_to "Retrend", retrend_posts_path(:post_id => post.id)%>
       </div>
@@ -18,15 +18,17 @@
       <div class="post_content">
         <div class="post_title">
           <%= link_to post.user.name, user_path(post.user), :id=>"name"%> <%= post.retrend_post_id.blank? ? "is trending " : "is RE-trending " %> <%= raw(list_trends(post)) %>
-          <% if !post.retrend_post_id.blank?%><span class='fr'>from <%= link_to post.retrend_user.name, user_path(post.retrend_user)%> </span><% end%>
+          
+          <% if post.retrend%>
+            <span class='fr'>from <%= link_to post.retrend_user.name, user_path(post.retrend_user_id)%> </span>
+          <% end%>
+          
           </div> on <%= post.created_at.to_s(:mdy_dots) unless post.created_at.blank?%>
         <div class="content"> <%= post.post_content.content %> </div>
             <div class="clear"></div>
       </div>
 
       <div class="post_info fl">
-        <%#raise post.trends.classify.inspect%>
-        <!-- <span>Category: <%#= post.category_id %> </span><br/> -->
         <% post.retrend_post_id.blank? ? posted = post : posted = Post.where(:id => post.retrend_post_id).first %>
         <% posted.trends.each do |trend| %>
         <span> <%= pluralize (trend.trend_count, "person is", "people are") %> trending <%= trend.name%>.</span>
@@ -35,14 +37,13 @@
       <div class="trend_hops fl">
         <span class="subsection_title">Hop to related trends: </span>
         <ul class="trend_hop">
-          <% check_for_unique = 0%>
-          <% post.trends.each do |hop| %>
-            <% check_for_unique += 1%>
-            <li id='hop'>  <%= link_to hop.name, trend_path(hop.name) %></li>
+          <%  post.trend_hop.each do |hop|%>
+            <li id='hop'>  <%= link_to hop.name, trend_path(hop.name) %></li> 
           <% end%>
-          <% if check_for_unique == 0 %>
-            <li>-- none -- </li>
+          <% if post.trend_hop.blank?%>
+            <li>-- none -- </li> 
           <% end%>
+
         </ul>
       </div>
       <div class="clear"></div>

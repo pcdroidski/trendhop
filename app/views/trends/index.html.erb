@@ -6,13 +6,13 @@
         <h4 class="trend_title"><%= link_to trend.name, trend_path(trend.name) %></h4>
         <span>Category: <%= trend.trend_category_id %> </span><br/>
         <span><%= pluralize (trend.trend_count, "person is", "people are") %> trending this.</span><br/>
-        <span><%= pluralize (trend.blogs.count, "blog is", "blogs are") %> trending this.</span>
+        <span><%= pluralize (trend.post_contents.count, "post is", "posts are") %> trending this.</span>
       </div>
       <div id="trend_blogs" class="fl">
         <span class="subsection_title">Recent posts: </span>
         <ul class="trend_blog">
-          <% trend.blogs.each do |blog| %>
-          <li>  <%= link_to blog.title, blog_path(blog) %><br/></li>
+          <% trend.post_contents.each do |post| %>
+          <li>  <%= link_to post.content, post_path(post.posts.first) %><br/></li>
           <% end%>
         </ul>
       </div>

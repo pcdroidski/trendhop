@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-  #  @post = Post.find(params[:id])
+    @post = Post.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
 
     @user = current_user
     @post = Post.new(:post_content_id => retrend.post_content_id, :retrend_user_id => retrend.user_id, :retrend_post_id => retrend.id, :user_id => @user.id, :retrend => true)
-    
+
     retrend.increment(:retrend_count)
 
     respond_to do |format|
@@ -149,7 +149,7 @@ class PostsController < ApplicationController
             @post_trend.post_content_id = @post_content.id
           end
           @post_trend.save
-          
+
         end
 
         format.html { redirect_to root_path, :notice => 'Post was successfully created.' }

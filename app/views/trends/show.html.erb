@@ -1,4 +1,4 @@
-<div class='content' id="trend">
+<div class='content' id="trend_show">
 
   <div class="trend-title">
     Viewing trendormation on <span id="title"><%= @trend.name %> </span>
@@ -13,33 +13,35 @@
     </div>
   </div>
 
-  <div class="trend_hops">
-    <span class="section_title">Hop to another trend / Related trends: </span>
-    <div class='trend_list'>
+  <% content_for :right_menu do%>
+    <span class="section_title">Hop to another trend: </span>
+    <ul id='trend_list'>
       <% if @trend.trends.blank? %>
-      <div class="trend_item" style="margin-left: auto; margin-right: auto; width: 220px;">
+      <li class="trend_item" style="margin-left: auto; margin-right: auto;">
         <p>There are no Trends to hop to! </p>
-      </div>
+      </li>
       <% else%>
       <% @trend.trends.each do |trend|%>
-      <div class="trend_item fl">
+      <li class="trend_item fl">
         <div class="trend-row">
           <span id="hop-title"><%= link_to trend.name, trend_path(trend.name) %></span>
         </div>
         <div class="trend-row">
           <span id="hop-count"><%= pluralize(trend.trend_count, "person" )%> trending this. </span>
         </div>
-      </div>
+      </li>
       <% end%>
-      <div class="clear"></div>
+      <div class="clear">
       <% end%>
-    </div>
-  </div>
-        <div class="clear"></div>
-  <div class="trend_blogs">
-    <span class="section_title">Blogs: </span>
+    </ul>
+  <%end%>
 
-    <%= render :partial => "blogs/index"%>
+  <div class="clear"></div>
+
+  <div class="trend_posts">
+    <span class="section_title">What people are saying: </span>
+
+    <%= render :partial => "posts/index"%>
   </div>
 
   <%= link_to 'Edit', edit_trend_path(@trend) %> |

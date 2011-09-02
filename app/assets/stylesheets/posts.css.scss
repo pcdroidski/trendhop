@@ -33,7 +33,6 @@ $trend-color: #339966;
   .posts_list {
     margin: 10px 0 10px 0;
     padding: 0;
-    width: 560px;
     list-style: none;
 
     li.post {
@@ -78,7 +77,7 @@ $trend-color: #339966;
 
       .post_info {
         display: block;
-        width: 300px;
+        width: 50%;
 
 
         span {
@@ -92,30 +91,30 @@ $trend-color: #339966;
       }
 
      .trend_hops {
+       width: 50%;
 
         .subsection_title {
           font-size: 12px;
         }
 
-        .trend_hop {
+        ul.trend_hop {
           padding: 0;
-          width: 250px;
-        }
-
-        #hop {
           list-style: none;
-          float: left;
-          margin: 0 10px 5px 0;
 
-          a {
-          text-decoration: none;
-          color: $trend-color;
-          font-size: 14px;
-          font-weight: bold;
+
+          li {
+            list-style: none;
+            margin: 0 10px 5px 0;
+
+            a {
+            text-decoration: none;
+            color: $trend-color;
+            font-size: 14px;
+            font-weight: bold;
+            }
+
           }
-
-        }
-
+}
      }
 
     }
@@ -127,44 +126,65 @@ $trend-color: #339966;
 
 #post_show {
 
+  .post_root {
 
-  .post-title {
-    height: 35px;
-    font-size: 30px;
-    border-bottom: 1px solid $border-color;
-  }
 
-  .post-info {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    height: 20px;
-    font-size: 14px;
-    border-bottom: 1px solid $border-color;
-  }
+    .post_content{
+      border-bottom: 1px solid $border-color;
 
-  .post-content {
-    border-bottom: 1px solid $border-color;
+      .post_title {
+        height: 35px;
+        font-size: 22px;
+        border-bottom: 1px solid $border-color;
+        }
 
-    p {
-      font-size: 20px;
-      text-align: justify;
+      .post_date {
+      font-size: 14px;
+      }
+
+      .content {
+
+          p{ font-size: 16px; }
+
+      }
+    }
+
+    .post_info {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      width: 50%;
+      font-size: 14px;
+    }
+
+
+    .trend_hops {
+      margin: 5px 0 5px 0;
+
+      span {
+        font-size: 15px;
+      }
+
+      ul.trend_hop {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin: 2px 10px 0 0;
+          font-weight: bold;
+
+          a{
+          text-decoration: none;
+
+          &:hover{}
+
+          }
+
+        }
+
+      }
+
     }
   }
-
-  .post-trends {
-    border-bottom: 1px solid $border-color;
-    margin: 5px 0 5px 0;
-
-
-    .post-trend {
-        display: block;
-        padding: 5px;
-        margin: 10px 10px 10px 10px;
-        border: 1px solid $border-color;
-        @include rounded-corners(5px);
-        font-size: 16px;
-    }
-  }
-
 }
 

@@ -227,5 +227,33 @@ $post-border: #616D7E;
 
     }
   }
+  
+  /* Trend Filter */
+  
+  ul.trend_filters {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li.filter {
+      margin: 2px 0 5px 2px;
+      font-size: 18px;
+      display: block;
+      height: 24px;
+      @include rounded-corners(5px);
+      border: 1px solid $border-color;
+      padding: 5px;
+      
+      a{
+        text-decoration: none;
+        margin-left: 5px; 
+      }
+      
+    }
+    #active-filter {
+      background-color: $trend-color;
+    }
+    
+  }
 
 

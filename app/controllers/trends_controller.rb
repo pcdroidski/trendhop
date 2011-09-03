@@ -9,7 +9,20 @@ class TrendsController < ApplicationController
   # GET /trends
   # GET /trends.json
   def index
-    @trends = Trend.all
+    @trend_filter = params[:filter]
+    
+    @trends = case params[:filter]
+      when "recent" then Trend.order("created_at DESC")
+      when "popular" then Trend.order("trend_count DESC")
+      when "today" then Trend.set_range("day")
+      when "past_week" then Trend.set_range("week")
+      when "past_month" then Trend.set_range("month")
+      when "men" then Trend.set_men
+      when "women" then Trend.set_women
+      else Trend.order("created_at DESC")
+    end
+  #  raise @trends.inspect
+    
     @posts = Post.order("created_at DESC")
 
     respond_to do |format|

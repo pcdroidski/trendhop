@@ -1,3 +1,20 @@
+ <% content_for :right_menu do%>
+  <br/><br/>
+    <span class="section_title">Sort by: </span>
+    <ul class="trend_filters">
+      <% filters = ["recent","popular", "today", "past_week", "past_month", "men", "women"]%>
+      <% filters.each do |filter| %>
+      <% if params[:filter] == filter%>
+        <li class="filter" id="active-filter">
+      <% else %>  
+        <li class="filter">
+      <% end%>
+        <span><%= link_to filter.humanize, {:filter => filter } %> </span>
+      </li>
+      <%end%>
+    </div>
+  <%end%>
+
 <div class="content" id="trends">
   <div class="title"><span>What's Trending? </span> </div>
   <ul class="trends_list"><% @trends.each do |trend| %>

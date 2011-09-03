@@ -24,7 +24,7 @@
       <% @trend.trends.each do |trend|%>
       <li class="trend_item fl">
         <div class="trend-row">
-          <span id="hop-title"><%= link_to trend.name, trend_path(trend.name) %></span>
+          <span id="hop-title"><%= link_to trend.name, trends_path(trend.name) %></span>
         </div>
         <div class="trend-row">
           <span id="hop-count"><%= pluralize(trend.trend_count, "person" )%> trending this. </span>

@@ -1,20 +1,56 @@
-<p id="notice"><%= notice %></p>
+<div class="content" id="post_show">
+  <div class="post_root">
+    <div class="post_content">
+      <div class="post_title">
+        <%= link_to @post.user.name, user_path(@post.user), :id=>"name"%> <%= @post.retrend_post_id.blank? ? "has trended " : "has RE-trended " %> <%= raw(list_trends(@post)) %>
 
-<p>
-  <b>User:</b>
-  <%= @post.user_id %>
-</p>
+        <% if @post.retrend%>
+          <span class='fr'>from <%= link_to @post.retrend_user.name, user_path(post.retrend_user_id)%> </span>
+        <% end%>
+        <br/>
+        <div class="fr post_date" > on <%= @post.created_at.to_s(:mdy_dots) unless @post.created_at.blank?%> </div>
+      </div>
+      <div class="content">
+        <p><%= @post.post_content.content %> </p>
+      </div>
+      <div class="clear"></div>
 
-<p>
-  <b>Category:</b>
-  <%= @post.category_id %>
-</p>
+      <%if !@post.retrend %>
+      <div class="fr">
+        <%= link_to "Retrend", retrend_posts_path(:post_id => @post.id)%>
+      </div>
+      <% end%>
+      <% if  !@post.retrend_count.blank? %>
+      <br/>
+      <div class="fr">
+        <%= pluralize (@post.retrend_count, "person has", "people have")%> re-trended this post.
+      </div>
+      <% end%>
 
-<p>
-  <b>Content:</b>
-  <%= @post.content %>
-</p>
+      <div class="clear"></div>
+    </div>
 
+    <div class="post_info fl">
+      <% @post.retrend_post_id.blank? ? posted = @post : posted = Post.where(:id => @post.retrend_post_id).first %>
+      <% posted.trends.each do |trend| %>
+      <span> <%= pluralize (trend.trend_count, "person is", "people are") %> trending <%= link_to trend.name, trend_path(trend.name), :id=> "trend"%>.</span>
+      <%end%>
+    </div>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+    <div class="trend_hops fl">
+      <span class="subsection_title">Hop to related trends: </span>
+      <ul class="trend_hop">
+        <%  @post.trend_hop.each do |hop|%>
+          <li class="fl" id='hop'>  <%= link_to hop.name, trend_path(hop.name), :id=> "trend" %></li>
+        <% end%>
+        <% if @post.trend_hop.blank?%>
+          <li>-- none -- </li>
+        <% end%>
+
+      </ul>
+    </div>
+
+  </div>
+  <div class="clear"></div>
+  <hr/>
+</div>

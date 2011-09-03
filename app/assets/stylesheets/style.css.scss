@@ -1,10 +1,23 @@
 
+$border-color: #000;
+$text-color: #000;
+$name-color: #0000FF;
+$trend-color: #339966;
+$post-color: #0000FF;
+
 .content {
   margin: 5px 0 5px 0;
-  width: 560px;
 }
 
 .section_title {
   font-size: 20px;
   font-weight: bold;
+}
+
+#trend {
+  color: $trend-color;
+}
+
+#post {
+  color: $post-color;
 }

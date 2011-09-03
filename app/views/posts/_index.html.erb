@@ -1,0 +1,56 @@
+<div id="post_index">
+<ul class="posts_list">
+
+<% @posts.each do |post| %>
+  <li class="post">
+    <%if !post.retrend %>
+    <div class="fr">
+      <%= link_to "Retrend", retrend_posts_path(:post_id => post.id)%>
+    </div>
+    <% end%>
+    <% if  !post.retrend_count.blank? %>
+    <br/>
+    <div class="fr">
+      <%= pluralize (post.retrend_count, "person has", "people have")%> re-trended this.
+    </div>
+    <% end%>
+    <div class="post_content">
+      <div class="post_title">
+        <%= link_to post.user.name, user_path(post.user), :id=>"name"%> <%= post.retrend_post_id.blank? ? "is trending " : "is RE-trending " %> <%= raw(list_trends(post)) %>
+
+        <% if post.retrend%>
+          <span class='fr'>from <%= link_to post.retrend_user.name, user_path(post.retrend_user_id)%> </span>
+        <% end%>
+
+        </div> on <%= post.created_at.to_s(:mdy_dots) unless post.created_at.blank?%>
+      <div class="content"> <%= post.post_content.content %> </div>
+          <div class="clear"></div>
+    </div>
+
+    <div class="post_info fl">
+      <% post.retrend_post_id.blank? ? posted = post : posted = Post.where(:id => post.retrend_post_id).first %>
+      <% posted.trends.each do |trend| %>
+      <span> <%= pluralize (trend.trend_count, "person is", "people are") %> trending <%= trend.name%>.</span>
+      <%end%>
+    </div>
+    <div class="trend_hops fl">
+      <span class="subsection_title">Hop to related trends: </span>
+      <ul class="trend_hop">
+        <%  post.trend_hop.each do |hop|%>
+          <li class="fl" id='hop'>  <%= link_to hop.name, trend_path(hop.name) %></li>
+        <% end%>
+        <% if post.trend_hop.blank?%>
+          <li>-- none -- </li>
+        <% end%>
+
+      </ul>
+    </div>
+    <div class="clear"></div>
+    <%#= link_to 'Show', trend %>
+    <%#= link_to 'Edit', edit_trend_path(trend) %>
+    <%#= link_to 'Destroy', trend, :confirm => 'Are you sure?', :method => :delete %>
+
+  </li>
+<% end %>
+</ul>
+</div>

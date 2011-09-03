@@ -1,13 +1,16 @@
 class TrendsController < ApplicationController
+#  layout "trends", :except => [:index]
+# layout 'application', :only => [:index]
 
-    before_filter :authenticate_user!
-    layout "trends"
+  before_filter :authenticate_user!
+
  #   load_and_authorize_resource, :only => [:index, :new, :edit, :create, :update, :destroy ]
- 
+
   # GET /trends
   # GET /trends.json
   def index
     @trends = Trend.all
+    @posts = Post.order("created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,7 +22,8 @@ class TrendsController < ApplicationController
   # GET /trends/1.json
   def show
     @trend = Trend.where(:name => params[:id]).first
-    @blogs = @trend.blogs
+    @posts = @trend.posts.no_retrends
+
 
     respond_to do |format|
       format.html # show.html.erb

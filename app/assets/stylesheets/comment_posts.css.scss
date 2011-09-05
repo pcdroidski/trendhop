@@ -1,0 +1,36 @@
+// Place all the styles related to the CommentPosts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$border-color: #000;
+$text-color: #000;
+$name-color: #0000FF;
+$trend-color: #339966;
+
+#comments_index {
+  
+  .comments {
+    
+    .comment-item {
+      margin: 5px 0 10px 0;
+      padding: 0 0 5px 5px;
+      border-left: 3px solid $trend-color;
+      border-bottom: 1px solid $trend-color;
+      
+      .comment-user{
+        font-size: 15px;
+      }
+      
+      .comment-body {
+        font-size: 18px;
+        margin: 10px 0 5px 10px;
+      }
+      
+      
+    }
+    
+    
+  }
+  
+  
+}

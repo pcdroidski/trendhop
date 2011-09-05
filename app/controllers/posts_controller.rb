@@ -84,15 +84,12 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-#    raise params[:post][:post_content].inspect
     @post_content = PostContent.new(params[:post][:post_content])
     @post_content.save
- #   params[:post][:post_content_id] = @post_content.id.to_s
-
-  # raise params[:post].inspect
     @post = Post.new(:user_id => params[:post][:user_id], :post_content_id => @post_content.id, :retrend => false)
     @user = current_user
 
+    at_array =[]
     trend_array=[]
     @post.post_content.content.split(" ").each do |str|
       if str.include?("#")
@@ -100,6 +97,11 @@ class PostsController < ApplicationController
  #         raise "#{trend.inspect} #{trend_array.inspect}"
         trend_array << trend if !trend_array.include?(trend)
       end
+      # if str.include?("@")
+      #   str.delete("@")
+      #   
+      #   at_array <<
+      # end
     end
 
     respond_to do |format|

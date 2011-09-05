@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :user_trends
   has_many :trends, :through => :user_trends
+  
+  has_many :comment_posts
 
   has_many :roles
 
@@ -22,9 +24,10 @@ class User < ActiveRecord::Base
   #   [role.to_sym]
   # end
 
-  def name
+  def full_name
     [first_name,last_name].join(" ")
   end
+  
 
   def birth_date
     [birth_month, birth_day, birth_year].join("/")

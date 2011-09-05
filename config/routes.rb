@@ -5,6 +5,7 @@ Trendhop::Application.routes.draw do
       get 'retrend'
       post :retrend
     end
+    resources :comment_posts
   end
 
   devise_for :users

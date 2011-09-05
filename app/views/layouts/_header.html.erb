@@ -8,7 +8,7 @@
           <div class="profile-mini">
             <div style="height: 40px;"> 
             <%= link_to image_tag("/assets/Profile.png", :class=>"profile-pic-mini fl"), user_path(current_user)%>
-            <span class="user-name fl"> <%= current_user.name %> </span>
+            <span class="user-name fl"> <%= current_user.full_name %> </span>
             </div>
             <div class="fr"><%= link_to "Sign out!", destroy_user_session_path %> </div>
           </div>

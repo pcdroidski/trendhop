@@ -8,6 +8,8 @@ class Post < ActiveRecord::Base
   has_many :trends, :through => :post_content
 
   has_many :post_contents
+  
+  has_many :comment_posts
 
   scope :no_retrends, :conditions => {:retrend => false}
 

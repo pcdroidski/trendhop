@@ -2,7 +2,7 @@
   <div class="post_root">
     <div class="post_content">
       <div class="post_title">
-        <%= link_to @post.user.name, user_path(@post.user), :id=>"name"%> <%= @post.retrend_post_id.blank? ? "has trended " : "has RE-trended " %> <%= raw(list_trends(@post)) %>
+        <%= link_to @post.user.full_name, user_path(@post.user), :id=>"name"%> <%= @post.retrend_post_id.blank? ? "has trended " : "has RE-trended " %> <%= raw(list_trends(@post)) %>
 
         <% if @post.retrend%>
           <span class='fr'>from <%= link_to @post.retrend_user.name, user_path(post.retrend_user_id)%> </span>
@@ -21,8 +21,7 @@
       </div>
       <% end%>
       <% if  !@post.retrend_count.blank? %>
-      <br/>
-      <div class="fr">
+      <div class="fl">
         <%= pluralize (@post.retrend_count, "person has", "people have")%> re-trended this post.
       </div>
       <% end%>
@@ -33,7 +32,7 @@
     <div class="post_info fl">
       <% @post.retrend_post_id.blank? ? posted = @post : posted = Post.where(:id => @post.retrend_post_id).first %>
       <% posted.trends.each do |trend| %>
-      <span> <%= pluralize (trend.trend_count, "person is", "people are") %> trending <%= link_to trend.name, trend_path(trend.name), :id=> "trend"%>.</span>
+      <span> <%= pluralize (trend.trend_count, "person is", "people are") %> trending <%= link_to trend.name, trend_path(trend.name), :id=> "trend"%>.</span><br/>
       <%end%>
     </div>
 
@@ -47,10 +46,39 @@
           <li>-- none -- </li>
         <% end%>
 
-      </ul>
+</ul>
     </div>
 
   </div>
   <div class="clear"></div>
   <hr/>
+  
+  <div id="comments_index">
+    <div class="comments">
+      <% @post.comment_posts.each do |comment| %>
+        <div class="comment-item">
+          <span class="comment-user"><%= link_to comment.user.full_name, user_path(comment.user) %> commented: </span> 
+          <p class="comment-body"><%= comment.body%></p>
+        </div>
+      <% end%>
+    </div>
+    
+    <div class="post_comments">
+      <h4>Add a comment: </h2>
+      <%= form_for([@post, @post.comment_posts.build]) do |f| %>
+        <div class="field">
+          <%= f.label :commenter %><br />
+          <%= f.hidden_field :commenter, :value => current_user.id %>
+        </div>
+        <div class="field">
+          <%= f.label :body %><br />
+          <%= f.text_area :body %>
+        </div>
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+      <% end %>  
+    </div>
+  </div>
+  
 </div>

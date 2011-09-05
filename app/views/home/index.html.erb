@@ -7,26 +7,28 @@
 
       <div class="post_content">
         <div class="post_title">
-          <%= link_to post.user.name, user_path(post.user), :id=>"name"%> <%= post.retrend_post_id.blank? ? "is trending " : "is RE-trending " %> <%= raw(list_trends(post)) %>
+          <%= link_to post.user.full_name, user_path(post.user), :id=>"name"%> <%= post.retrend_post_id.blank? ? "is trending " : "is RE-trending " %> <%= raw(list_trends(post)) %>
 
           <% if post.retrend%>
-            <span class='fr'>from <%= link_to post.retrend_user.name, user_path(post.retrend_user_id)%> </span>
+            <span class='fr'>from <%= link_to post.retrend_user.full_name, user_path(post.retrend_user_id)%> </span>
           <% end%>
 
           </div> 
           on <%= post.created_at.to_s(:mdy_dots) unless post.created_at.blank?%>
-          <%if !post.retrend %>
-          <div class="fr">
-            <%= link_to "Retrend", retrend_posts_path(:post_id => post.id)%>
-          </div>
-          <% end%>
-          <% if  !post.retrend_count.blank? %>
-          <br/>
-          <div class="fr">
-            <%= pluralize (post.retrend_count, "person has", "people have")%> re-trended this.
-          </div>
-          <% end%>
-        <div class="content"> <%= post.post_content.content %> </div>
+         
+          <div style="width: 100%;"> 
+            <%if !post.retrend %>
+            <div class="fr">
+              <%= link_to "Retrend", retrend_posts_path(:post_id => post.id)%>
+            </div>
+            <% end%>
+            <% if  !post.retrend_count.blank? %>
+            <div class="fr">
+              <%= pluralize (post.retrend_count, "person has", "people have")%> re-trended this.
+            </div>
+            <% end%>
+        
+          <div class="content"> <%= post.post_content.content %> </div>
             <div class="clear"></div>
       </div>
 

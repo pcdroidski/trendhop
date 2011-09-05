@@ -127,24 +127,25 @@ $trend-color: #339966;
 #post_show {
 
   .post_root {
-
+    
 
     .post_content{
       border-bottom: 1px solid $border-color;
 
       .post_title {
-        height: 35px;
-        font-size: 22px;
-        border-bottom: 1px solid $border-color;
+        height: 25px;
+        font-size: 18px;
         }
 
       .post_date {
-      font-size: 14px;
+      font-size: 13px;
       }
 
       .content {
 
-          p{ font-size: 16px; }
+          p{ 
+            margin-left: 20px;
+            font-size: 20px; }
 
       }
     }

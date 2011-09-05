@@ -5,21 +5,50 @@
       <header>
        <div class="grid_4 omega fl">
         <% if user_signed_in? %>
-          <div>Welcome to TrendHop, <%= current_user.name %> </div><br/>
-            <%= link_to "Sign out!", destroy_user_session_path %>
+          <div class="profile-mini">
+            <div style="height: 40px;"> 
+            <%= link_to image_tag("/assets/Profile.png", :class=>"profile-pic-mini fl"), user_path(current_user)%>
+            <span class="user-name fl"> <%= current_user.name %> </span>
+            </div>
+            <div class="fr"><%= link_to "Sign out!", destroy_user_session_path %> </div>
+          </div>
         <% else%>
-            <%= link_to "Sign up!", new_user_registration_path %><br/>
-            <%= link_to "Sign in!", new_user_session_path %>
+          <div class="login-mini">
+            <div><%= link_to "Sign up!", new_user_registration_path %> </div>
+            <div><%= link_to "Sign in!", new_user_session_path %> </div>
+          </div>
         <% end%>
         </div>
         <div class="grid_8 fl">
-          <h2>TrendHop </h2>
+          <div class="logo_home">
+           <%= link_to image_tag("/assets/Logo.png", :class=>"logo_link"), root_path %>
+          </div>
         </div>
         <div class="grid_4 fl">
-          <%= link_to "Home", root_path %>
-          <%= link_to "Profile", user_path(current_user) unless current_user.blank? %>
-          <%= link_to "Blogs", blogs_path %>
-          <%= link_to "Trends", trends_path%>
+          <div class="home-nav">
+            <%= link_to root_path, :class => "home-link" do %>
+              <div class="link">
+                Home
+              </div>
+            <%end%>
+            <% if user_signed_in? %>
+              <%= link_to user_path(current_user), :class => "home-link" do%>
+                <div class="link">
+                  Profile
+                </div>
+              <% end%>
+            <%end%>
+            <%= link_to blogs_path, :class => "home-link" do%>
+              <div class="link">
+                Blogs
+              </div>
+            <%end%>
+            <%= link_to trends_path, :class => "home-link" do%>
+              <div class="link">
+                Trends
+              </div>
+            <%end%>
+          </div>
         </div>
 
         </header>

@@ -4,13 +4,19 @@
     <ul class="trend_filters">
       <% filters = ["recent","popular", "today", "past_week", "past_month", "men", "women"]%>
       <% filters.each do |filter| %>
-      <% if params[:filter] == filter%>
-        <li class="filter" id="active-filter">
-      <% else %>  
-        <li class="filter">
-      <% end%>
-        <span><%= link_to filter.humanize, {:filter => filter } %> </span>
-      </li>
+        <% if params[:filter] == filter%>
+          <%= link_to trends_path(:filter => filter), :class=>"filter-link", :id=>"active-filter" do%>
+            <li class="filter">
+                 <span><%= filter.humanize %> </span>
+            </li>
+          <%end%>
+        <%else%>
+          <%= link_to trends_path(:filter => filter), :class=>"filter-link" do%>
+            <li class="filter">
+                 <span><%= filter.humanize %> </span>
+            </li>
+          <%end%>
+        <%end%>
       <%end%>
     </div>
   <%end%>

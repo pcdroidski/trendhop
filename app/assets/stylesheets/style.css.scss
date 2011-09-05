@@ -5,6 +5,101 @@ $name-color: #0000FF;
 $trend-color: #339966;
 $post-color: #0000FF;
 
+@mixin rounded-corners($radius) {
+  border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  }
+
+#header_container {
+  background-color: #0066FF;
+  height: 80px;
+  
+  .profile-mini {
+    display: block;
+    height: 65px;
+    width: 170px;
+    margin: 4px 4px 4px 0;
+    padding: 3px;
+    background: #fff;
+    @include rounded-corners(10px);
+        
+    .user-name {
+      margin: 2px 0 0 5px;
+      font-size: 16px;
+    }
+    
+    .profile-pic-mini {
+      height: 60px;    
+    }
+    
+  }
+  
+  .login-mini {
+    margin: 4px;
+    padding: 3px;
+    height: 60px;
+    background: #fff;
+    
+    div {
+      text-align: center;
+      margin: 2px 0 10px;
+      a{
+        text-decoration: none;
+        font-size: 20px;
+        }
+    }  
+        
+  }
+  
+  .logo_home {
+    
+    .logo_link{
+     height: 90px;
+    }
+    
+  }
+  
+  .home-nav {
+    
+    
+    .home-link{
+      float: left;
+      height: 25px;
+      margin: 4px 4px 2px 0;
+      width: 95px;
+      padding: 4px;
+      background: #fff;
+      text-decoration: none;
+          @include rounded-corners(5px);
+      
+      &:hover{
+        background: $trend-color;
+        color: #fff;
+        
+      .link {
+        font-weight: bold;
+        text-decoration: none;
+      }
+        
+      }
+      
+      .link {
+        font-size: 20px;
+        text-decoration: none;
+      }
+      
+    }
+  
+    
+    
+  }
+  
+  
+}
+
+
+
 .content {
   margin: 5px 0 5px 0;
 }

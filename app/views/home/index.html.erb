@@ -13,7 +13,8 @@
             <span class='fr'>from <%= link_to post.retrend_user.name, user_path(post.retrend_user_id)%> </span>
           <% end%>
 
-          </div> on <%= post.created_at.to_s(:mdy_dots) unless post.created_at.blank?%>
+          </div> 
+          on <%= post.created_at.to_s(:mdy_dots) unless post.created_at.blank?%>
           <%if !post.retrend %>
           <div class="fr">
             <%= link_to "Retrend", retrend_posts_path(:post_id => post.id)%>

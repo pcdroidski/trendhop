@@ -34,7 +34,7 @@ gem 'jquery-rails'
 #gem 'aws-s3', :require => 'aws/s3' # Image Storage
 
 # Search Engine
-#gem 'thinking-sphinx', :branch => "rails3", :git => "git://github.com/freelancing-god/thinking-sphinx.git", :require => 'thinking_sphinx'
+gem 'thinking-sphinx', :branch => "rails3", :git => "git://github.com/freelancing-god/thinking-sphinx.git", :require => 'thinking_sphinx'
 
 # Authentication
 # Decided to not go with restful authentication as it's not RAILS 3 by default

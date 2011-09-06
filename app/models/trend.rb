@@ -13,7 +13,7 @@ class Trend < ActiveRecord::Base
 
   has_many :trend_hops
   has_many :trends, :through => :trend_hops
-  
+
   scope :set_range, lambda {|field| where (["trends.updated_at >= ?", eval("Time.now-1.#{field}") ])}  #field = [day, week, month, year]
   scope :set_men, joins(:users).where(["users.sex = 0"])
   scope :set_women, joins(:users).where(["users.sex = 1"])
@@ -27,5 +27,10 @@ class Trend < ActiveRecord::Base
   def list
     self.trends.map(&:name)
   end
+
+  define_index do
+    indexes :name
+  end
+
 
 end

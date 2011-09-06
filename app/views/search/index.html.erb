@@ -1,0 +1,33 @@
+<% content_for :left_menu do%>
+ <br/><br/>
+   <span class="section_title">Sort by: </span>
+   <ul class="trend_filters">
+     <% search_views = ["posts","users", "trends"]%>
+     <% search_views.each do |view| %>
+       <% if @search_view == view%>
+        <%= link_to search_index_path(:search => @search, :search_view => view), :class=>"filter-link", :id => "active-filter" do%>
+           <li class="filter">
+                <span><%= view.humanize %> </span>
+           </li>
+        <% end%>
+       <%else%>
+         <%= link_to search_index_path(:search => @search, :search_view => view), :class=>"filter-link" do%>
+           <li class="filter">
+                <span><%= view.humanize %> </span>
+           </li>
+         <%end%>
+       <%end%>
+     <%end%>
+   </div>
+ <%end%>
+
+<% case @search_view %>
+  <% when "posts"%>
+    <%= render :partial => "posts/index" %>
+  <% when "users" %>
+    <%= render :template => "users/index"%>
+  <% when "trends" %>
+    <%= render :partial => "trends/index"%>
+  <% else %>
+    <p> No Results Found </p>
+<% end%>

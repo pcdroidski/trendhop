@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.search params[:search]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -99,7 +99,7 @@ class PostsController < ApplicationController
       end
       # if str.include?("@")
       #   str.delete("@")
-      #   
+      #
       #   at_array <<
       # end
     end

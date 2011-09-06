@@ -11,13 +11,13 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :user_trends
   has_many :trends, :through => :user_trends
-  
+
   has_many :comment_posts
 
   has_many :roles
 
   ROLES = %w[admin moderator standard]
-  
+
   SEX = %w[male female]
 
   # def role_symbols
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   def full_name
     [first_name,last_name].join(" ")
   end
-  
+
 
   def birth_date
     [birth_month, birth_day, birth_year].join("/")
@@ -38,6 +38,12 @@ class User < ActiveRecord::Base
     birthday = Date.civil(self.birth_year, self.birth_month, self.birth_day)
     age = (now.year - birthday.year) - (now.yday < birthday.yday ? 1 : 0)
     age;
+  end
+
+  define_index do
+    indexes first_name
+    indexes last_name
+    indexes [first_name, last_name], :as => :full_name
   end
 
 

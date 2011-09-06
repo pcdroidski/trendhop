@@ -23,19 +23,9 @@
       <div id="main_page">
         <div class="grid_3 alpha">
           <%= render :partial => "layouts/left_column/left_menu" %>
-          <p>stuff goes here</p>
         </div>
-        <div class="grid_10 omega">
-          <% if check_user? && params[:controller] != "posts" %>
-          <p>Share what's #trending!
-            <%= render :partial => "posts/post_from_anywhere" %>
-
-          </p>
-          <% end %>
+        <div class="grid_13 omega">
           <%= yield %>
-        </div>
-        <div class="grid_3 beta">
-           <%= render :partial => "layouts/left_column/left_menu" %>
         </div>
         <div class="clear"></div>
       </div>

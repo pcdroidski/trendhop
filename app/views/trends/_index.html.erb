@@ -1,25 +1,36 @@
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Trend category</th>
-    <th>Like count</th>
-    <th>Trend count</th>
-    <th>TrendHops
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="content" id="trends">
+  <div class="title"><span>What's Trending? </span> </div>
+  <ul class="trends_list"><% @trends.each do |trend| %>
+    <li class="trend">
+      <div class="trend_info fl">
+        <h4 class="trend_title"><%= link_to trend.name, trend_path(trend.name), :id=> "trend"%></h4>
+        <span>Category: <%= trend.trend_category_id %> </span><br/>
+        <span><%= pluralize (trend.trend_count, "person is", "people are") %> trending this.</span><br/>
+        <span><%= pluralize (trend.post_contents.count, "post is", "posts are") %> trending this.</span>
+      </div>
+      <div class="trend_posts" class="fl">
+        <span class="subsection_title">Recent posts: </span>
+        <ul class="trend_post">
+          <% trend.post_contents.each do |post| %>
+          <li>  <%= link_to post.content, post_path(post.posts.first), :id=> "post" %><br/></li>
+          <% end%>
+        </ul>
+      </div>
+            <div class="clear"></div>
+      <div class="trend_hops" class="fl">
+        <span class="trend_section_info fl">Hop to a related trend: </span>
+        <ul class="trend_hop fl">
+          <% trend.trends.each do |hop| %>
+          <li>  <%= link_to hop.name, trend_path(hop.name), :id => "trend" %><br/></li>
+          <% end%>
+        </ul>
+      </div>
+      <div class="clear"></div>
+      <%#= link_to 'Show', trend %>
+      <%#= link_to 'Edit', edit_trend_path(trend) %>
+      <%#= link_to 'Destroy', trend, :confirm => 'Are you sure?', :method => :delete %>
 
-<% @trends.each do |trend| %>
-  <tr>
-    <td><%= link_to trend.name, trend_path(trend.name) %></td>
-    <td><%= trend.trend_category_id %></td>
-    <td><%= trend.like_count %></td>
-    <td><%= trend.trend_count %></td>
-    <td><% trend.trends.each do |hop| %> <%= link_to hop.name, trend_path(hop.name) %><br/> <% end%> </td>
-    <td><%#= link_to 'Show', trend %></td>
-    <td><%#= link_to 'Edit', edit_trend_path(trend) %></td>
-    <td><%#= link_to 'Destroy', trend, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+    </li>
+  <% end %>
+  </ul>
+</div>

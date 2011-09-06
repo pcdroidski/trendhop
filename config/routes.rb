@@ -1,5 +1,7 @@
 Trendhop::Application.routes.draw do
 
+  resources :search
+
   resources :posts do
     collection do
       get 'retrend'

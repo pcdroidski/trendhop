@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
   has_many :trends, :through => :post_content
 
   has_many :post_contents
-  
+
   has_many :comment_posts
 
   scope :no_retrends, :conditions => {:retrend => false}
@@ -31,6 +31,12 @@ class Post < ActiveRecord::Base
       end
     end
     return array
+  end
+
+  define_index do
+    indexes post_content.content
+    indexes [user.first_name, user.last_name], :as => :user_name
+    indexes trends(:name), :as => :trend
   end
 
 end

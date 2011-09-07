@@ -3,28 +3,13 @@
   <div class="container_16">
     <div id="header">
       <header>
-       <div class="grid_4 omega fl">
-        <% if user_signed_in? %>
-          <div class="profile-mini">
-            <div style="height: 40px;"> 
-            <%= link_to image_tag("/assets/Profile.png", :class=>"profile-pic-mini fl"), user_path(current_user)%>
-            <span class="user-name fl"> <%= current_user.full_name %> </span>
-            </div>
-            <div class="fr"><%= link_to "Sign out!", destroy_user_session_path %> </div>
-          </div>
-        <% else%>
-          <div class="login-mini">
-            <div><%= link_to "Sign up!", new_user_registration_path %> </div>
-            <div><%= link_to "Sign in!", new_user_session_path %> </div>
-          </div>
-        <% end%>
-        </div>
-        <div class="grid_8 fl">
+
+        <div class="grid_5 fl">
           <div class="logo_home">
            <%= link_to image_tag("/assets/Logo.png", :class=>"logo_link"), root_path %>
           </div>
         </div>
-        <div class="grid_4 fl">
+        <div class="grid_11 fl">
           <div class="home-nav">
             <%= link_to root_path, :class => "home-link" do %>
               <div class="link">

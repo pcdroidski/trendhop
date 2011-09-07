@@ -13,8 +13,30 @@
     <%= render :partial => "layouts/header" %>
 
     <div class="container_16">
-      <div class="grid_12">
-        <p id="notice"><%= notice %></p>
+              <p id="notice"><%= notice %></p><br/>
+      <div class="grid_3 alpha">
+        <% if user_signed_in? %>
+          <div class="profile-mini">
+            <div style="height: 40px;"> 
+            <%= link_to image_tag("/assets/Profile.png", :class=>"profile-pic-mini fl"), user_path(current_user)%>
+            <span class="user-name fl"> <%= current_user.full_name %> </span>
+            </div>
+            <div class="fr"><%= link_to "Sign out!", destroy_user_session_path %> </div>
+          </div>
+        <% else%>
+          <div class="login-mini">
+            <div><%= link_to "Sign up!", new_user_registration_path %> </div>
+            <div><%= link_to "Sign in!", new_user_session_path %> </div>
+          </div>
+        <% end%>
+      </div>
+      <div class="grid_9">
+        <% if check_user? && params[:controller] != "posts" %>
+          <div>Share what's #trending!
+            <%= render :partial => "posts/post_from_anywhere" %>
+
+          </div>
+        <% end %>
       </div>
       <div class="grid_4">
         <%= render :partial => "search/search"%>
@@ -26,12 +48,6 @@
           <p>stuff goes here</p>
         </div>
         <div class="grid_10 omega">
-          <% if check_user? && params[:controller] != "posts" %>
-          <p>Share what's #trending!
-            <%= render :partial => "posts/post_from_anywhere" %>
-
-          </p>
-          <% end %>
           <%= yield %>
         </div>
         <div class="grid_3 beta">

@@ -7,13 +7,13 @@
        <% if @search_view == view%>
         <%= link_to search_index_path(:search => @search, :search_view => view), :class=>"filter-link", :id => "active-filter" do%>
            <li class="filter">
-                <span><%= view.humanize %> </span>
+                <span><%= view.humanize %> </span> <span class="fr"> ( <%= match_and_count(view) %> ) </span>
            </li>
         <% end%>
        <%else%>
          <%= link_to search_index_path(:search => @search, :search_view => view), :class=>"filter-link" do%>
            <li class="filter">
-                <span><%= view.humanize %> </span>
+                <span><%= view.humanize %> </span> <span class="fr"> ( <%= match_and_count(view) %> ) </span>
            </li>
          <%end%>
        <%end%>

@@ -11,14 +11,9 @@ $post-color: #0000FF;
   -webkit-border-radius: $radius;
   }
 
-#header_container {
-  background-color: #0066FF;
-  height: 80px;
-  
   .profile-mini {
     display: block;
     height: 65px;
-    width: 170px;
     margin: 4px 4px 4px 0;
     padding: 3px;
     background: #fff;
@@ -51,6 +46,11 @@ $post-color: #0000FF;
     }  
         
   }
+
+#header_container {
+  background-color: #0066FF;
+  height: 80px;
+  
   
   .logo_home {
     

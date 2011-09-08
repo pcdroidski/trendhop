@@ -17,7 +17,7 @@
       <div class="grid_3 alpha">
         <% if user_signed_in? %>
           <div class="profile-mini">
-            <div style="height: 40px;"> 
+            <div style="height: 40px;">
             <%= link_to image_tag("/assets/Profile.png", :class=>"profile-pic-mini fl"), user_path(current_user)%>
             <span class="user-name fl"> <%= current_user.full_name %> </span>
             </div>
@@ -39,7 +39,9 @@
         <% end %>
       </div>
       <div class="grid_4">
-        <%= render :partial => "search/search"%>
+        <% if user_signed_in? %>
+          <%= render :partial => "search/search"%>
+        <% end%>
       </div>
       <div class="clear"></div>
       <div id="main_page">

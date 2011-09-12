@@ -10,7 +10,7 @@ class TrendsController < ApplicationController
   # GET /trends.json
   def index
     @trend_filter = params[:filter]
-    
+
     @trends = case params[:filter]
       when "recent" then Trend.order("created_at DESC")
       when "popular" then Trend.order("trend_count DESC")
@@ -22,7 +22,7 @@ class TrendsController < ApplicationController
       else Trend.order("created_at DESC")
     end
   #  raise @trends.inspect
-    
+
     @posts = Post.order("created_at DESC")
 
     respond_to do |format|
@@ -34,9 +34,11 @@ class TrendsController < ApplicationController
   # GET /trends/1
   # GET /trends/1.json
   def show
-    @trend = Trend.where(:name => params[:id]).first
-    @posts = @trend.posts.no_retrends
-
+    @trend_search = params[:id].to_s
+    @trends = Trend.search :conditions => {:name => params[:id] }
+    @categories = list_trend_categories(@trends)
+    @trend_hops = trend_hops(@trends)
+    @posts = get_trend_posts(@trends)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -103,4 +105,46 @@ class TrendsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  private
+
+  def list_trend_categories(trends)
+    categories = []
+    trends.each do |trend|
+      categories <<" " + trend.trend_category_id unless trend.trend_category_id.blank?
+    end
+    categories
+  end
+  helper_method :list_trend_categories
+
+  def trend_counts(trends)
+    count = 0
+    trends.each do |trend|
+      count = count + trend.trend_count unless trend.trend_count.blank?
+    end
+    count
+  end
+  helper_method :trend_counts
+
+  def trend_hops(trends)
+    hops = []
+    trends.each do |trend|
+      trend.trends.each do |hop|
+        hops << hop
+      end
+    end
+    hops
+  end
+  helper_method :trend_hops
+
+  def get_trend_posts(trends)
+    posts = []
+    trends.each do |trend|
+      trend.posts.no_retrends.each do |post|
+        posts << post
+      end
+    end
+    posts
+  end
+
 end

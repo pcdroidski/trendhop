@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+  before_filter :authenticate_user!
 
   def index
     @header_title = "Results for " + params[:search].to_s
@@ -7,21 +8,21 @@ class SearchController < ApplicationController
     @trends = Trend.search(@search)
     @posts = Post.search(@search)
     @users = User.search(@search)
-    
-    #Automatically selects model with most number of results
+
     model_array = ["trends", "posts", "users"]
     select_array = [@trends.count, @posts.count, @users.count]
     max = nil
     model_array.each do |set|
+
       if eval("@"+ set + ".count") >= select_array.max
+
         max = set
       end
     end
     @search_view = params[:search_view].blank? ? max : params[:search_view].to_s
-    #End
-    
+
   end
-  
+
   def match_and_count(view)
     case view
     when "posts"
@@ -33,5 +34,5 @@ class SearchController < ApplicationController
     end
   end
   helper_method :match_and_count
-  
+
 end

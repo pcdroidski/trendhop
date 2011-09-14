@@ -1,30 +1,40 @@
 <div class='content' id="trend_show">
 
   <div class="trend-title">
-    Viewing trendormation on <span id="title"><%= @trend.name %> </span>
+    Viewing trendormation on <span id="title"><%= @trend_search %> </span>
   </div>
   <div class="trend-info">
     <div class="fl" id="category">
-      Category:
-      <%= @trend.trend_category_id %>
+      <% case @categories.count%>
+      <% when "0"%>
+        No Categories Found
+      <% when "1"%>
+        Category: <%= @categories.first %>
+      <% else %>
+        Categories:
+        <% @categories.each do |cat| %>
+          <span><%= cat %>
+        <%end%>
+      <%end%>
     </div>
     <div class="fl" id="count">
-      Trend count: <%= @trend.trend_count %>
+      Trend count: <%= trend_counts(@trends) %>
     </div>
   </div>
 
   <% content_for :right_menu do%>
     <span class="section_title">Hop to another trend: </span>
     <ul id='trend_list'>
-      <% if @trend.trends.blank? %>
+
+      <% if @trend_hops.blank? %>
       <li class="trend_item" style="margin-left: auto; margin-right: auto;">
         <p>There are no Trends to hop to! </p>
       </li>
       <% else%>
-      <% @trend.trends.each do |trend|%>
+      <% @trend_hops.each do |trend|%>
       <li class="trend_item fl">
         <div class="trend-row">
-          <span id="hop-title"><%= link_to trend.name, trends_path(trend.name) %></span>
+          <span id="hop-title"><%= link_to trend.name, trend_path(trend.name) %></span>
         </div>
         <div class="trend-row">
           <span id="hop-count"><%= pluralize(trend.trend_count, "person" )%> trending this. </span>

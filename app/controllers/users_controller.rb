@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
- #   @user = User.find(params[:id])
+    @user = User.find(params[:id])
     @blogs = @user.blogs
     @post = Post.new
     @posts = @user.posts
@@ -49,8 +49,10 @@ class UsersController < ApplicationController
   def create
 #    @user = User.new(params[:user])
 
+
     respond_to do |format|
       if @user.save
+        create_groups(@user)
         format.html { redirect_to @user, :notice => 'User was successfully created.' }
         format.json { render :json => @user, :status => :created, :location => @user }
       else
@@ -95,6 +97,16 @@ class UsersController < ApplicationController
     if user != current_user
       redirect_to root_url, :notice => "Incorrect credentials"
     end
+  end
+
+  def create_groups(user)
+    #Rake::Task["import:tracking:all"].invoke
+    friends = Group.new(:name => "Friends", :user_id => user)
+    friends.save
+    family = Group.new(:name =>"Family", :user_id => user)
+    family.save
+    colleagues = Group.new(:name =>"Colleagues", :user_id => user)
+    colleagues.save
   end
 
 end

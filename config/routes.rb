@@ -1,5 +1,9 @@
 Trendhop::Application.routes.draw do
 
+  resources :friends
+
+  resources :groups
+
   resources :search
 
   resources :posts do

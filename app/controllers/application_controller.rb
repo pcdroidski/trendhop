@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def post_from_anywhere
     @special_post = Post.new()
-    @user = current_user
+    @current_user = current_user
   end
 
   def check_user?

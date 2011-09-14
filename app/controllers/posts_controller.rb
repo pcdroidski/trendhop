@@ -45,8 +45,7 @@ class PostsController < ApplicationController
   def retrend
     retrend = Post.where(:id => params[:post_id]).first
 
-    @user = current_user
-    @post = Post.new(:post_content_id => retrend.post_content_id, :retrend_user_id => retrend.user_id, :retrend_post_id => retrend.id, :user_id => @user.id, :retrend => true)
+    @post = Post.new(:post_content_id => retrend.post_content_id, :retrend_user_id => retrend.user_id, :retrend_post_id => retrend.id, :user_id => @current_user.id, :retrend => true)
 
     retrend.increment(:retrend_count)
 
@@ -60,10 +59,10 @@ class PostsController < ApplicationController
           @trend.increment(:trend_count)
           @trend.save
 
-          @user_trend = UserTrend.where(:user_id => @user, :trend_id => @trend).first
+          @user_trend = UserTrend.where(:user_id => @current_user, :trend_id => @trend).first
           if @user_trend.blank?
             @user_trend = UserTrend.new()
-            @user_trend.user_id = @user.id
+            @user_trend.user_id = @current_user.id
             @user_trend.trend_id = @trend.id
           end
 
@@ -87,7 +86,6 @@ class PostsController < ApplicationController
     @post_content = PostContent.new(params[:post][:post_content])
     @post_content.save
     @post = Post.new(:user_id => params[:post][:user_id], :post_content_id => @post_content.id, :retrend => false)
-    @user = current_user
 
     at_array =[]
     trend_array=[]
@@ -115,10 +113,10 @@ class PostsController < ApplicationController
           @trend.increment(:trend_count)
           @trend.save
 
-          @user_trend = UserTrend.where(:user_id => @user, :trend_id => @trend).first
+          @user_trend = UserTrend.where(:user_id => @current_user, :trend_id => @trend).first
           if @user_trend.blank?
             @user_trend = UserTrend.new()
-            @user_trend.user_id = @user.id
+            @user_trend.user_id = @current_user.id
             @user_trend.trend_id = @trend.id
           end
             @user_trend.increment(:count)

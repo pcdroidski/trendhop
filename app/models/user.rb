@@ -12,6 +12,11 @@ class User < ActiveRecord::Base
   has_many :user_trends
   has_many :trends, :through => :user_trends
 
+  has_many :user_friends
+  has_many :friends, :through => :user_friends
+
+  has_many :groups, :through => :user_friends
+
   has_many :comment_posts
 
   has_many :roles

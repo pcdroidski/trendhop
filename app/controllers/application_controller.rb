@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
-
-
   private
 
   def post_from_anywhere
@@ -22,6 +20,15 @@ class ApplicationController < ActionController::Base
   end
   helper_method :check_user?
 
+  def create_groups(user)
+    #Rake::Task["import:tracking:all"].invoke
+    friends = Group.new(:name => "Friends", :user_id => user)
+    friends.save
+    family = Group.new(:name =>"Family", :user_id => user)
+    family.save
+    colleagues = Group.new(:name =>"Colleagues", :user_id => user)
+    colleagues.save
+  end
 
   def list_trends(post)
     trend_list = []

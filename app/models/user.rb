@@ -15,11 +15,14 @@ class User < ActiveRecord::Base
   has_many :user_friends
   has_many :friends, :through => :user_friends
 
-  has_many :groups, :through => :user_friends
+  has_many :groups
 
   has_many :comment_posts
 
   has_many :roles
+
+
+  scope :with_at_least, lambda {|number_of_bottles| where(:quantity_available.gte => number_of_bottles)}
 
   ROLES = %w[admin moderator standard]
 

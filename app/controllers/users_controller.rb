@@ -46,21 +46,21 @@ class UsersController < ApplicationController
 
   # POST /users
   # POST /users.json
-  def create
-#    @user = User.new(params[:user])
-
-
-    respond_to do |format|
-      if @user.save
-        create_groups(@user)
-        format.html { redirect_to @user, :notice => 'User was successfully created.' }
-        format.json { render :json => @user, :status => :created, :location => @user }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @user.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
+#   def create
+# #    @user = User.new(params[:user])
+#
+#
+#     respond_to do |format|
+#       if @user.save
+#         create_groups(@user)
+#         format.html { redirect_to @user, :notice => 'User was successfully created.' }
+#         format.json { render :json => @user, :status => :created, :location => @user }
+#       else
+#         format.html { render :action => "new" }
+#         format.json { render :json => @user.errors, :status => :unprocessable_entity }
+#       end
+#     end
+#   end
 
   # PUT /users/1
   # PUT /users/1.json
@@ -99,14 +99,5 @@ class UsersController < ApplicationController
     end
   end
 
-  def create_groups(user)
-    #Rake::Task["import:tracking:all"].invoke
-    friends = Group.new(:name => "Friends", :user_id => user)
-    friends.save
-    family = Group.new(:name =>"Family", :user_id => user)
-    family.save
-    colleagues = Group.new(:name =>"Colleagues", :user_id => user)
-    colleagues.save
-  end
 
 end

@@ -1,4 +1,4 @@
-class Devise::RegistrationsController < ApplicationController
+class RegistrationsController < Devise::RegistrationsController
   prepend_before_filter :require_no_authentication, :only => [ :new, :create, :cancel ]
   prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy]
   include Devise::Controllers::InternalHelpers
@@ -12,8 +12,9 @@ class Devise::RegistrationsController < ApplicationController
   # POST /resource
   def create
     build_resource
-
     if resource.save
+#      raise resource.inspect
+      create_groups(resource)
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_in(resource_name, resource)
@@ -116,5 +117,17 @@ class Devise::RegistrationsController < ApplicationController
     def authenticate_scope!
       send(:"authenticate_#{resource_name}!", true)
       self.resource = send(:"current_#{resource_name}")
+    end
+
+  private
+
+    def create_groups(user)
+      #Rake::Task["import:tracking:all"].invoke
+      friends = Group.new(:name => "Friends", :user_id => user.id)
+      friends.save
+      family = Group.new(:name =>"Family", :user_id => user.id)
+      family.save
+      colleagues = Group.new(:name =>"Colleagues", :user_id => user.id)
+      colleagues.save
     end
 end

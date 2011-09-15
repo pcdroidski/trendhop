@@ -1,3 +1,38 @@
+<% content_for :left_menu do%>
+ <br/><br/>
+   <span class="section_title">Show posts from:</span>
+   <ul class="trend_filters">
+      <% if params[:group].blank?%>
+        <%= link_to trends_path(:group => nil), :class=>"filter-link", :id=>"active-filter" do%>
+          <li class="filter">
+               <span>All </span>
+          </li>
+        <%end%>
+      <%else%>
+        <%= link_to trends_path(:group => nil), :class=>"filter-link" do%>
+          <li class="filter">
+               <span>All </span>
+          </li>
+        <%end%>
+      <%end%>
+     <% @current_user.groups.each do |group| %>
+       <% if params[:group] == group%>
+         <%= link_to trends_path(:group => group.name), :class=>"filter-link", :id=>"active-filter" do%>
+           <li class="filter">
+                <span><%= group.name.humanize %> </span>
+           </li>
+         <%end%>
+       <%else%>
+         <%= link_to trends_path(:group => group.name), :class=>"filter-link" do%>
+           <li class="filter">
+                <span><%= group.name.humanize %> </span>
+           </li>
+         <%end%>
+       <%end%>
+     <%end%>
+   </div>
+ <%end%>
+
 <div class="content" id="post_index">
   <div class="title"><span>Who's Trending What? </span> </div>
   <ul class="posts_list">
@@ -13,10 +48,10 @@
             <span class='fr'>from <%= link_to post.retrend_user.full_name, user_path(post.retrend_user_id)%> </span>
           <% end%>
 
-          </div> 
+          </div>
           on <%= post.created_at.to_s(:mdy_dots) unless post.created_at.blank?%>
-         
-          <div style="width: 100%;"> 
+
+          <div style="width: 100%;">
             <%if !post.retrend %>
             <div class="fr">
               <%= link_to "Retrend", retrend_posts_path(:post_id => post.id)%>
@@ -27,7 +62,7 @@
               <%= pluralize (post.retrend_count, "person has", "people have")%> re-trended this.
             </div>
             <% end%>
-        
+
           <div class="content"> <%= post.post_content.content %> </div>
             <div class="clear"></div>
       </div>

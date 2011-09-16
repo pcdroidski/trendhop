@@ -3,27 +3,27 @@
    <span class="section_title">Show posts from:</span>
    <ul class="trend_filters">
       <% if params[:group].blank?%>
-        <%= link_to trends_path(:group => nil), :class=>"filter-link", :id=>"active-filter" do%>
+        <%= link_to root_path(:group => nil), :class=>"filter-link", :id=>"active-filter" do%>
           <li class="filter">
                <span>All </span>
           </li>
         <%end%>
       <%else%>
-        <%= link_to trends_path(:group => nil), :class=>"filter-link" do%>
+        <%= link_to root_path(:group => nil), :class=>"filter-link" do%>
           <li class="filter">
                <span>All </span>
           </li>
         <%end%>
       <%end%>
      <% @current_user.groups.each do |group| %>
-       <% if params[:group] == group%>
-         <%= link_to trends_path(:group => group.name), :class=>"filter-link", :id=>"active-filter" do%>
+       <% if params[:group] == group.name%>
+         <%= link_to root_path(:group => group.name), :class=>"filter-link", :id=>"active-filter" do%>
            <li class="filter">
                 <span><%= group.name.humanize %> </span>
            </li>
          <%end%>
        <%else%>
-         <%= link_to trends_path(:group => group.name), :class=>"filter-link" do%>
+         <%= link_to root_path(:group => group.name), :class=>"filter-link" do%>
            <li class="filter">
                 <span><%= group.name.humanize %> </span>
            </li>

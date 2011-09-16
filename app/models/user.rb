@@ -41,6 +41,10 @@ class User < ActiveRecord::Base
     [birth_month, birth_day, birth_year].join("/")
   end
 
+  def address
+    [city, state_id].join(",")
+  end
+
   def age
     now = Time.now
     birthday = Date.civil(self.birth_year, self.birth_month, self.birth_day)

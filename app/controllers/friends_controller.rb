@@ -41,11 +41,13 @@ class FriendsController < ApplicationController
   # POST /friends
   # POST /friends.json
   def create
-    @friend = UserFriend.new(params[:friend])
+    user_friend = User.find(params[:id])
+    friend_group = Group.where(:name => params[:group_name], :user_id => @current_user.id).first
+    @friend = UserFriend.new(:user_id => @current_user.id, :friend_id => user_friend, :group_id => friend_group)
 
     respond_to do |format|
       if @friend.save
-        format.html { redirect_to @friend, :notice => 'Friend was successfully created.' }
+        format.html { redirect_to user_friend, :notice => "You are now following #{user_friend.full_name}!" }
         format.json { render :json => @friend, :status => :created, :location => @friend }
       else
         format.html { render :action => "new" }
@@ -73,12 +75,14 @@ class FriendsController < ApplicationController
   # DELETE /friends/1
   # DELETE /friends/1.json
   def destroy
-    @friend = UserFriend.find(params[:id])
+    user = User.find(params[:id])
+    @friend = UserFriend.where(:user_id => @current_user.id, :friend_id => user.id).first
     @friend.destroy
 
     respond_to do |format|
-      format.html { redirect_to friends_url }
+      format.html { redirect_to user, :notice => "You no longer follow #{user.full_name}." }
       format.json { head :ok }
     end
   end
+
 end

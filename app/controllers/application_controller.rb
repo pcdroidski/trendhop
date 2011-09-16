@@ -47,4 +47,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :list_trends
 
+  def is_friend?(user)
+    friend = UserFriend.where(:user_id => @current_user.id, :friend_id => user.id).first
+    friend
+  end
+  helper_method :is_friend?
+
+
 end

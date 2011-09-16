@@ -2,13 +2,14 @@ class HomeController < ApplicationController
   before_filter :authenticate_user!
 
   def index
+  #  raise params.inspect
     @post_group = params[:group].blank? ? nil : params[:group]
 
     @posts = case @post_group
-    when nil then Post.all
-    when "Friends" then Post.where()#WORK IN PROFRESSS!
-
-    @posts = Post.order("created_at DESC")
+      when nil then Post
+      when "Friends" then Post.friends(@current_user)
+    end
+    @posts = @posts.order("created_at DESC")
 
 
     @trend_filter = params[:filter]

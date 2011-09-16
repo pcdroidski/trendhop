@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    @friend = is_friend?(@user)
     @blogs = @user.blogs
     @post = Post.new
     @posts = @user.posts

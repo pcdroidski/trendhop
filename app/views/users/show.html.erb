@@ -1,42 +1,42 @@
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
-<div class="content">
+<div class="content" id="user_show">
+  <div class="user-top">
+    <div class="fr">
+      <% if @friend.blank?%>
+        <%= link_to "Follow #{@user.first_name}", create_friends_path(:id => @user.id)%>
+      <% else%>
+        <%= link_to "Stop Following", destroy_friends_path(:id => @user.id), :confirm => "Stop following?", :method => :delete %>
+      <%end%>
+    </div>
+    <div>
+      <span class="user-name"><%= @user.full_name %></span>
+    </div>
+  </div>
 
-  <p>
-    <b>Email:</b>
-    <%= @user.email %>
-  </p>
+  <% if can? :update, @user %>
+    <div class="fr">
+      <%= link_to 'Edit', edit_user_path(@current_user) %>
+    </div>
+  <%end%>
 
-  <p>
-    <b>Domain:</b>
-    <%= @user.domain %>
-  </p>
-
-  <p>
-    <b>Name</b>
-    <%= @user.full_name %>
-  </p>
-
-  <p>
-    <b>City:</b>
-    <%= @user.city %>
-  </p>
-
-  <p>
-    <b>State:</b>
-    <%= @user.state_id %>
-  </p>
-
-  <p>
-    <b>Sex:</b>
-    <%= @user.sex %>
-  </p>
-
-  <p>
-    <b>Birth date:</b>
-    <%= @user.birth_date %>
-  </p>
-
+  <div class="user-about">
+    <div class="about-location">
+      <div class="user-subsection">
+        <span>Location</span>
+      </div>
+      <div class="info-subection fr">
+        <span> <%= @user.city%>, <%= @user.state_id %>
+      </div>
+    </div>
+    <div class="about-info">
+      <div class="user-subsection">
+        <span>About</span>
+      </div>
+      <div class="info-subsection fr">
+        <span><%= @user.sex %> </span>
+        <span><%= @user.birth_date %></span>
+      </div>
+    </div>
+  </div>
   <hr/>
 
   <hr/>

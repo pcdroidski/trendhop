@@ -3,7 +3,13 @@ Trendhop::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations"}
   #Need to set this up
 
-  resources :friends
+  resources :friends do
+    collection do
+      get :create, :as => :create
+      delete :destroy, :as => :destroy
+    end
+  end
+
 
   resources :groups
 

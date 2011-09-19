@@ -1,22 +1,33 @@
 <div class="content" id="user_show">
   <div class="user-top">
     <div class="fr">
-      <% if @friend.blank?%>
-        <%= link_to "Follow #{@user.first_name}", create_friends_path(:id => @user.id)%>
-      <% else%>
-        <%= link_to "Stop Following", destroy_friends_path(:id => @user.id), :confirm => "Stop following?", :method => :delete %>
+      <% if can? :update, @user %>
+        <div class="fr">
+          <%= link_to 'Edit', edit_user_path(@current_user) %>
+        </div>
+      <%else%>
+        <% if @friend.blank?%>
+          <div class="button">
+            <%= link_to "Follow #{@user.first_name}", create_friends_path(:id => @user.id)%>
+          </div>
+        <% else%>
+          <div class="button">
+            <%= link_to "Stop Following", destroy_friends_path(:id => @user.id), :confirm => "Stop following?", :method => :delete %>
+          </div>
+        <%end%>
       <%end%>
     </div>
     <div>
-      <span class="user-name"><%= @user.full_name %></span>
+      <div class="fl">
+        <%= image_tag ("/assets/Profile.png"), :style =>"height:100px; width:80px;" %>
+      </div>
+      <div class="fl">
+        <div class="first-name"><%= @user.first_name %></div><br/>
+        <div class="last-name"><%= @user.last_name %> </div>
+      </div>
+      <div class="clear"></div>
     </div>
   </div>
-
-  <% if can? :update, @user %>
-    <div class="fr">
-      <%= link_to 'Edit', edit_user_path(@current_user) %>
-    </div>
-  <%end%>
 
   <div class="user-about">
     <div class="about-location">
@@ -37,16 +48,11 @@
       </div>
     </div>
   </div>
-  <hr/>
 
-  <hr/>
   <p>
     <b>Posts by You: </b>
     <%= render :partial => "posts/index"%>
   </p>
-
-
-  <hr/>
 
   <p>
     <b>Trends: </b>

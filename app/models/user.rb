@@ -7,22 +7,22 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :first_name, :last_name, :birth_day, :birth_month, :birth_year, :city, :state, :sex, :email, :password, :password_confirmation, :remember_me, :role
 
-  has_many :blogs
-  has_many :posts
-  has_many :user_trends
+  has_many :blogs, :dependent => :destroy
+  has_many :posts, :dependent => :destroy
+  has_many :user_trends, :dependent => :destroy
   has_many :trends, :through => :user_trends
 
-  has_many :user_friends
+  has_many :user_friends, :dependent => :destroy
   has_many :friends, :through => :user_friends
 
-  has_many :groups
+  has_many :groups, :dependent => :destroy
 
   has_many :comment_posts
 
   has_many :roles
 
 
-  scope :with_at_least, lambda {|number_of_bottles| where(:quantity_available.gte => number_of_bottles)}
+  #scope :with_at_least, lambda {|number_of_bottles| where(:quantity_available.gte => number_of_bottles)}
 
   ROLES = %w[admin moderator standard]
 

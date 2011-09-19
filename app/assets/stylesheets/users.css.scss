@@ -1,3 +1,41 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$border-color: #000;
+$text-color: #000;
+$name-color: #0000FF;
+$trend-color: #339966;
+
+@mixin rounded-corners($radius) {
+  border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  }
+
+@mixin border($color) {
+  border-bottom: 1px solid $color;
+}
+
+#user_show {
+  .user-top {
+    height: 100px;
+    margin: 0 0 10px 0;
+    border-bottom: 1px solid $border-color;
+
+    .first-name {
+      font-size: 35px;
+      letter-spacing: .2em;
+      font-weight: bold;
+    }
+    .last-name{
+      margin: 5px 0 0 15px;
+      font-size:40px;
+      letter-spacing: .2em;
+      font-weight: bold;
+    }
+  }
+
+
+
+}

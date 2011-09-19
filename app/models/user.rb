@@ -12,9 +12,17 @@ class User < ActiveRecord::Base
   has_many :user_trends
   has_many :trends, :through => :user_trends
 
+  has_many :user_friends
+  has_many :friends, :through => :user_friends
+
+  has_many :groups
+
   has_many :comment_posts
 
   has_many :roles
+
+
+  scope :with_at_least, lambda {|number_of_bottles| where(:quantity_available.gte => number_of_bottles)}
 
   ROLES = %w[admin moderator standard]
 
@@ -31,6 +39,10 @@ class User < ActiveRecord::Base
 
   def birth_date
     [birth_month, birth_day, birth_year].join("/")
+  end
+
+  def address
+    [city, state_id].join(",")
   end
 
   def age

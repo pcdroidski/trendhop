@@ -13,6 +13,30 @@ class Post < ActiveRecord::Base
 
   scope :no_retrends, :conditions => {:retrend => false}
 
+
+  # you could put that in the product model
+  #
+  # class Product
+  #   def self.favorites(user)
+  #     # stuff
+  #   end
+  # end
+  #
+  # Product.favorites(@user)
+
+  # class User
+  #   has_many :products do
+  #     def favorites
+  #       proxy_owner.figure_out_favorites
+  #     end
+  #   end
+  # end
+
+#!!!!  scope :favorites lambda{|user, product|  where(:some_field => user.generate_favorites_list)} will work like this :    Product.where(:blah => test).favorites(@user, @product).order("blue")
+
+
+  scope :friends, lambda {|user| where(:user_id => user.friends)}
+
   def delete_chars
     self.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").delete(",").delete(".").delete("-")
   end

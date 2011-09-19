@@ -3,3 +3,13 @@ db/*.sqlite3
 log/*.log
 tmp/
 .sass-cache/
+db/
+log/*.pid
+.rvmrc
+config/database.yml
+config/monetra.yml
+config/amazon_s3.yml
+config/facebook.yml
+config/mail.yml
+config/*.sphinx.conf
+config/development.sphinx.conf

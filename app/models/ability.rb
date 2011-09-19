@@ -13,6 +13,13 @@ class Ability
         comment.try(:user) == user || user.role == 'moderator'
       end
       if user.role == 'standard'
+        can :update, User do |me|
+          me == user
+        end
+        can :create, Post
+        can :udpate, Post do |post|
+          post.try(:user) == user
+        end
         can :create, Blog
         can :update, Blog do |blog|
           blog.try(:user) == user

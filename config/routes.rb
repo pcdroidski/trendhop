@@ -1,5 +1,18 @@
 Trendhop::Application.routes.draw do
 
+  devise_for :users, :controllers => { :registrations => "registrations"}
+  #Need to set this up
+
+  resources :friends do
+    collection do
+      get :create, :as => :create
+      delete :destroy, :as => :destroy
+    end
+  end
+
+
+  resources :groups
+
   resources :search
 
   resources :posts do
@@ -10,7 +23,7 @@ Trendhop::Application.routes.draw do
     resources :comment_posts
   end
 
-  devise_for :users
+
 
 
   resources :trends

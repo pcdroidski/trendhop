@@ -16,11 +16,14 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    @section = params[:section].blank? ? "about" : params[:section]
     @friend = is_friend?(@user)
     @blogs = @user.blogs
     @post = Post.new
     @posts = @user.posts
     @trends = @user.trends
+    @friends = @user.friends
+
 
     respond_to do |format|
       format.html # show.html.erb

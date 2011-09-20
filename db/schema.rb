@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110914201000) do
+ActiveRecord::Schema.define(:version => 20110920140123) do
 
   create_table "blog_trends", :force => true do |t|
     t.integer  "blog_id"
@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(:version => 20110914201000) do
     t.string   "last_name"
     t.string   "city"
     t.integer  "state_id"
-    t.integer  "sex"
+    t.string   "sex"
     t.integer  "birth_day"
     t.integer  "birth_month"
     t.integer  "birth_year"

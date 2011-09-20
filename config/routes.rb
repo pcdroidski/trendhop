@@ -19,6 +19,7 @@ Trendhop::Application.routes.draw do
     collection do
       get 'retrend'
       post :retrend
+      delete :untrend
     end
     resources :comment_posts
   end

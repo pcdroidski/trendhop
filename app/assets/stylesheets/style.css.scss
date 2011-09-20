@@ -11,6 +11,45 @@ $post-color: #0000FF;
   -webkit-border-radius: $radius;
   }
 
+/* BUTTON STYLES */
+.button_edit{
+  background-color: #3d9400;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  border:1px solid #29691D;
+  padding: 0 8px;
+  height: 27px;
+  min-width: 50px;
+  text-decoration: none;
+  line-height: 24px;
+}
+.retrend-button {
+  background-color: $trend-color;
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+  text-align:center;
+  border:1px solid #fff;
+  padding: 0 5px;
+  height: 18px;
+  min-width: 40px;
+  line-height: 15px;
+}
+.untrend-button {
+  background-color: #c00;
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+  text-align:center;
+  border:1px solid #fff;
+  padding: 0 5px;
+  height: 18px;
+  min-width: 40px;
+  line-height: 15px;
+}
+
   .profile-mini {
     display: block;
     height: 65px;
@@ -18,24 +57,24 @@ $post-color: #0000FF;
     padding: 3px;
     background: #fff;
     @include rounded-corners(10px);
-        
+
     .user-name {
       margin: 2px 0 0 5px;
       font-size: 16px;
     }
-    
+
     .profile-pic-mini {
-      height: 60px;    
+      height: 60px;
     }
-    
+
   }
-  
+
   .login-mini {
     margin: 4px;
     padding: 3px;
     height: 60px;
     background: #fff;
-    
+
     div {
       text-align: center;
       margin: 2px 0 10px;
@@ -43,26 +82,26 @@ $post-color: #0000FF;
         text-decoration: none;
         font-size: 20px;
         }
-    }  
-        
+    }
+
   }
 
 #header_container {
   background-color: #0066FF;
   height: 80px;
-  
-  
+
+
   .logo_home {
-    
+
     .logo_link{
      height: 90px;
     }
-    
+
   }
-  
+
   .home-nav {
-    
-    
+
+
     .home-link{
       float: left;
       height: 25px;
@@ -72,30 +111,30 @@ $post-color: #0000FF;
       background: #fff;
       text-decoration: none;
           @include rounded-corners(5px);
-      
+
       &:hover{
         background: $trend-color;
         color: #fff;
-        
+
       .link {
         font-weight: bold;
         text-decoration: none;
       }
-        
+
       }
-      
+
       .link {
         font-size: 20px;
         text-decoration: none;
       }
-      
+
     }
-  
-    
-    
+
+
+
   }
-  
-  
+
+
 }
 
 

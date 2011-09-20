@@ -41,6 +41,17 @@ class Post < ActiveRecord::Base
     self.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").delete(",").delete(".").delete("-")
   end
 
+  def retrended?(user)
+   # raise user.posts.inspect
+    if self.user == user
+      return 0
+    elsif user.posts.where(:retrend_post_id => self.id).exists?
+      return 1
+    else
+      return 2
+    end
+  end
+
   def trends_list
     self.trends.map(&:name).to_sentence
   end

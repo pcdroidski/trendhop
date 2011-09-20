@@ -34,11 +34,35 @@
  <%end%>
 
 <div class="content" id="post_index">
-  <div class="title"><span>Who's Trending What? </span> </div>
+  <!-- <div class="title"><span>Who's Trending What? </span> </div> -->
   <ul class="posts_list">
 
   <% @posts.each do |post| %>
     <li class="post">
+
+      <div class="fr">
+        <%if !post.retrend %>
+        <div class="fr">
+        <% case post.retrended?(current_user) %>
+          <% when 0%>
+          <%when 1%>
+            <%= link_to untrend_posts_path(:post_id => post.id) do%>
+              <div role="button" class="untrend-button">Un-Trend</div>
+            <%end%>
+          <%when 2%>
+            <%= link_to retrend_posts_path(:post_id => post.id) do%>
+              <div role="button" class="retrend-button">Re-Trend</div>
+            <% end%>
+        <%end%>
+        </div>
+        <% end%>
+        <% if  !post.retrend_count.blank? %>
+        <div>
+            <div class="clear"></div>
+            <%= pluralize (post.retrend_count, "person has", "people have")%> re-trended this.
+        </div>
+        <% end%>
+      </div>
 
       <div class="post_content">
         <div class="post_title">
@@ -50,18 +74,6 @@
 
           </div>
           on <%= post.created_at.to_s(:mdy_dots) unless post.created_at.blank?%>
-
-          <div style="width: 100%;">
-            <%if !post.retrend %>
-            <div class="fr">
-              <%= link_to "Retrend", retrend_posts_path(:post_id => post.id)%>
-            </div>
-            <% end%>
-            <% if  !post.retrend_count.blank? %>
-            <div class="fr">
-              <%= pluralize (post.retrend_count, "person has", "people have")%> re-trended this.
-            </div>
-            <% end%>
 
           <div class="content"> <%= post.post_content.content %> </div>
             <div class="clear"></div>

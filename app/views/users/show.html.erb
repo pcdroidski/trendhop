@@ -1,9 +1,34 @@
+<% content_for :left_menu do%>
+ <br/><br/>
+   <ul class="trend_filters">
+     <% sections = ["about","posts", "trends", "likes", "friends"]%>
+     <% sections.each do |section| %>
+       <% if @section== section%>
+         <%= link_to user_path(@user, :section => section), :class=>"filter-link", :id=>"active-filter" do%>
+           <li class="filter">
+                <span><%= section.humanize %> </span>
+           </li>
+         <%end%>
+       <%else%>
+         <%= link_to user_path(@user, :section => section), :class=>"filter-link" do%>
+           <li class="filter">
+                <span><%= section.humanize %> </span>
+           </li>
+         <%end%>
+       <%end%>
+     <%end%>
+   </ul>
+ <%end%>
+
+
 <div class="content" id="user_show">
   <div class="user-top">
     <div class="fr">
       <% if can? :update, @user %>
         <div class="fr">
-          <%= link_to 'Edit', edit_user_path(@current_user) %>
+          <%= link_to edit_user_path(@current_user) do%>
+            <div role="button" class="button_edit">Edit </div>
+          <% end%>
         </div>
       <%else%>
         <% if @friend.blank?%>
@@ -29,34 +54,85 @@
     </div>
   </div>
 
+<% case @section %>
+  <% when "about"%>
+
   <div class="user-about">
-    <div class="about-location">
-      <div class="user-subsection">
-        <span>Location</span>
+    <div class="about-section">
+      <div class="about-subsection">
+        <span>Birthday</span>
       </div>
-      <div class="info-subection fr">
-        <span> <%= @user.city%>, <%= @user.state_id %>
-      </div>
-    </div>
-    <div class="about-info">
-      <div class="user-subsection">
-        <span>About</span>
-      </div>
-      <div class="info-subsection fr">
-        <span><%= @user.sex %> </span>
+      <div class="info-subsection">
         <span><%= @user.birth_date %></span>
       </div>
+      <div class="clear"></div>
     </div>
+
+    <div class="about-section">
+      <div class="about-subsection">
+        <span>Gender</span>
+      </div>
+      <div class="info-subsection">
+        <span><%= @user.sex.humanize %></span>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <div class="about-section">
+      <div class="about-subsection">
+        <span>Occupation</span>
+      </div>
+      <div class="info-subsection">
+        <span>Student </span>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <div class="about-section">
+      <div class="about-subsection">
+        <span>Location</span>
+      </div>
+      <div class="info-subsection">
+        <span> <%= @user.city%>, <%= @user.state_id %>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <div class="about-section">
+      <div class="about-subsection">
+        <span>Education</span>
+      </div>
+      <div class="info-subsection">
+        <span>College: </span>
+        <div class="fr">Montclair State University </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+
   </div>
 
-  <p>
-    <b>Posts by You: </b>
-    <%= render :partial => "posts/index"%>
-  </p>
+  <% when "posts"%>
 
-  <p>
-    <b>Trends: </b>
-    <%= render :partial => "trends/index" %>
-  </p>
+    <p>
+      <b>Posts by You: </b>
+      <%= render :partial => "posts/index"%>
+    </p>
+
+  <% when "trends"%>
+    <p>
+      <b>Trends: </b>
+      <%= render :partial => "trends/index" %>
+    </p>
+  <% when "likes" %>
+
+  <% when "friends"%>
+  <% if !@friends.blank? %>
+    <% @friends.each do |friend|%>
+      <p><%= friend.full_name %> </p>
+    <% end%>
+  <% else%>
+    <p>You have no friends?!?! </p>
+  <%end%>
+<% end%>
 
 </div>

@@ -37,7 +37,7 @@
   </div>
   <div class="field">
     <%= f.label :sex %><br />
-    <%= f.text_field :sex %>
+    <%= f.collection_select(:sex, User::SEX, :to_s, :humanize, :prompt => true) %>
   </div>
   <div class="field">
     <%= f.label :birth_day %><br />

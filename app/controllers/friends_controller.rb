@@ -43,7 +43,7 @@ class FriendsController < ApplicationController
   def create
     user_friend = User.find(params[:id])
     friend_group = Group.where(:name => params[:group_name], :user_id => @current_user.id).first
-    @friend = UserFriend.new(:user_id => @current_user.id, :friend_id => user_friend, :group_id => friend_group)
+    @friend = UserFriend.new(:user_id => @current_user.id, :friend_id => user_friend.id, :group_id => friend_group)
 
     respond_to do |format|
       if @friend.save

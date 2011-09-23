@@ -17,6 +17,12 @@
         <p id="notice"><%= notice %></p>
       </div>
       <div class="clear"></div>
+      <div id="page_title">
+        <div class="grid_16 alpha beta">
+          <%= yield :page_title  %>
+        </div>
+      </div>
+      <div class="clear"></div>
       <div id="main_page">
         <div class="grid_3 alpha">
           <%= render :partial => "layouts/left_column/left_menu" %>

@@ -4,12 +4,13 @@
     <div id="header">
       <header>
 
-        <div class="grid_5 fl">
+        <div class="grid_4 fl alpha">
           <div class="logo_home">
            <%= link_to image_tag("/assets/Logo.png", :class=>"logo_link"), root_path %>
           </div>
         </div>
-        <div class="grid_11 fl">
+        <% if user_signed_in?%>
+        <div class="grid_8 fl">
           <div class="home-nav">
             <%= link_to root_path, :class => "home-link" do %>
               <div class="link">
@@ -35,6 +36,8 @@
             <%end%>
           </div>
         </div>
+        <%end%>
+        <%= render :partial =>"users/sessions/header"%>
 
         </header>
     </div>

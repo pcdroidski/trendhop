@@ -1,0 +1,31 @@
+<% if user_signed_in? %>
+<div class="fl grid_4 beta">
+   <div class="profile-mini">
+      <div style="height: 40px;">
+      <%= link_to image_tag("/assets/Profile.png", :class=>"profile-pic-mini fl"), user_path(current_user)%>
+      <span class="user-name fl"> <%= current_user.full_name %> </span>
+      </div>
+      <div class="fr"><%= link_to "Sign out!", destroy_user_session_path %> </div>
+    </div>
+</div>
+<% else%>
+<div class="flbeta">
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+<div style="margin-top:0;">
+  <div class="fl"><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+  <div class="fl"><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <p class="fl"><%= f.submit "Sign in" %></p>
+
+  <div class="clear"></div>
+  <% if devise_mapping.rememberable? -%>
+    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+  <% end -%>
+</div>
+</div>
+<% end %>
+
+<%end%>

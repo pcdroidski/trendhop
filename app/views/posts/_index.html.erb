@@ -24,7 +24,7 @@
             <% end%>
             <% if  !post.retrend_count.blank? %>
             <div class="fr">
-              <%= pluralize (post.retrend_count, "person has", "people have")%> re-trended this.
+              <%= pluralize(post.retrend_count, "person has", "people have")%> re-trended this.
             </div>
             <% end%>
 
@@ -35,7 +35,7 @@
       <div class="post_info fl">
         <% post.retrend_post_id.blank? ? posted = post : posted = Post.where(:id => post.retrend_post_id).first %>
         <% posted.trends.each do |trend| %>
-        <span> <%= pluralize (trend.trend_count, "person is", "people are") %> trending <%= trend.name%>.</span>
+        <span> <%= pluralize(trend.trend_count, "person is", "people are") %> trending <%= trend.name%>.</span>
         <%end%>
       </div>
       <div class="trend_hops fl">

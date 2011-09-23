@@ -24,12 +24,13 @@
 <div class="content" id="trends">
   <div class="title"><span>What's Trending? </span> </div>
   <ul class="trends_list"><% @trends.each do |trend| %>
+    <% if !trend.post_contents.blank? %>
     <li class="trend">
       <div class="trend_info fl">
         <h4 class="trend_title"><%= link_to trend.name, trend_path(trend.name), :id=> "trend"%></h4>
         <span>Category: <%= trend.trend_category_id %> </span><br/>
-        <span><%= pluralize (trend.trend_count, "person is", "people are") %> trending this.</span><br/>
-        <span><%= pluralize (trend.post_contents.count, "post is", "posts are") %> trending this.</span>
+        <span><%= pluralize(trend.trend_count, "person is", "people are") %> trending this.</span><br/>
+        <span><%= pluralize(trend.post_contents.count, "post is", "posts are") %> trending this.</span>
       </div>
       <div class="trend_posts" class="fl">
         <span class="subsection_title">Recent posts: </span>
@@ -54,6 +55,7 @@
       <%#= link_to 'Destroy', trend, :confirm => 'Are you sure?', :method => :delete %>
 
     </li>
+    <%end%>
   <% end %>
   </ul>
 </div>

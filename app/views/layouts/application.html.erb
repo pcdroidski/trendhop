@@ -44,9 +44,15 @@
         <% end%>
       </div>
       <div class="clear"></div>
+      <div id="page_title">
+        <div class="grid_16 alpha beta">
+          <%= yield :page_tile %>
+        </div>
+      </div>
       <div id="main_page">
         <div class="grid_3 alpha">
           <%= render :partial => "layouts/left_column/left_menu" %>
+          <p>.</p>
         </div>
         <div class="grid_10 omega">
           <%= yield %>

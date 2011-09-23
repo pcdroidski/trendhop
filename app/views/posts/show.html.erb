@@ -22,7 +22,7 @@
       <% end%>
       <% if  !@post.retrend_count.blank? %>
       <div class="fl">
-        <%= pluralize (@post.retrend_count, "person has", "people have")%> re-trended this post.
+        <%= pluralize(@post.retrend_count, "person has", "people have")%> re-trended this post.
       </div>
       <% end%>
 
@@ -32,7 +32,7 @@
     <div class="post_info fl">
       <% @post.retrend_post_id.blank? ? posted = @post : posted = Post.where(:id => @post.retrend_post_id).first %>
       <% posted.trends.each do |trend| %>
-      <span> <%= pluralize (trend.trend_count, "person is", "people are") %> trending <%= link_to trend.name, trend_path(trend.name), :id=> "trend"%>.</span><br/>
+      <span> <%= pluralize(trend.trend_count, "person is", "people are") %> trending <%= link_to trend.name, trend_path(trend.name), :id=> "trend"%>.</span><br/>
       <%end%>
     </div>
 
@@ -52,17 +52,17 @@
   </div>
   <div class="clear"></div>
   <hr/>
-  
+
   <div id="comments_index">
     <div class="comments">
       <% @post.comment_posts.each do |comment| %>
         <div class="comment-item">
-          <span class="comment-user"><%= link_to comment.user.full_name, user_path(comment.user) %> commented: </span> 
+          <span class="comment-user"><%= link_to comment.user.full_name, user_path(comment.user) %> commented: </span>
           <p class="comment-body"><%= comment.body%></p>
         </div>
       <% end%>
     </div>
-    
+
     <div class="post_comments">
       <h4>Add a comment: </h2>
       <%= form_for([@post, @post.comment_posts.build]) do |f| %>
@@ -77,8 +77,8 @@
         <div class="actions">
           <%= f.submit %>
         </div>
-      <% end %>  
+      <% end %>
     </div>
   </div>
-  
+
 </div>

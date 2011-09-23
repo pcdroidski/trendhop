@@ -20,39 +20,48 @@
    </ul>
  <%end%>
 
+<% content_for :page_title do%>
+<div class="user-top">
+  <div class="fr">
+    <%if @user != current_user%>
+    <%# raise @friend.inspect%>
+      <% if @friend.blank?%>
+        <div class="fr">
+          <%= link_to create_friends_path(:id => @user.id) do%>
+            <div role="button" class="button add_friend">Follow <%=@user.first_name %> </div>
+          <%end%>
+        </div>
+      <% else%>
+        <div class="fr">
+          <%= link_to destroy_friends_path(:id => @user.id), :confirm => "Stop following?", :method => :delete do%>
+            <div role="button" class="button remove_friend">Stop Following </div>
+          <%end%>
+        </div>
+      <%end%>
+    <%end%>
+    <% if can? :update, @user %>
+      <div class='clear'></div>
+      <div class="fr">
+        <%= link_to edit_user_path(@current_user) do%>
+          <div role="button" class="button edit">Edit </div>
+        <% end%>
+      </div>
+    <%end%>
+  </div>
+  <div>
+    <div class="fl">
+      <%= image_tag ("/assets/Profile.png"), :style =>"height:100px; width:80px;" %>
+    </div>
+    <div class="fl">
+      <div class="first-name"><%= @user.first_name %></div><br/>
+      <div class="last-name"><%= @user.last_name %> </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<% end%>
 
 <div class="content" id="user_show">
-  <div class="user-top">
-    <div class="fr">
-      <% if can? :update, @user %>
-        <div class="fr">
-          <%= link_to edit_user_path(@current_user) do%>
-            <div role="button" class="button_edit">Edit </div>
-          <% end%>
-        </div>
-      <%else%>
-        <% if @friend.blank?%>
-          <div class="button">
-            <%= link_to "Follow #{@user.first_name}", create_friends_path(:id => @user.id)%>
-          </div>
-        <% else%>
-          <div class="button">
-            <%= link_to "Stop Following", destroy_friends_path(:id => @user.id), :confirm => "Stop following?", :method => :delete %>
-          </div>
-        <%end%>
-      <%end%>
-    </div>
-    <div>
-      <div class="fl">
-        <%= image_tag ("/assets/Profile.png"), :style =>"height:100px; width:80px;" %>
-      </div>
-      <div class="fl">
-        <div class="first-name"><%= @user.first_name %></div><br/>
-        <div class="last-name"><%= @user.last_name %> </div>
-      </div>
-      <div class="clear"></div>
-    </div>
-  </div>
 
 <% case @section %>
   <% when "about"%>

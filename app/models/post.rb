@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
   belongs_to :post_content
   has_many :trends, :through => :post_content
 
-  has_many :post_contents, :dependent => :destroy
+  has_many :post_contents
 
   has_many :comment_posts, :dependent => :destroy
 

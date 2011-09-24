@@ -11,9 +11,13 @@
 <body>
   <div style="background: white;">
     <%= render :partial => "layouts/header" %>
-
+    
     <div class="container_16">
-              <p id="notice"><%= notice %></p><br/>
+        <div id="notice">
+          <%if !notice.blank?%>
+            <div class="flash"><%= notice %></div>
+          <%end%>
+        </div>
       <div class="grid_3 alpha">
         <% if user_signed_in? %>
           <div class="profile-mini">

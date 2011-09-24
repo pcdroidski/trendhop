@@ -10,6 +10,11 @@ $post-color: #0000FF;
   -moz-border-radius: $radius;
   -webkit-border-radius: $radius;
   }
+.filler-header {
+  height: 80px;
+  background: #0066FF;
+}
+
 
 /* BUTTON STYLES */
 .button{

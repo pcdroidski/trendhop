@@ -32,7 +32,20 @@ div {
     margin-bottom: 10px; } }
 
 #notice {
-  color: green; }
+  height: 30px;
+  width: 960px;
+  color: #c00;
+  
+  .flash{
+    padding-left: 25px;
+    width: auto;
+    border: 1px solid #0066FF;
+    border-radius: 6px;
+    margin: 10px auto 10px auto;
+    font-size: 20px;
+    padding: 3px;
+  }
+}
 
 .field_with_errors {
   padding: 2px;

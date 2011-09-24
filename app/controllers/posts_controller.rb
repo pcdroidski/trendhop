@@ -83,29 +83,25 @@ class PostsController < ApplicationController
   # DELETE /untrends
   #DELETE /untrends.json
   def untrend
-    untrend = Post.where(:id => params[:post_id]).first
-
+    untrend = Post.where(:user_id => current_user.id, :retrend => true, :retrend_post_id => params[:post_id]).first
     untrend.trends.each do |t|
       @trend = Trend.where(:name => t.name).first
       @trend.decrement(:trend_count)
       @trend.save
-
       @user_trend = UserTrend.where(:user_id => @current_user, :trend_id => @trend).first
-      if @user_trend.blank?
-        @user_trend = UserTrend.new()
-        @user_trend.user_id = @current_user.id
-        @user_trend.trend_id = @trend.id
-      end
 
       @user_trend.decrement(:count)
       @user_trend.save
     end
 
-    untrend.destroy
-
     respond_to do |format|
-      format.html { redirect_to root_path }
-      format.json { head :ok }
+      if untrend.destroy
+        format.html { redirect_to root_path, :notice => 'Post was successfully Un-Trended.' }
+        format.json { head :ok }
+      else
+        format.html { redirect_to root_path, :notice => 'There was a problem Un-Trending your post!' }
+        format.json { head :ok }
+      end
     end
   end
 

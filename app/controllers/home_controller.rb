@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-      render :layout => "layouts/home.erb"
+
   #  raise params.inspect
     @post_group = params[:group].blank? ? nil : params[:group]
 
@@ -25,6 +25,8 @@ class HomeController < ApplicationController
       when "women" then Trend.set_women
       else Trend.order("created_at DESC")
     end
+
+        render(:layout => "home")
   end
 
 

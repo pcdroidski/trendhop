@@ -21,6 +21,8 @@ Trendhop::Application.routes.draw do
       post :retrend
       get 'untrend'
       post :untrend
+      get 'hide'
+      post :hide
     end
     resources :comment_posts
   end

@@ -2,13 +2,10 @@
   <div class="post_root">
     <div class="post_content">
       <div class="post_title">
-        <%= link_to @post.user.full_name, user_path(@post.user), :id=>"name"%> <%= @post.retrend_post_id.blank? ? "has trended " : "has RE-trended " %> <%= raw(list_trends(@post)) %>
+        <%= link_to @post.user.full_name, user_path(@post.user), :id=>"name"%> <%= @post.retrend_post_id.blank? ? "trended " : "RE-trended " %> <%= raw(list_trends(@post)) %>
 
-        <% if @post.retrend%>
-          <span class='fr'>from <%= link_to @post.retrend_user.full_name, user_path(@post.retrend_user_id)%> </span>
-        <% end%>
         <br/>
-        <div class="fr post_date" > on <%= @post.created_at.to_s(:mdy_dots) unless @post.created_at.blank?%> </div>
+        <div class="post_date" > on <%= @post.created_at.to_s(:mdy_dots) unless @post.created_at.blank?%> </div>
       </div>
       <div class="content">
         <p><%= @post.post_content.content %> </p>

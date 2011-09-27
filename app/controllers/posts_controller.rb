@@ -15,6 +15,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+ #   render :layout => "post_show"
     @post = Post.find(params[:id])
 
     respond_to do |format|
@@ -103,6 +104,13 @@ class PostsController < ApplicationController
         format.json { head :ok }
       end
     end
+  end
+
+  # /GET Hide Post
+  #/POST hide Post
+  def hide
+    hide_trend = Post.find(:id => params[:id])
+
   end
 
   # POST /posts

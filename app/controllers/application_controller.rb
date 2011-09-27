@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :post_from_anywhere
-  layout 'application'
+
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = "Access denied."

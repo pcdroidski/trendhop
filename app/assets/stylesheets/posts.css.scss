@@ -20,6 +20,21 @@ $trend-color: #339966;
 
 #post_index{
 
+  .post-date {
+    padding: 4px;
+    height: 90px;
+    display: block;
+    width: 100px;
+    background: #D8D8D8;
+
+    .time { font-size: 18px; color: #fff; display: block; height: 22px;}
+
+    .date {font-size: 24px; display: block; height: 28px;}
+
+    .year {font-size: 35px; display: block; height: 37px;}
+
+  }
+
   .title {
     height: 40px;
     display: block;
@@ -68,8 +83,9 @@ $trend-color: #339966;
         }
 
         .content {
-          margin: 5px 0 10px 20px;
-          font-size: 16px;
+          margin: 5px 0 0 5px;
+          font-size: 20px;
+          width: 570px;
         }
 
 
@@ -78,6 +94,12 @@ $trend-color: #339966;
       .post_info {
         display: block;
         width: 50%;
+
+        .button1 {
+          margin: 5px 10px 5px 0;
+          width: 110px;
+
+        }
 
 
         span {
@@ -120,6 +142,36 @@ $trend-color: #339966;
     }
 
   }
+
+  #comments_index {
+    margin: 5px 0 0 35px;
+    background: #D8D8D8;
+
+    .comments{
+      max-height: 150px;
+      overflow: auto;
+
+      .comment-item{
+        margin: 2px 0 0 0;
+      }
+
+    }
+
+
+    .post_comments {
+      padding-top: 5px;
+
+     .field {
+        margin: 2px 0 0 5px;
+
+        #comment_post_body {
+          width: 640px;
+          height: 40px;
+        }
+     }
+
+    }
+  }
 }
 
 /* SHOW */
@@ -127,7 +179,7 @@ $trend-color: #339966;
 #post_show {
 
   .post_root {
-    
+
 
     .post_content{
       border-bottom: 1px solid $border-color;
@@ -135,7 +187,15 @@ $trend-color: #339966;
       .post_title {
         height: 25px;
         font-size: 18px;
+
+        #trend {
+          text-decoration: none;
+          font-size: 22px;
+          color: $trend-color;
+          font-weight: bold;
+
         }
+      }
 
       .post_date {
       font-size: 13px;
@@ -143,7 +203,7 @@ $trend-color: #339966;
 
       .content {
 
-          p{ 
+          p{
             margin-left: 20px;
             font-size: 20px; }
 

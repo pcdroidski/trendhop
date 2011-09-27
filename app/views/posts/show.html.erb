@@ -5,7 +5,7 @@
         <%= link_to @post.user.full_name, user_path(@post.user), :id=>"name"%> <%= @post.retrend_post_id.blank? ? "has trended " : "has RE-trended " %> <%= raw(list_trends(@post)) %>
 
         <% if @post.retrend%>
-          <span class='fr'>from <%= link_to @post.retrend_user.name, user_path(post.retrend_user_id)%> </span>
+          <span class='fr'>from <%= link_to @post.retrend_user.full_name, user_path(@post.retrend_user_id)%> </span>
         <% end%>
         <br/>
         <div class="fr post_date" > on <%= @post.created_at.to_s(:mdy_dots) unless @post.created_at.blank?%> </div>

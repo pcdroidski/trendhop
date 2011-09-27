@@ -8,10 +8,7 @@ class Ability
       can :manage, :all
     else
       can :read, :all
-      can :create, Comment
-      can :update, Comment do |comment|
-        comment.try(:user) == user || user.role == 'moderator'
-      end
+     
       if user.role == 'standard'
         can :update, User do |me|
           me == user

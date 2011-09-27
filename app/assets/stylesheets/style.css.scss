@@ -38,6 +38,30 @@ $post-color: #0000FF;
         background: #0000FF;
       }
   }
+  
+  .over_section{
+    margin: -40px -40px auto 0;
+    height: 80px;
+    width: 40px;
+    line-height: 60px;
+
+    
+    
+    .post-link {
+      border-left: 3px solid #D8D8D8;
+      display: block;
+      margin: 0 -10px 0 0;
+      padding: 2px;
+      height: 80px;
+      font-weight: bold;
+      font-size: 30px;
+      color: #000;
+      
+      &:hover {
+        background: #D8D8D8
+      };
+    }
+  }
 
   .add_friend {
     background-color: #3d9400;

@@ -76,7 +76,7 @@
           on <%= post.created_at.to_s(:mdy_dots) unless post.created_at.blank?%>
 
           <div class="content"> <%= post.post_content.content %> </div>
-            <div class="clear"></div>
+
       </div>
 
       <div class="post_info fl">
@@ -97,12 +97,18 @@
 
         </ul>
       </div>
+      <div class="fl over_section">  
+        <%= link_to post_path(post), :class=>"post-link" do%>
+          >>
+        <%end%>
+      </div>
       <div class="clear"></div>
       <%#= link_to 'Show', trend %>
       <%#= link_to 'Edit', edit_trend_path(trend) %>
       <%#= link_to 'Destroy', trend, :confirm => 'Are you sure?', :method => :delete %>
 
     </li>
+      <div class="clear"></div>
   <% end %>
   </ul>
 

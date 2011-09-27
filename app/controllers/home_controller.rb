@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   before_filter :authenticate_user!
 
   def index
+      render :layout => "layouts/home.erb"
   #  raise params.inspect
     @post_group = params[:group].blank? ? nil : params[:group]
 

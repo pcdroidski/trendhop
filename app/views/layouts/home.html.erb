@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @page_title.blank? ? "Welcome to TrendHop!" : @page_title %></title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= yield :head %>
+  <%#= render(:partial => "layouts/ie_stylesheets") %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div style="background: white;">
+    <%= render :partial => "layouts/header" %>
+    
+    <div class="container_16">
+        <div id="notice">
+          <%if !notice.blank?%>
+            <div class="flash"><%= notice %></div>
+          <%end%>
+        </div>
+      <div class="grid_3 alpha">
+        <% if user_signed_in? %>
+          <div class="profile-mini">
+            <div style="height: 40px;">
+            <%= link_to image_tag("/assets/Profile.png", :class=>"profile-pic-mini fl"), user_path(current_user)%>
+            <span class="user-name fl"> <%= current_user.full_name %> </span>
+            </div>
+            <div class="fr"><%= link_to "Sign out!", destroy_user_session_path %> </div>
+          </div>
+        <% else%>
+          <div class="login-mini">
+            <div><%= link_to "Sign up!", new_user_registration_path %> </div>
+            <div><%= link_to "Sign in!", new_user_session_path %> </div>
+          </div>
+        <% end%>
+      </div>
+      <div class="grid_9">
+        <% if check_user? && params[:controller] != "as" %>
+          <div>Share what's #trending!
+            <%= render :partial => "posts/post_from_anywhere" %>
+
+          </div>
+        <% end %>
+      </div>
+      <div class="grid_4">
+        <% if user_signed_in? %>
+          <%= render :partial => "search/search"%>
+        <% end%>
+      </div>
+      <div class="clear"></div>
+      <div id="page_title">
+        <div class="grid_16 alpha beta">
+          <%= yield :page_tile %>
+        </div>
+      </div>
+      <div id="main_page">
+        <div class="grid_3 alpha">
+          <%= render :partial => "layouts/left_column/left_menu" %>
+          <p>.</p>
+        </div>
+        <div class="grid_12 omega">
+          <%= yield %>
+        </div>
+        <div class="grid_1 beta">
+           <%= render :partial => "layouts/right_column/right_menu" %>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+
+  </div>
+  <%= render :partial => "layouts/footer" %>
+</body>
+</html>

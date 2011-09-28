@@ -11,6 +11,8 @@ class Post < ActiveRecord::Base
 
   has_many :comment_posts, :dependent => :destroy
 
+  has_many :user_likes, :as => :likeable
+
   scope :no_retrends, :conditions => {:retrend => false}
 
 
@@ -49,6 +51,17 @@ class Post < ActiveRecord::Base
       return 1
     else
       return 2
+    end
+  end
+
+  def liked?(user)
+  #  if self.user == user
+   #   return "own_post"
+ #   elsif user.likes.where(:post_id => self.id).exists?
+    if user.user_likes.where(:source_type => "Post", :source_id => self.id).exists?
+      return "liked"
+    else
+      return "not_liked"
     end
   end
 

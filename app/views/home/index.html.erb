@@ -93,6 +93,22 @@
           </div>
         <% end%>
 
+        <div class="button1">
+        <% case post.liked?(current_user) %>
+          <% when "liked" %>
+           <%= link_to unlike_posts_path(:post_id => post.id), :confirm => 'Do you want to make this post disappear?' do%>
+              <div role="button" class="untrend-button">Unlike</div>
+            <%end%>
+          <% when "not_liked"%>
+           <%= link_to like_posts_path(:post_id => post.id) do%>
+              <div role="button" class="retrend-button">Like</div>
+            <%end%>
+          <% when "own_post" %>
+
+        <%end%>
+         </div>
+
+          <!-- shows number of people trending each TREND -->
         <!-- <%# post.retrend_post_id.blank? ? posted = post : posted = Post.where(:id => post.retrend_post_id).first %>
                 <%# posted.trends.each do |trend| %>
                 <span> <%#= pluralize(trend.trend_count, "person is", "people are") %> trending <%#= trend.name%>.</span>

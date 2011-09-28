@@ -222,10 +222,49 @@ class PostsController < ApplicationController
     end
   end
 
-    private
+  def like
+    @likeable = find_likeable.last
+    @likeable_type = find_likeable.first
+    @user_like = UserLike.new(:user_id => current_user.id, :source_id => @likeable.id, :source_type => @likeable_type)
+
+    current_url = request.url
+
+    if @user_like.save
+      flash[:notice] = "Oh you like it!"
+      redirect_to root_path
+    else
+      flash[:notice] = "There was an error!!!!"
+     redirect_to root_path
+    end
+  end
+
+  def unlike
+    @likeable = find_likeable.last
+    @likeable_type = find_likeable.first
+    @user_like = UserLike.where(:user_id => current_user.id, :source_id => @likeable.id, :source_type => @likeable_type).first
+
+    @user_like.destroy
+
+    respond_to do |format|
+      format.html {redirect_to root_path }
+      format.json {head :ok}
+    end
+
+  end
+
+  private
 
   def delete_chars(trend)
     trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").delete("?")
+  end
+
+  def find_likeable
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        return [$1.classify, $1.classify.constantize.find(value)]
+      end
+    end
+    nil
   end
 
 

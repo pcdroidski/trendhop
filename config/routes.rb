@@ -17,6 +17,11 @@ Trendhop::Application.routes.draw do
 
   resources :posts do
     collection do
+      get 'like'
+      post :like
+      get 'unlike'
+      post :unlike
+
       get 'retrend'
       post :retrend
       get 'untrend'

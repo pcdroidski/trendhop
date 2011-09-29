@@ -241,7 +241,12 @@ class PostsController < ApplicationController
   def unlike
     @likeable = find_likeable.last
     @likeable_type = find_likeable.first
-    @user_like = UserLike.where(:user_id => current_user.id, :source_id => @likeable.id, :source_type => @likeable_type).first
+
+    if likeable_type == "like"
+      @user_like = UserLike.where(:user_id => current_user.id, :source_id => @likeable.id, :source_type => @likeable_type).first
+    elsif "dislike"
+      @user_like = UserDislike.where(:user_id => current_user.id, :source_id => @likeable.id, :source_type => @likeable_type).first
+    end
 
     @user_like.destroy
 
@@ -250,6 +255,22 @@ class PostsController < ApplicationController
       format.json {head :ok}
     end
 
+  end
+
+  def dislike
+    @likeable = find_likeable.last
+    @likeable_type = find_likeable.first
+    @user_like = UserDislike.new(:user_id => current_user.id, :source_id => @likeable.id, :source_type => @likeable_type)
+
+      current_url = request.url
+
+      if @user_like.save
+        flash[:notice] = "Oh you like it!"
+        redirect_to root_path
+      else
+        flash[:notice] = "There was an error!!!!"
+       redirect_to root_path
+      end
   end
 
   private

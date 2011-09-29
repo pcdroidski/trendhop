@@ -85,7 +85,7 @@ $trend-color: #339966;
         .content {
           margin: 5px 0 0 5px;
           font-size: 20px;
-          width: 570px;
+          display: inline-block;
         }
 
 
@@ -165,7 +165,7 @@ $trend-color: #339966;
         margin: 2px 0 0 5px;
 
         #comment_post_body {
-          width: 640px;
+          width: 90%;
           height: 40px;
         }
      }

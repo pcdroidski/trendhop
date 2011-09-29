@@ -133,7 +133,19 @@
       <%= render :partial => "trends/index" %>
     </p>
   <% when "likes" %>
-
+    <div id="like_index">
+    <% @user.user_likes.each do |like|%>
+      <% case like.source_type%>
+        <% when "Post"%>
+          <div class="post">
+          <% @post1 = Post.where(:id => like.source_id).first %>
+          <%= render :partial => "posts/post"%>
+          </div>
+        <%when "Trend"%>
+      
+      <%end%>
+    <%end%>  
+    </div>
   <% when "friends"%>
   <% if !@friends.blank? %>
     <% @friends.each do |friend|%>

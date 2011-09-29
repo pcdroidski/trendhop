@@ -18,7 +18,7 @@ $trend-color: #339966;
   border-bottom: 1px solid $color;
 }
 
-#post_index{
+#post_index, #like_index{
 
   .post-date {
     padding: 4px;
@@ -49,8 +49,8 @@ $trend-color: #339966;
     margin: 10px 0 10px 0;
     padding: 0;
     list-style: none;
-
-    li.post {
+  }
+    .post {
       padding-top: 5px;
       padding-bottom: 10px;
       margin: 2px 0 2px 0;
@@ -136,7 +136,7 @@ $trend-color: #339966;
             }
 
           }
-}
+
      }
 
     }

@@ -5,7 +5,8 @@
       <%= link_to image_tag("/assets/Profile.png", :class=>"profile-pic-mini fl"), user_path(current_user)%>
       <span class="user-name fl"> <%= current_user.full_name %> </span>
       </div>
-      <a href="" class="trend-now">Trend Something</a><div class="fr"><%= link_to "Sign out!", destroy_user_session_path %> </div>
+     <div class="fr"><%= link_to "Sign out!", destroy_user_session_path %> </div>
+             <a href="" id="trend-now">Trend now!</a>
     </div>
 </div>
 <% else%>

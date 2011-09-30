@@ -17,19 +17,18 @@ $post-color: #0000FF;
 
 /*Whats trending pop down!!! TEST*/
 
-#pop-down {
-  display: none;
+.whats-trending {
   height: 165px;
   width: 600px;
   float:right;
   background: #0066FF;
-  
+
   .title {
     margin: 2px;
     font-size: 20px;
     color: #fff;
   }
-  
+
   .field {
     width: 100%;
     #post_post_content_content{
@@ -40,7 +39,7 @@ $post-color: #0000FF;
       font-size: 17px;
     }
   }
-  
+
   .actions{
     float:right;
     margin-right: 35px;
@@ -58,7 +57,7 @@ $post-color: #0000FF;
 
 .search-bar {
   margin: 4px 0 4px 0;
-  
+
   #search {
     width: 350px;
   }

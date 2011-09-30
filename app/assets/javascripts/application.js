@@ -9,38 +9,30 @@
 //= require_tree .
 
 
+// //LOADING POPUP
+// //Click the button event!
+// $("#button").click(function(){
+// //centering with css
+// centerPopup();
+// //load popup
+// loadPopup();
+// });
+//
+// //CLOSING POPUP
+// //Click the x event!
+// $("#popupContactClose").click(function(){
+// disablePopup();
+// });
+// //Click out event!
+// $("#backgroundPopup").click(function(){
+// disablePopup();
+// });
+// //Press Escape event!
+// $(document).keypress(function(e){
+// if(e.keyCode==27 &amp;amp;amp;amp;amp;amp;&amp;amp;amp;amp;amp;amp; popupStatus==1){
+// disablePopup();
+// }
+// });
 
-//LOADING POPUP
-//Click the button event!
-$("#button").click(function(){
-//centering with css
-centerPopup();
-//load popup
-loadPopup();
-});
 
-//CLOSING POPUP
-//Click the x event!
-$("#popupContactClose").click(function(){
-disablePopup();
-});
-//Click out event!
-$("#backgroundPopup").click(function(){
-disablePopup();
-});
-//Press Escape event!
-$(document).keypress(function(e){
-if(e.keyCode==27 &amp;amp;amp;amp;amp;amp;&amp;amp;amp;amp;amp;amp; popupStatus==1){
-disablePopup();
-}
-});
 
-$(document).ready(function() {
-  $(".trend-now").click(function(e){
-    e.preventDefault();
-    
-    $("#pop-down").toggle();
-    
-  });    
-  
-});

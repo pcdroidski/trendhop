@@ -35,12 +35,23 @@
               </div>
             <%end%>
           </div>
+          <div class="clear"></div>
+          <%= render :partial => "search/search"%>
         </div>
         <%end%>
         <%= render :partial =>"users/sessions/header"%>
-
         </header>
     </div>
+    
+    <div class="hide-whats-trending" id="pop-down">
+      <% if check_user? && params[:controller] != "as" %>
+        <div>
+          <span class="title">Share what's #trending!</span>
+          <%= render :partial => "posts/post_from_anywhere" %>
+        </div>
+      <% end %>
+    </div>
+    
   </div>
 </div>
 <div class="filler-header"></div>

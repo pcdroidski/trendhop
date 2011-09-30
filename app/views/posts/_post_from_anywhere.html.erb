@@ -8,11 +8,10 @@
   </div> -->
   <%= f.fields_for :post_content do |post_form| %>
     <div class="field" >
-      <%= post_form.text_area :content, :rows=>'4', :style=>"width:520px;" %>
+      <%= post_form.text_area :content, :rows=>'4' %>
     </div>
   <% end%>
   <div class="actions">
     <%= f.submit %>
   </div>
-  <hr/>
 <% end %>

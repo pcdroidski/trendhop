@@ -15,6 +15,54 @@ $post-color: #0000FF;
   background: #0066FF;
 }
 
+/*Whats trending pop down!!! TEST*/
+
+#pop-down {
+  display: none;
+  height: 165px;
+  width: 600px;
+  float:right;
+  background: #0066FF;
+  
+  .title {
+    margin: 2px;
+    font-size: 20px;
+    color: #fff;
+  }
+  
+  .field {
+    width: 100%;
+    #post_post_content_content{
+      width: 90%;
+      height: 80px;
+      margin: 0 0 0 20px;
+      resize: none;
+      font-size: 17px;
+    }
+  }
+  
+  .actions{
+    float:right;
+    margin-right: 35px;
+    input{
+      font-size: 20px;
+      background: #c00;
+      color: #fff;
+    }
+  }
+
+}
+
+
+
+
+.search-bar {
+  margin: 4px 0 4px 0;
+  
+  #search {
+    width: 350px;
+  }
+}
 
 /* BUTTON STYLES */
 .button{
@@ -157,7 +205,7 @@ $post-color: #0000FF;
 
 
   #header {
-    position: fixed !important;
+/*    position: fixed !important;*/
     top: 0;
   }
 

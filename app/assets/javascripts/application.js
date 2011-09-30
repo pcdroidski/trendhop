@@ -34,3 +34,13 @@ if(e.keyCode==27 &amp;amp;amp;amp;amp;amp;&amp;amp;amp;amp;amp;amp; popupStatus=
 disablePopup();
 }
 });
+
+$(document).ready(function() {
+  $(".trend-now").click(function(e){
+    e.preventDefault();
+    
+    $("#pop-down").toggle();
+    
+  });    
+  
+});

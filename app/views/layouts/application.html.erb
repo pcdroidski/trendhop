@@ -35,17 +35,9 @@
         <% end%>
       </div>
       <div class="grid_9">
-        <% if check_user? && params[:controller] != "as" %>
-          <div>Share what's #trending!
-            <%= render :partial => "posts/post_from_anywhere" %>
-
-          </div>
-        <% end %>
       </div>
       <div class="grid_4">
-        <% if user_signed_in? %>
-          <%= render :partial => "search/search"%>
-        <% end%>
+
       </div>
       <div class="clear"></div>
       <div id="page_title">

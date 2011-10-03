@@ -19,6 +19,8 @@ group :assets do
   gem 'uglifier'
 end
 
+gem 'feedzirra'
+
 gem 'jquery-rails'
 
 # Use unicorn as the web server

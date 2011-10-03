@@ -7,5 +7,6 @@ jQuery ->
   $("#trend-now").click ->
     $("#pop-down").slideToggle("fast")
     false
-  # ,
-  #   $("#pop-down").slideToggle("fast")
+  $("#cancel-trend").click ->
+    $("#pop-down").slideToggle("fast")
+    false

@@ -18,7 +18,7 @@
 <% @feed.entries.each do |entry| %>
   <h2><%= entry.title %></h2>
   <h5>By <%= entry.author%>, posted on <%= entry.published %></h5>
-  <p><%= entry.summary %></p>
+  <p><%= raw(entry.summary) %></p>
   <p>Categories: <%= entry.categories %></p>
   <hr/><br/>
 <%end%>

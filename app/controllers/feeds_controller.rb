@@ -3,7 +3,7 @@ class FeedsController < ApplicationController
   # GET /feeds.json
   def index
     @feeds = Feed.all
-    
+
       # fetching a single feed
   #@feed = Feedzirra::Feed.fetch_and_parse("http://feeds.feedburner.com/PaulDixExplainsNothing")
 
@@ -18,11 +18,8 @@ class FeedsController < ApplicationController
   # GET /feeds/1
   # GET /feeds/1.json
   def show
-    feed = Feed.find(params[:id])
-    
-    @feed = Feedzirra::Feed.fetch_and_parse(feed.url)
-    
-    
+    @feed = Feed.find(params[:id])
+    @entries = EntryFeed.where(:feed_id => @feed.id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -53,6 +50,7 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       if @feed.save
+        FeedEntry.create_from_feed(@feed.url)
         format.html { redirect_to @feed, :notice => 'Feed was successfully created.' }
         format.json { render :json => @feed, :status => :created, :location => @feed }
       else

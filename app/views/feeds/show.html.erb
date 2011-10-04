@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @feed.title %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @feed.url %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @feed.etag %>
+</p>
+<hr/>
+<% @feed.entries.each do |entry| %>
+  <h2><%= entry.title %></h2>
+  <h5>By <%= entry.author%>, posted on <%= entry.published %></h5>
+  <p><%= entry.summary %></p>
+  <p>Categories: <%= entry.categories %></p>
+  <hr/><br/>
+<%end%>
+
+<%= link_to 'Edit', edit_feed_path(@feed) %> |
+<%= link_to 'Back', feeds_path %>

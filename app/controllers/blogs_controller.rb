@@ -5,13 +5,10 @@ class BlogsController < ApplicationController
   # GET /blogs.json
   def index
   #  @blogs = Blog.all
-
   # fetching a single feed
-  @feed = Feedzirra::Feed.fetch_and_parse("http://feeds.feedburner.com/PaulDixExplainsNothing")
+  #@feed = Feedzirra::Feed.fetch_and_parse("http://feeds.feedburner.com/PaulDixExplainsNothing")
 
-
-
-  @entries = @feed.entries
+ # @entries = @feed.entries
 
 
     respond_to do |format|

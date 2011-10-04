@@ -1,5 +1,7 @@
 Trendhop::Application.routes.draw do
 
+  resources :feeds
+
   devise_for :users, :controllers => { :registrations => "registrations"}
   #Need to set this up
 

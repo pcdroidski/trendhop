@@ -1,10 +1,11 @@
-<h1>Listing feeds</h1>
+<h1>Listing All Feeds</h1>
 
 <table>
   <tr>
     <th>Name</th>
     <th>Url</th>
     <th>Category</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,6 +16,11 @@
     <td><%= feed.name %></td>
     <td><%= feed.url %></td>
     <td><%= feed.category_id %></td>
+    <% if is_subscribed?(feed).blank? %>
+      <td><%= link_to "Subscribe", subscribe_feeds_path(:feed_id => feed.id)%>
+    <% else %>
+      <td><%= link_to "Unsubscribe", unsubscribe_feeds_path(:feed_id => feed.id)%>
+    <%end%>
     <td><%= link_to 'Show', feed %></td>
     <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
     <td><%= link_to 'Destroy', feed, :confirm => 'Are you sure?', :method => :delete %></td>

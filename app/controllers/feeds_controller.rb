@@ -21,6 +21,11 @@ class FeedsController < ApplicationController
     @feed = Feed.find(params[:id])
     @entries = EntryFeed.where(:feed_id => @feed.id)
 
+    if @entries.blank?
+      EntryFeed.create_from_feed(@feed)
+      @entries = EntryFeed.where(:feed_id => @feed.id)
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @feed }
@@ -87,4 +92,34 @@ class FeedsController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  def subscribe
+    @feed = Feed.where(:id => params[:feed_id]).first
+    subscribe = UserFeed.new(:user_id => current_user.id, :feed_id => @feed.id)
+    if subscribe.save 
+      flash[:notice] = "You have Subscribed to this Blog!"
+      redirect_to feed_path(@feed)
+    else
+      flash[:notice] = "There was an error!!!!"
+      redirect_to feeds_path
+    end   
+  end
+  
+  def unsubscribe
+    @feed = Feed.where(:id => params[:feed_id]).first
+    subscribe = UserFeed.where(:user_id => current_user.id, :feed_id => @feed.id).first
+    subscribe.destroy   
+    
+    respond_to do |format|
+      format.html { redirect_to feeds_path, :notice => "You have Unsubscribed to this post!" }
+      format.json { head :ok }
+    end 
+  end
+  
+  def is_subscribed?(feed)
+    feed = UserFeed.where(:user_id => @current_user.id, :feed_id => feed.id).first
+    feed    
+  end
+  helper_method :is_subscribed?
+  
 end

@@ -29,7 +29,7 @@ class EntryFeed < ActiveRecord::Base
      entries.each do |entry|
        unless exists? :guid => entry.id
          create!(
-           :feed_id       => feed.id
+           :feed_id       => feed.id,
            :title         => entry.title,
            :summary      => entry.summary,
            :content     => entry.content,

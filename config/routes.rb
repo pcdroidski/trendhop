@@ -1,6 +1,13 @@
 Trendhop::Application.routes.draw do
 
-  resources :feeds
+  resources :feeds do
+    collection do
+      get 'subscribe'
+      post :subscribe
+      get 'unsubscribe'
+      post :unsubscribe
+    end
+  end
 
   devise_for :users, :controllers => { :registrations => "registrations"}
   #Need to set this up

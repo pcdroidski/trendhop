@@ -4,12 +4,21 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
   def index
-  #  @blogs = Blog.all
-  # fetching a single feed
-  #@feed = Feedzirra::Feed.fetch_and_parse("http://feeds.feedburner.com/PaulDixExplainsNothing")
+    @blogs = []
 
- # @entries = @feed.entries
+      
+      test = EntryFeed.find_each do |entry|
+        UserFeed.where(:user_id => current_user.id, :feed_id => entry.feed_id)
+      end
+      raise test.inspect 
+      
+      # EntryFeed.where(:feed_id => subscribe.feed_id).each do |entry|
+      #   @blogs << entry        
+      # end     
 
+  raise EntryFeed.where(:feed_id => "1").order("published_at ASC").inspect
+   @blogs = @blogs.first.order("published_at ASC") unless @blogs.blank?
+    # raise @blogs.inspect
 
     respond_to do |format|
       format.html # index.html.erb

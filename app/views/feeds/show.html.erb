@@ -2,7 +2,7 @@
 
 <p>
   <b>Name:</b>
-  <%= @feed.title %>
+  <%= @feed.name %>
 </p>
 
 <p>
@@ -12,14 +12,14 @@
 
 <p>
   <b>Category:</b>
-  <%= @feed.etag %>
+  <%#= @feed.etag %>
 </p>
 <hr/>
-<% @feed.entries.each do |entry| %>
+<% @entries.each do |entry| %>
   <h2><%= entry.title %></h2>
-  <h5>By <%= entry.author%>, posted on <%= entry.published %></h5>
+  <h5>By <%#= entry.author%>, posted on <%= entry.published_at %></h5>
   <p><%= raw(entry.summary) %></p>
-  <p>Categories: <%= entry.categories %></p>
+  <p>Categories: <%#= entry.categories %></p>
   <hr/><br/>
 <%end%>
 

@@ -6,11 +6,24 @@
     <%#= f.label :category_id %><br />
     <%#= f.number_field :category_id %>
   </div> -->
-  <%= f.fields_for :post_content do |post_form| %>
-    <div class="field" >
-      <%= post_form.text_area :content, :rows=>'4' %>
-    </div>
-  <% end%>
+  <% if !@blog.blank? %>
+    <%= f.fields_for :post_content do |post_form| %>
+      <div class="field_2" >
+        <%= post_form.text_area :content, :rows=>'2' %>
+      </div>
+    <% end%>
+      <div class="info_field">
+        <%= f.hidden_field :entry_feed_id, :value => @blog.id %>
+        <%= @blog.title%>
+      </div>
+
+  <%else%>
+    <%= f.fields_for :post_content do |post_form| %>
+      <div class="field_1" >
+        <%= post_form.text_area :content, :rows=>'4' %>
+      </div>
+    <% end%>
+  <%end%>
   <div class="cancel-action fl">
     <a href="" id="cancel-trend">Cancel</a>
   </div>

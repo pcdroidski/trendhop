@@ -118,7 +118,7 @@ class PostsController < ApplicationController
   def create
     @post_content = PostContent.new(params[:post][:post_content])
     @post_content.save
-    @post = Post.new(:user_id => params[:post][:user_id], :post_content_id => @post_content.id, :retrend => false)
+    @post = Post.new(:user_id => params[:post][:user_id], :post_content_id => @post_content.id, :entry_feed_id => params[:post][:entry_feed_id], :retrend => false)
 
     at_array =[]
     trend_array=[]

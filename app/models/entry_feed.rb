@@ -30,10 +30,10 @@ class EntryFeed < ActiveRecord::Base
        unless exists? :guid => entry.id
          create!(
            :feed_id       => feed.id,
-           :title         => entry.title,
-           :summary      => entry.summary,
-           :content     => entry.content,
-           :url          => entry.url,
+           :title         => entry.title.sanitize,
+           :summary      => entry.summary.sanitize,
+           :content     => entry.content.sanitize,
+           :url          => entry.url.sanitize,
            :published_at => entry.published,
            :guid         => entry.id
          )

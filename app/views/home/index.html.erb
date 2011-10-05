@@ -39,8 +39,9 @@
   <% @posts.each do |post| %>
     <li class="post">
       <% @post1 = post %>
+      <% raise post.inspect %>
       <%= render :partial => "posts/post" %>
- 
+
     </li>
       <div class="clear"></div>
   <% end %>

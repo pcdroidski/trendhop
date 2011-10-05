@@ -55,7 +55,7 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       if @feed.save
-        FeedEntry.create_from_feed(@feed.url)
+        EntryFeed.create_from_feed(@feed)
         format.html { redirect_to @feed, :notice => 'Feed was successfully created.' }
         format.json { render :json => @feed, :status => :created, :location => @feed }
       else
@@ -92,34 +92,34 @@ class FeedsController < ApplicationController
       format.json { head :ok }
     end
   end
-  
+
   def subscribe
     @feed = Feed.where(:id => params[:feed_id]).first
     subscribe = UserFeed.new(:user_id => current_user.id, :feed_id => @feed.id)
-    if subscribe.save 
+    if subscribe.save
       flash[:notice] = "You have Subscribed to this Blog!"
       redirect_to feed_path(@feed)
     else
       flash[:notice] = "There was an error!!!!"
       redirect_to feeds_path
-    end   
+    end
   end
-  
+
   def unsubscribe
     @feed = Feed.where(:id => params[:feed_id]).first
     subscribe = UserFeed.where(:user_id => current_user.id, :feed_id => @feed.id).first
-    subscribe.destroy   
-    
+    subscribe.destroy
+
     respond_to do |format|
       format.html { redirect_to feeds_path, :notice => "You have Unsubscribed to this post!" }
       format.json { head :ok }
-    end 
+    end
   end
-  
+
   def is_subscribed?(feed)
     feed = UserFeed.where(:user_id => @current_user.id, :feed_id => feed.id).first
-    feed    
+    feed
   end
   helper_method :is_subscribed?
-  
+
 end

@@ -4,7 +4,7 @@
       <% @blogs.each do |blog| %>
       <div class="blog">
         <div class="blog_title">
-          <div class="fl" id="title"><%= link_to blog.title, blog%></div>
+          <div class="fl" id="title"><%= link_to blog.title, blog_path(blog) %> </div>
           <div class="blog_options fr">
             <span class="option">Re-Trend</span>
             <span class="option">Comment</span><br/>
@@ -18,18 +18,18 @@
         </div>
         <div class='clear'></div>
         <div class="blog_info">
-          <span class="fl">Category: <%= blog.category_id %></span>
-          <span class="fl">Posted by: <%= blog.user.name %></span>
+          <span class="fl">Category: <%#= blog.category_id %></span>
+          <span class="fl">Posted by: <%#= blog. %></span>
         </div>
         <div class="blog_content">
-          <p><%= blog.post %></p>
+          <p><%= raw(blog.summary) %></p>
           <span><%= blog.url %></span>
         </div>
         <div class="blog_trends">
           <span>Trends in this blog: </span>
-          <% blog.trends.each do |trend| %>
-            <span> <%= link_to trend.name, trend_path(trend.name) %></span>
-          <% end%>
+          <%# blog.trends.each do |trend| %>
+            <span> <%#= link_to trend.name, trend_path(trend.name) %></span>
+          <%# end%>
         </div>
       </div>
       <% end %>

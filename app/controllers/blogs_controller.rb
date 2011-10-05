@@ -1,24 +1,18 @@
 class BlogsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  skip_load_resource :only => :show
+
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = []
+    feeds = []
+    UserFeed.where(:user_id => current_user.id).each do |feed|
+      feeds << feed.feed_id unless feeds.include?(feed.feed_id)
+    end
 
-      
-      test = EntryFeed.find_each do |entry|
-        UserFeed.where(:user_id => current_user.id, :feed_id => entry.feed_id)
-      end
-      raise test.inspect 
-      
-      # EntryFeed.where(:feed_id => subscribe.feed_id).each do |entry|
-      #   @blogs << entry        
-      # end     
-
-  raise EntryFeed.where(:feed_id => "1").order("published_at ASC").inspect
-   @blogs = @blogs.first.order("published_at ASC") unless @blogs.blank?
-    # raise @blogs.inspect
+    @blogs = EntryFeed.where(:feed_id => feeds)
+    @blogs = @blogs.order("published_at ASC") unless @blogs.blank?
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,7 +23,7 @@ class BlogsController < ApplicationController
   # GET /blogs/1
   # GET /blogs/1.json
   def show
- #   @blog = Blog.find(params[:id])
+    @blog = EntryFeed.where(:id => params[:id]).first
 
     respond_to do |format|
       format.html # show.html.erb
@@ -134,6 +128,7 @@ class BlogsController < ApplicationController
       end
     end
   end
+
 
   # PUT /blogs/1
   # PUT /blogs/1.json

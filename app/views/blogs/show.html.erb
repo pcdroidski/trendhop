@@ -1,16 +1,20 @@
 <div class='content' id="blog">
+  <div class="blog-info">
+    <div class="fl"><%= link_to "More from this Blog", feed_path(@blog.feed_id)%> </div>
+  </div>
 
   <div class="blog-title">
      <%= @blog.title %>
   </div>
 
   <div class="blog-info">
-    <div class="fl">Posted by: <span id="user"><%= @blog.user.name %></span> </div>
-    <div class="fr" style="width:200px;">Category: <span id="category"><%= @blog.category_id %> </span> </div>
+    <%#= link_to "Trend this Article!", trend_blog_path(@blog.id) %>
+    <!-- <div class="fl">Posted by: <span id="user"><%#= @blog.user.name %></span> </div>
+    <div class="fr" style="width:200px;">Category: <span id="category"><%#= @blog.category_id %> </span> </div> -->
   </div>
   <div class="clear"></div>
   <div class="blog-content">
-    <p><%= @blog.post %></p>
+    <p><%= raw(@blog.content) %></p>
     <b>Attached websites:</b>
     <%= @blog.url %>
   </p>
@@ -19,14 +23,11 @@
   <div class="blog-trends">
     <span class="section_title">Trends: </span>
     <div class="blog-list">
-      <% @blog.trends.each do |trend| %>
-      <div class="blog-trend fl"><%= link_to trend.name, trend_path(trend.name)%></div>
-      <%end %>
+      <%# @blog.trends.each do |trend| %>
+      <div class="blog-trend fl"><%#= link_to trend.name, trend_path(trend.name)%></div>
+      <%#end %>
       <div class="clear"></div>
     </div>
   </div>
-  <% if can? :update, @blogs %>
-    <%= link_to 'Edit', edit_blog_path(@blog) %> |
-  <% end %>
   <%= link_to 'Back', blogs_path %>
 </div>

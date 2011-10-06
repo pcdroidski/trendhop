@@ -1,8 +1,11 @@
-<div class='content' id="blog">
-  <div class="blog-info">
-    <div class="fl"><%= link_to "More from this Blog", feed_path(@blog.feed_id)%> </div>
-  </div>
+<% content_for :left_menu do %>
+  <p>Options: </p>
+    <%= link_to "More from this Blog", feed_path(@blog.feed_id)%><br/>
+    <a href="" id="trend-blog">Trend this Article</a><br/>
+    <%= link_to 'Back to Blog Hop', blogs_path %>
+<%end%>
 
+<div class='content' id="blog">
   <div class="blog-title">
      <%= @blog.title %>
   </div>
@@ -29,5 +32,4 @@
       <div class="clear"></div>
     </div>
   </div>
-  <%= link_to 'Back', blogs_path %>
 </div>

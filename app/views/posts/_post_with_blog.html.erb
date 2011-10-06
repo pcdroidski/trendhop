@@ -1,8 +1,8 @@
       <div class="post_content fl">
         <div class="post_title">
           <%# raise @post1.inspect%>
-          <%= link_to @post1.user.full_name, user_path(@post1.user), :id=>"name"%> <%= @post1.retrend_post_id.blank? ? "is trending " : "is RE-trending " %> 
-          
+          <%= link_to @post1.user.full_name, user_path(@post1.user), :id=>"name"%> <%= @post1.retrend_post_id.blank? ? "is trending " : "is RE-trending " %>
+
             <% if list_trends(@post1) == "" %>
               a link from <b><%= @post1.entry_feed.feed.name %></b>
             <% else%>
@@ -12,8 +12,8 @@
           <% if @post1.retrend%>
             <span class=''>from <%= link_to @post1.retrend_user.full_name, user_path(@post1.retrend_user_id)%> </span>
           <% end%>
-
         </div>
+
         <div class="fl post-date">
           <div class="time">
             <%= @post1.created_at.to_s(:time_only) unless @post1.created_at.blank?%>
@@ -25,7 +25,7 @@
             <%= @post1.created_at.to_s(:year_only) unless @post1.created_at.blank?%>
           </div>
         </div>
-        
+
         <div class="content fl">
           <%= @post1.post_content.content %><br/>
           <div class="content_blog">
@@ -38,18 +38,22 @@
             </div>
           </div>
         </div>
-        <div class="clear"></div>
-        
 
+        <div class="clear"></div>
+
+        </div>
       </div>
-      
+    </div>
       <div class="fl over_section">
         <%= link_to post_path(@post1), :class=>"post-link" do%>
           >>
         <%end%>
       </div>
-      <div class="clear"></div>
-    
+
+      <div class="clear">
+
+    </div>
+
       <div class="post_bottom_section">
         <div class="post_info fl">
           <%#if !@post1.retrend %>
@@ -78,7 +82,7 @@
                 <%= pluralize(@post1.retrend_count, "person", "people") %> re-trended.
             </div>
           <% end%>
-  
+
           <div class="button1">
           <% case @post1.liked?(current_user) %>
             <% when "liked" %>
@@ -90,7 +94,7 @@
                 <div role="button" class="retrend-button">Like</div>
               <%end%>
             <% when "own_post" %>
-  
+
           <%end%>
           </div>
           <div class="trend_hops fl">
@@ -104,14 +108,14 @@
               <% end%>
             </ul>
           </div>
-  
+
             <!-- shows number of people trending each TREND -->
           <!-- <%# @post1.retrend_post_id.blank? ? posted = post : posted = Post.where(:id => @post1.retrend_post_id).first %>
                   <%# posted.trends.each do |trend| %>
                   <span> <%#= pluralize(trend.trend_count, "person is", "people are") %> trending <%#= trend.name%>.</span>
                   <%#end%> -->
         </div>
-  
+
         <%#= link_to 'Show', trend %>
         <%#= link_to 'Edit', edit_trend_path(trend) %>
         <%#= link_to 'Destroy', trend, :confirm => 'Are you sure?', :method => :delete %>
@@ -124,12 +128,12 @@
               </div>
             <% end%>
           </div>
-  
+
           <div class="post_comments">
             <%= form_for([@post1, @post1.comment_posts.build]) do |f| %>
               <%= f.hidden_field :commenter, :value => current_user.id %>
               <div class="field">
-  
+
                 <%= f.text_area :body %>
               </div>
               <div class="actions">
@@ -138,5 +142,5 @@
             <% end %>
           </div>
         </div>
-        <div class="clear"></div>
     </div>
+            <div class="clear"></div>

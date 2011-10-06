@@ -146,6 +146,11 @@ class PostsController < ApplicationController
           @trend.increment(:trend_count)
           @trend.save
 
+          if !@post.entry_feed_id.blank?
+            entry_feed = EntryFeed.where(:id =>@post.entry_feed_id).first
+            entry_feed.increment(:trend_count)
+          end
+
           @user_trend = UserTrend.where(:user_id => @current_user, :trend_id => @trend).first
           if @user_trend.blank?
             @user_trend = UserTrend.new()

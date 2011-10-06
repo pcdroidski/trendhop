@@ -258,7 +258,7 @@ $post-color: #0000FF;
       padding: 4px;
       background: #fff;
       text-decoration: none;
-          @include rounded-corners(5px);
+      @include rounded-corners(5px);
 
       &:hover{
         background: $trend-color;

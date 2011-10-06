@@ -1,6 +1,8 @@
 class EntryFeed < ActiveRecord::Base
 
-  belongs_to :feeds
+  belongs_to :feed
+  
+  has_many :posts
 
   def self.create_from_feed(feed_info)
      feed = Feedzirra::Feed.fetch_and_parse(feed_info.url)

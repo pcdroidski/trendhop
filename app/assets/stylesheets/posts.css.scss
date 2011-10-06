@@ -24,14 +24,14 @@ $trend-color: #339966;
     padding: 4px;
     height: 90px;
     display: block;
-    width: 100px;
+    width: 110px;
     background: #D8D8D8;
 
-    .time { font-size: 18px; display: block; height: 22px;}
+    .time { font-size: 19px; display: block; height: 27px;}
 
-    .date {font-size: 24px; display: block; height: 28px;}
+    .date {font-size: 27px; display: block; height: 34px;}
 
-    .year {font-size: 36px; display: block; height: 38px;}
+    .year {font-size: 39px; display: block; height: 40px;}
 
   }
 
@@ -60,6 +60,7 @@ $trend-color: #339966;
       .post_content {
         text-align: left;
         display: block;
+        width: 100%;
 
         .post_title {
           text-align: left;
@@ -83,21 +84,45 @@ $trend-color: #339966;
         }
 
         .content {
-          margin: 5px 0 0 5px;
+          width: 80%;
+          margin: 5px 0px 0 10px;
           font-size: 20px;
           display: inline-block;
+        
+        
+        .content_blog {
+          margin: 25px 5px 0 5px;
+          display: inline-block;
+          
+          .blog_title {
+            font-size: 15px;
+            font-weight: bold;
+            font-decoration: underline;
+          }
+          
+          .blog_content {
+            font-size: 13px;
+            padding-left: 5px;
+          }
+          
+          
         }
+      }
 
 
+      }
+      
+      .post_bottom_section {
+        width: 100%;
       }
 
       .post_info {
         display: block;
-        width: 50%;
+        width: 120px;
 
         .button1 {
           margin: 5px 10px 5px 0;
-          width: 110px;
+          width: 120px;
 
         }
 
@@ -113,10 +138,13 @@ $trend-color: #339966;
       }
 
      .trend_hops {
-       width: 50%;
+       margin-top: 5px;
+       border-top: 1px solid #339966;
+       width: 120px;
 
         .subsection_title {
           font-size: 12px;
+          margin: 0;
         }
 
         ul.trend_hop {
@@ -144,8 +172,9 @@ $trend-color: #339966;
   }
 
   #comments_index {
-    margin: 5px 0 0 35px;
+    margin: 5px 0 0 15px;
     background: #D8D8D8;
+    width: 80%;
 
     .comments{
       max-height: 150px;

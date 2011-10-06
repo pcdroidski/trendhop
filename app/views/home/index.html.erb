@@ -39,8 +39,11 @@
   <% @posts.each do |post| %>
     <li class="post">
       <% @post1 = post %>
-      <% raise post.inspect %>
-      <%= render :partial => "posts/post" %>
+      <% if @post1.entry_feed_id.blank? %>
+        <%= render :partial => "posts/post" %>
+      <%else%>
+        <%= render :partial => "posts/post_with_blog" %>
+      <%end%>
 
     </li>
       <div class="clear"></div>

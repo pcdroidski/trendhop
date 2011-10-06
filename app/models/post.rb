@@ -8,6 +8,8 @@ class Post < ActiveRecord::Base
   has_many :trends, :through => :post_content
 
   has_many :post_contents
+  
+  belongs_to :entry_feed
 
   has_many :comment_posts, :dependent => :destroy
 

@@ -1,10 +1,10 @@
-      <div class="post_content">
+      <div class="post_content fl">
         <div class="post_title">
           <%# raise @post1.inspect%>
           <%= link_to @post1.user.full_name, user_path(@post1.user), :id=>"name"%> <%= @post1.retrend_post_id.blank? ? "is trending " : "is RE-trending " %> <%= raw(list_trends(@post1)) %>
 
           <% if @post1.retrend%>
-            <span class='fr'>from <%= link_to @post1.retrend_user.full_name, user_path(@post1.retrend_user_id)%> </span>
+            <span class=''>from <%= link_to @post1.retrend_user.full_name, user_path(@post1.retrend_user_id)%> </span>
           <% end%>
 
         </div>
@@ -23,97 +23,101 @@
         <div class="clear"></div>
 
       </div>
-
-      <div class="post_info fl">
-        <%#if !@post1.retrend %>
-          <div class="button1">
-          <% case @post1.retrended?(current_user) %>
-            <% when 0%>
-            <%when 1%>
-              <%= link_to untrend_posts_path(:post_id => @post1.id) do%>
-                <div role="button" class="untrend-button">Un-Trend</div>
-              <%end%>
-            <%when 2%>
-              <%= link_to retrend_posts_path(:post_id => @post1.id) do%>
-                <div role="button" class="retrend-button">Re-Trend</div>
-              <% end%>
-          <%end%>
-          <% if @post1.user == current_user%>
-            <%= link_to hide_posts_path(:post_id => @post1.id), :confirm => 'Do you want to make this post disappear?' do%>
-              <div role="button" class="untrend-button">Hide Post?</div>
-            <%end%>
-          <%end%>
-          </div>
-        <%# end%>
-        <% if  !@post1.retrend_count.blank? %>
-          <div>
-            <div class="clear"></div>
-              <%= pluralize(@post1.retrend_count, "person has", "people have") %> re-trended this.
-          </div>
-        <% end%>
-
-        <div class="button1">
-        <% case @post1.liked?(current_user) %>
-          <% when "liked" %>
-           <%= link_to unlike_posts_path(:post_id => @post1.id), :confirm => 'Do you want to make this post disappear?' do%>
-              <div role="button" class="untrend-button">Unlike</div>
-            <%end%>
-          <% when "not_liked"%>
-           <%= link_to like_posts_path(:post_id => @post1.id) do%>
-              <div role="button" class="retrend-button">Like</div>
-            <%end%>
-          <% when "own_post" %>
-
-        <%end%>
-         </div>
-
-          <!-- shows number of people trending each TREND -->
-        <!-- <%# @post1.retrend_post_id.blank? ? posted = post : posted = Post.where(:id => @post1.retrend_post_id).first %>
-                <%# posted.trends.each do |trend| %>
-                <span> <%#= pluralize(trend.trend_count, "person is", "people are") %> trending <%#= trend.name%>.</span>
-                <%#end%> -->
-      </div>
-      <div class="trend_hops fl">
-        <span class="subsection_title">Hop to related trends: </span>
-        <ul class="trend_hop">
-          <%  @post1.trend_hop.each do |hop|%>
-            <li class="fl" id='hop'>  <%= link_to hop.name, trend_path(hop.name) %></li>
-          <% end%>
-          <% if @post1.trend_hop.blank?%>
-            <li>-- none -- </li>
-          <% end%>
-
-        </ul>
-      </div>
+      
       <div class="fl over_section">
         <%= link_to post_path(@post1), :class=>"post-link" do%>
           >>
         <%end%>
       </div>
       <div class="clear"></div>
-      <%#= link_to 'Show', trend %>
-      <%#= link_to 'Edit', edit_trend_path(trend) %>
-      <%#= link_to 'Destroy', trend, :confirm => 'Are you sure?', :method => :delete %>
-      <div id="comments_index">
-        <div class="comments">
-          <% @post1.comment_posts.each do |comment| %>
-            <div class="comment-item">
-              <span class="comment-user"><%= link_to comment.user.full_name, user_path(comment.user), :id =>"user" %> commented: </span>
-              <p class="comment-body"><%= comment.body%></p>
+    
+      <div class="post_bottom_section">
+        <div class="post_info fl">
+          <%#if !@post1.retrend %>
+            <div class="button1">
+            <% case @post1.retrended?(current_user) %>
+              <% when 0%>
+              <%when 1%>
+                <%= link_to untrend_posts_path(:post_id => @post1.id) do%>
+                  <div role="button" class="untrend-button">Un-Trend</div>
+                <%end%>
+              <%when 2%>
+                <%= link_to retrend_posts_path(:post_id => @post1.id) do%>
+                  <div role="button" class="retrend-button">Re-Trend</div>
+                <% end%>
+            <%end%>
+            <% if @post1.user == current_user%>
+              <%= link_to hide_posts_path(:post_id => @post1.id), :confirm => 'Do you want to make this post disappear?' do%>
+                <div role="button" class="untrend-button">Hide Post?</div>
+              <%end%>
+            <%end%>
+            </div>
+          <%# end%>
+          <% if  !@post1.retrend_count.blank? %>
+            <div>
+              <div class="clear"></div>
+                <%= pluralize(@post1.retrend_count, "person", "people") %> re-trended.
             </div>
           <% end%>
+  
+          <div class="button1">
+          <% case @post1.liked?(current_user) %>
+            <% when "liked" %>
+             <%= link_to unlike_posts_path(:post_id => @post1.id), :confirm => 'Do you want to make this post disappear?' do%>
+                <div role="button" class="untrend-button">Unlike</div>
+              <%end%>
+            <% when "not_liked"%>
+             <%= link_to like_posts_path(:post_id => @post1.id) do%>
+                <div role="button" class="retrend-button">Like</div>
+              <%end%>
+            <% when "own_post" %>
+  
+          <%end%>
+          </div>
+          <div class="trend_hops fl">
+            <span class="subsection_title">Hop to related trends: </span>
+            <ul class="trend_hop">
+              <%  @post1.trend_hop.each do |hop|%>
+                <li class="fl" id='hop'>  <%= link_to hop.name, trend_path(hop.name) %></li>
+              <% end%>
+              <% if @post1.trend_hop.blank?%>
+                <li>-- none -- </li>
+              <% end%>
+            </ul>
+          </div>
+  
+            <!-- shows number of people trending each TREND -->
+          <!-- <%# @post1.retrend_post_id.blank? ? posted = post : posted = Post.where(:id => @post1.retrend_post_id).first %>
+                  <%# posted.trends.each do |trend| %>
+                  <span> <%#= pluralize(trend.trend_count, "person is", "people are") %> trending <%#= trend.name%>.</span>
+                  <%#end%> -->
         </div>
-
-        <div class="post_comments">
-          <%= form_for([@post1, @post1.comment_posts.build]) do |f| %>
-            <%= f.hidden_field :commenter, :value => current_user.id %>
-            <div class="field">
-
-              <%= f.text_area :body %>
-            </div>
-            <div class="actions">
-              <%= f.submit(:value => "Comment") %>
-            </div>
-          <% end %>
+  
+        <%#= link_to 'Show', trend %>
+        <%#= link_to 'Edit', edit_trend_path(trend) %>
+        <%#= link_to 'Destroy', trend, :confirm => 'Are you sure?', :method => :delete %>
+        <div class="fl" id="comments_index">
+          <div class="comments">
+            <% @post1.comment_posts.each do |comment| %>
+              <div class="comment-item">
+                <span class="comment-user"><%= link_to comment.user.full_name, user_path(comment.user), :id =>"user" %> commented: </span>
+                <p class="comment-body"><%= comment.body%></p>
+              </div>
+            <% end%>
+          </div>
+  
+          <div class="post_comments">
+            <%= form_for([@post1, @post1.comment_posts.build]) do |f| %>
+              <%= f.hidden_field :commenter, :value => current_user.id %>
+              <div class="field">
+  
+                <%= f.text_area :body %>
+              </div>
+              <div class="actions">
+                <%= f.submit(:value => "Comment") %>
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
+        <div class="clear"></div>
+    </div>

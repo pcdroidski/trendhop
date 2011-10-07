@@ -34,11 +34,30 @@ set :keep_releases, 5
 
 # If you are using Passenger mod_rails uncomment this:
  namespace :deploy do
-   # task :start do ; end
-   # task :stop do ; end
+   task :start do ; end
+   task :stop do ; end
    task :restart, :roles => :app, :except => { :no_release => true } do
      run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
    end
+
+   [:start, :stop].each do |t|
+     desc "#{t} task is a no-op with mod_rails"
+     task t, :roles => :app do ; end
+   end
+
+   task :symlink_in_shared_directories, :roles => :app, :except => {:no_symlink => true} do
+     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+     run "ln -nfs #{shared_path}/system #{release_path}/public/system"
+   end
+
+   task :ensure_shared_directories_created, :roles => :app do
+     %w{config system}.each do |dir|
+       run <<-CMD
+       mkdir -p #{shared_path}/#{dir}
+       CMD
+     end
+   end
+
  end
 
  namespace :ts do
@@ -76,4 +95,7 @@ set :keep_releases, 5
  after "deploy", "thinking_sphinx:stop"
  # after "deploy", "thinking_sphinx:configure"
  after "deploy", "thinking_sphinx:start"
+
+after "deploy:symlink","deploy:symlink_in_shared_directories"
+ after "deploy:setup", "thinking_sphinx:shared_sphinx_folder"
 

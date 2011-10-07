@@ -13,4 +13,5 @@ config/mail.yml
 config/*.sphinx.conf
 config/development.sphinx.conf
 log/searchd.development.pid
-db/sphinx/development
+public/system/*
+public/assets/

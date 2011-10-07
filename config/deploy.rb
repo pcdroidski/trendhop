@@ -16,7 +16,7 @@ set :deploy_via, :remote_cache
 set :branch, "master"
 set :user, "deploy"
 set :group, "deploy"
-det :use_sudo, false
+set :use_sudo, false
 set(:rails_env) {"%w{stage}"}
 set :keep_releases, 5
 

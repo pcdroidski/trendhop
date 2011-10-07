@@ -27,7 +27,7 @@ gem 'jquery-rails'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano'
+gem 'capistrano', "2.6.0"
 gem 'capistrano-ext' # Extend capistrano to multiple environments
 
 # To use debugger

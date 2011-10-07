@@ -28,6 +28,7 @@ gem 'jquery-rails'
 
 # Deploy with Capistrano
 gem 'capistrano'
+gem 'capistrano-ext' # Extend capistrano to multiple environments
 
 # To use debugger
 # gem 'ruby-debug'
@@ -39,6 +40,7 @@ gem 'capistrano'
 
 # Search Engine
 gem 'thinking-sphinx', :branch => "rails3", :git => "git://github.com/freelancing-god/thinking-sphinx.git", :require => 'thinking_sphinx'
+
 
 # Authentication
 # Decided to not go with restful authentication as it's not RAILS 3 by default

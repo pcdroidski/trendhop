@@ -6,7 +6,6 @@ tmp/
 log/*.pid
 .rvmrc
 config/database.yml
-config/monetra.yml
 config/amazon_s3.yml
 config/facebook.yml
 config/mail.yml

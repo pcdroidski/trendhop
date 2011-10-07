@@ -21,12 +21,12 @@ test:
 #   searchd_file_path: /var/www/staging/wlib/shared/sphinx/
 #   html_strip: true
 #   max_matches: 10000
-# production:
-#   address: 127.0.0.1
-#   port: 3006
-#   mem_limit: 512M
-#   morphology: stem_en
-#   pid_file: /var/www/wlib/shared/sphinx/searchd.pid
-#   searchd_file_path: /var/www/wlib/shared/sphinx/
-#   html_strip: true
-#   max_matches: 10000
+production:
+  address: 127.0.0.1
+  port: 9312
+  mem_limit: 512M
+  morphology: stem_en
+  pid_file: /var/www/production/trendhop/shared/sphinx/searchd.pid
+  searchd_file_path: /var/www/production/trendhop/shared/sphinx/
+  html_strip: true
+  max_matches: 10000

@@ -7,11 +7,32 @@ class BlogsController < ApplicationController
   # GET /blogs.json
   def index
     feeds = []
-    UserFeed.where(:user_id => current_user.id).each do |feed|
+
+    @blogs_filter = params[:filter].blank? ? "All" : params[:filter]
+
+    @feeds = case @blogs_filter
+    when "All" then UserFeed
+    when "Politics" then UserFeed.politics
+    when "Technology" then UserFeed.technology
+    when "Science" then UserFeed.science
+    when "Sports" then UserFeed.sports
+    when "Health" then UserFeed.health
+    when "Art" then UserFeed.art
+    when "Finance" then UserFeed.finance
+    when "US" then UserFeed.us
+    when "Business" then UserFeed.business
+    when "Travel" then UserFeed.travel
+    when "Entertainment" then UserFeed.entertainment
+    when "World" then UserFeed.world
+    end
+
+    @feeds.where(:user_id => current_user.id).each do |feed|
       feeds << feed.feed_id unless feeds.include?(feed.feed_id)
     end
 
     @blogs = EntryFeed.where(:feed_id => feeds)
+
+
     @blogs = @blogs.order("published_at ASC") unless @blogs.blank?
 
     respond_to do |format|

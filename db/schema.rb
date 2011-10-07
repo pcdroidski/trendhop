@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(:version => 20111006190519) do
   create_table "blogs", :force => true do |t|
     t.integer  "user_id"
     t.integer  "category_id"
-    t.string   "title"
-    t.text     "post"
+    t.string   "name"
+    t.text     "description"
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(:version => 20111006190519) do
   create_table "feeds", :force => true do |t|
     t.string   "name"
     t.string   "url"
-    t.integer  "category_id"
+    t.integer  "feed_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

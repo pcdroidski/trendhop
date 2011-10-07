@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @page_title.blank? ? "Welcome to TrendHop!" : @page_title %></title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= yield :head %>
+  <%#= render(:partial => "layouts/ie_stylesheets") %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div style="background: white;">
+    <%= render :partial => "layouts/header" %>
+
+    <div class="container_16">
+        <div id="notice">
+          <%if !notice.blank?%>
+            <div class="flash"><%= notice %></div>
+          <%end%>
+        </div>
+      <div class="clear"></div>
+      <div id="page_title">
+        <div class="grid_16 alpha beta">
+          <%= yield :page_tile %>
+        </div>
+      </div>
+      <div id="main_page">
+        <div class="grid_3 alpha">
+          <%= render :partial => "layouts/left_column/left_menu" %>
+        </div>
+        <div class="grid_13 omega">
+          <%= yield %>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+
+  </div>
+  <%= render :partial => "layouts/footer" %>
+</body>
+</html>

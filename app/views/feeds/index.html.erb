@@ -1,33 +1,37 @@
-<h1>Listing All Feeds</h1>
+<% content_for :left_menu do%>
+  Browse through Feeds
+<%end%>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Url</th>
-    <th>Category</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>Browse Through Feeds</h1>
+<%= link_to 'New Feed', new_feed_path %><br/>
+<% FeedCategory.all.each do |cat|%>
+<div class="feed_table">
+  <h3><%= cat.name%></h3>
+  <table>
+    <tr>
+      <th id="name">Blog Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
 
-<% @feeds.each do |feed| %>
-  <tr>
-    <td><%= feed.name %></td>
-    <td><%= feed.url %></td>
-    <td><%= feed.category_id %></td>
-    <% if is_subscribed?(feed).blank? %>
-      <td><%= link_to "Subscribe", subscribe_feeds_path(:feed_id => feed.id)%>
-    <% else %>
-      <td><%= link_to "Unsubscribe", unsubscribe_feeds_path(:feed_id => feed.id)%>
-    <%end%>
-    <td><%= link_to 'Show', feed %></td>
-    <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
-    <td><%= link_to 'Destroy', feed, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+  <% cat.feeds.each do |feed| %>
+    <tr>
+      <td><%= link_to feed.name, feed %></td>
+      <% if is_subscribed?(feed).blank? %>
+        <td><%= link_to "Subscribe", subscribe_feeds_path(:feed_id => feed.id)%>
+      <% else %>
+        <td><%= link_to "Unsubscribe", unsubscribe_feeds_path(:feed_id => feed.id)%>
+      <%end%>
+      <td><%#= link_to 'Edit', edit_feed_path(feed) %></td>
+      <td><%#= link_to 'Destroy', feed, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>
 
-<br />
+  <br />
 
-<%= link_to 'New Feed', new_feed_path %>
+  <%end%>
+</div>
+

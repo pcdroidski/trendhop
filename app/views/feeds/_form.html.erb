@@ -20,8 +20,8 @@
     <%= f.text_field :url %>
   </div>
   <div class="field">
-    <%= f.label :category_id %><br />
-    <%= f.number_field :category_id %>
+    <%= f.label :feed_category_id %><br />
+    <%= f.collection_select(:feed_category_id, FeedCategory.all, :id, :name, :prompt => true) %>
   </div>
   <div class="actions">
     <%= f.submit %>

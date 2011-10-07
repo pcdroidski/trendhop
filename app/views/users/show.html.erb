@@ -53,7 +53,7 @@
       <%= image_tag ("/assets/Profile.png"), :style =>"height:100px; width:80px;" %>
     </div>
     <div class="fl">
-      <div class="first-name"><%= @user.first_name %></div><br/>
+      <div class="first-name"><%= @user.first_name %></div>
       <div class="last-name"><%= @user.last_name %> </div>
     </div>
     <div class="clear"></div>
@@ -142,9 +142,9 @@
           <%= render :partial => "posts/post"%>
           </div>
         <%when "Trend"%>
-      
+
       <%end%>
-    <%end%>  
+    <%end%>
     </div>
   <% when "friends"%>
   <% if !@friends.blank? %>

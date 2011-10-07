@@ -1,4 +1,5 @@
 class FeedsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /feeds
   # GET /feeds.json
   def index
@@ -95,7 +96,7 @@ class FeedsController < ApplicationController
 
   def subscribe
     @feed = Feed.where(:id => params[:feed_id]).first
-    subscribe = UserFeed.new(:user_id => current_user.id, :feed_id => @feed.id)
+    subscribe = UserFeed.new(:user_id => current_user.id, :feed_id => @feed.id, :feed_group_id => @feed.feed_category_id)
     if subscribe.save
       flash[:notice] = "You have Subscribed to this Blog!"
       redirect_to feed_path(@feed)

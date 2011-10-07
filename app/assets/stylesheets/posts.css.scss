@@ -22,7 +22,6 @@ $trend-color: #339966;
 
   .post-date {
     padding: 4px;
-    height: 90px;
     display: block;
     width: 110px;
     background: #D8D8D8;
@@ -88,30 +87,30 @@ $trend-color: #339966;
           margin: 5px 0px 0 10px;
           font-size: 20px;
           display: inline-block;
-        
-        
+
+
         .content_blog {
           margin: 25px 5px 0 5px;
           display: inline-block;
-          
+
           .blog_title {
             font-size: 15px;
             font-weight: bold;
             font-decoration: underline;
           }
-          
+
           .blog_content {
             font-size: 13px;
             padding-left: 5px;
           }
-          
-          
+
+
         }
       }
 
 
       }
-      
+
       .post_bottom_section {
         width: 100%;
       }

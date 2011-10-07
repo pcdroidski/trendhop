@@ -1,0 +1,21 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.feed_table {
+  float: left;
+  width: 350px;
+  margin: 5px 15px 15px 0;
+
+  table {
+    border-right: 1px solid #fff;
+    padding: 5px;
+  }
+  #name{
+    width: 150px;
+  }
+  #url{
+    width: 100px;
+  }
+}

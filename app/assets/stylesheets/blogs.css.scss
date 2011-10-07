@@ -5,11 +5,208 @@
 $border-color: #000;
 $text-color: #000;
 
+/*Cateogry colors*/
+$politics: red;
+$sports: #00CC00;
+$technology: #A0A0A0;
+$science: #0066FF;
+$world: #33FFFF;
+$art: #9966FF;
+$entertainment: #CC9900;
+$health: pink;
+$travel: #CCFF33;
+$business: #660033;
+$finance: #003300;
+$us: #FF3366;
+
 @mixin rounded-corners($radius) {
   border-radius: $radius;
   -moz-border-radius: $radius;
   -webkit-border-radius: $radius;
   }
+
+  #Finance{
+    background: $finance;
+    color: #fff;
+
+    &:hover{
+      .filter{
+        color: #fff;
+        font-weight: bold;
+      }
+    }
+  /*          border-right: 16px solid red;*/
+  }
+  #US{
+    background: $us;
+    color: #fff;
+
+    &:hover{
+      .filter{
+        color: #fff;
+        font-weight: bold;
+      }
+    }
+  /*          border-right: 16px solid red;*/
+  }
+  #Business{
+    background: $business;
+    color: #fff;
+
+    &:hover{
+      .filter{
+        color: #fff;
+        font-weight: bold;
+      }
+    }
+  /*          border-right: 16px solid red;*/
+  }
+
+#Entertainment{
+  background: $entertainment;
+  color: #000;
+
+  &:hover{
+    .filter{
+      color: #000;
+      font-weight: bold;
+    }
+  }
+/*          border-right: 16px solid red;*/
+}
+
+  #Art_Design{
+    background: $art;
+    color: #fff;
+
+    &:hover{
+      .filter{
+        color: #fff;
+        font-weight: bold;
+      }
+    }
+/*          border-right: 16px solid red;*/
+  }
+    #Politics{
+      background: $politics;
+      color: #fff;
+
+      &:hover{
+        .filter{
+          color: #fff;
+          font-weight: bold;
+        }
+      }
+/*          border-right: 16px solid red;*/
+    }
+    #Technology{
+      background: $technology;
+      color: #fff;
+
+      &:hover{
+        .filter{
+          color: #fff;
+          font-weight: bold;
+        }
+      }
+/*          border-right: 16px solid green;*/
+    }
+
+    #World{
+      background: $world;
+      color: #000;
+
+      &:hover{
+        .filter{
+          color: #000;
+          font-weight: bold;
+        }
+      }
+/*          border-right: 16px solid green;*/
+    }
+
+
+    #Science{
+      background: $science;
+      color: #fff;
+
+      &:hover{
+        .filter{
+          color: #fff;
+          font-weight: bold;
+        }
+      }
+/*          border-right: 16px solid yellow;*/
+    }
+    #Sports {
+      background: $sports;
+      color: #fff;
+
+      &:hover{
+        .filter{
+          color: #fff;
+          font-weight: bold;
+        }
+      }
+/*          border-right: 16px solid blue;*/
+    }
+    #Travel{
+      background: $travel;
+      color: #000;
+
+      &:hover{
+        .filter{
+          color: #000;
+          font-weight: bold;
+        }
+      }
+/*          border-right: 16px solid purple;*/
+    }
+    #Health {
+      background: $health;
+      color: #000;
+
+      &:hover{
+        .filter{
+          color: #000;
+          font-weight: bold;
+        }
+      }
+/*          border-right: 16px solid pink;*/
+    }
+
+
+  #blog_filters{
+    list-style: none;
+    padding: 0;
+
+    .filter-link {
+      height: 22px;
+      margin: 2px 0 2px 0;
+      display: block;
+
+      .filter{
+        padding: 2px;
+        font-size: 15px;
+      }
+    }
+
+    .active-link{
+      height: 27px;
+      margin: 2px 0 4px 0;
+      display: block;
+
+      .filter{
+        border: 1px solid #000;
+        padding: 2px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+    }
+  }
+
+
 
 #blogs{
 
@@ -36,39 +233,17 @@ $text-color: #000;
       .blog_origins{
         font-weight: bold;
         text-align: right;
-        background: #c00;
         color: #Fff;
         font-size: 14px;
         width: 80px;
         padding: 4px;
 
-        .triangle{
+/*        .triangle{
         display: block;
         border-bottom: 16px solid transparent;
         overflow: hidden;
         position: absolute;
-        }
-
-        #red {
-          border-right: 16px solid red;
-        }
-        #green{
-          border-right: 16px solid green;
-        }
-        #yellow{
-          border-right: 16px solid yellow;
-        }
-        #blue {
-          border-right: 16px solid blue;
-        }
-        #purple {
-          border-right: 16px solid purple;
-        }
-        #pink {
-          border-right: 16px solid pink;
-        }
-
-
+        }*/
       }
 
       .blog_title {
@@ -77,13 +252,10 @@ $text-color: #000;
         display: block;
         width: 80%;
 
-
-
         #title {
           margin: 0 5px 5px 5px;
           font-size: 20px;
           text-decoration: none;
-
         }
 
         a {
@@ -96,15 +268,12 @@ $text-color: #000;
         display: block;
         height: 20px;
 
-
         span {
           margin-left: 10px;
           text-align: left;
           width: 260px;
           display: block;
-
         }
-
       }
 
       .blog_content {

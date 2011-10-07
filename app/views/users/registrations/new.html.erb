@@ -1,43 +1,56 @@
-<h2>Sign up</h2>
-
+<% content_for :left_menu do%>
+Welcome to<br/>
+Trend Hop!
+<%end%>
+<div style="width: 700px;">
+<h2>Sign up for a New Account!</h2>
+<hr/>
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
+  <h3 class="sign_up_header">Your Name </h3>
+  <div class="field fl sign_up_field">
     <%= f.label :first_name %><br />
     <%= f.text_field :first_name %>
   </div>
-  <div class="field">
+  <div class="field sign_up_field">
     <%= f.label :last_name %><br />
     <%= f.text_field :last_name %>
   </div>
-  <div class="field">
+  <div class="clear"></div>
+  <h3 class="sign_up_header">Your Location</h3>
+  <div class="field sign_up_field fl">
     <%= f.label :city %><br />
     <%= f.text_field :city %>
   </div>
-  <div class="field">
+  <div class="field sign_up_field fl">
     <%= f.label :state_id %><br />
     <%= f.number_field :state_id %>
+    <p>(Enter "1" for now...)</p>
   </div>
-  <div class="field">
+
+  <div class="clear"></div>
+  <h3 class="sign_up_header">Your Information</h3>
+  <div class="field sign_up_field fl">
     <%= f.label :sex %><br />
     <%= f.collection_select(:sex, User::SEX, :to_s, :humanize, :prompt => true) %>
   </div>
-  <div class="field">
+    <div class="clear"></div>
+  <div class="field sign_up_field fl">
     <%= f.label :birth_day %><br />
     <%= f.number_field :birth_day %>
   </div>
-  <div class="field">
+  <div class="field sign_up_field fl">
     <%= f.label :birth_month %><br />
     <%= f.number_field :birth_month %>
   </div>
-  <div class="field">
+  <div class="field sign_up_field">
     <%= f.label :birth_year %><br />
     <%= f.number_field :birth_year %>
   </div>
-
-
-  <h4>Log in Information: </h4>
+  <div class="clear"></div>
+  <hr/>
+  <h3 class="sign_up_header">Log in Information</h3>
   <p><%= f.label :email %><br />
   <%= f.email_field :email %></p>
 
@@ -47,13 +60,12 @@
   <p><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></p>
 
-  <p>
-    <%= f.label :role %><br />
-    <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
-  </p>
+  <%= f.hidden_field :role, :value => 'standard'%>
+
 
 
   <p><%= f.submit "Sign up" %></p>
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>
+</div>

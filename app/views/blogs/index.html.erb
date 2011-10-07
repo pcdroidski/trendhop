@@ -1,5 +1,36 @@
 <% content_for :left_menu do%>
-  <p>Primairy Selector goes here</p>
+  <div class="subscribe">  <%= link_to 'Subscirbe to Blogs', feeds_path %></div>
+  <span class="section_title">Categories</span>
+  <ul id="blog_filters">
+     <% if params[:filter].blank?%>
+       <%= link_to blogs_path(:filter => nil), :class=>"active-link", :id=>"All" do%>
+         <li class="filter">
+              <span>All </span>
+         </li>
+       <%end%>
+     <%else%>
+       <%= link_to blogs_path(:filter => nil), :class=>"filter-link" do%>
+         <li class="filter">
+              <span>All </span>
+         </li>
+       <%end%>
+     <%end%>
+    <% FeedCategory.all.each do |cat| %>
+      <% if params[:filter] == cat.name%>
+        <%= link_to blogs_path(:filter => cat.name), :class=>"active-link", :id =>"#{cat.name}"  do%>
+          <li class="filter">
+               <span><%= cat.name.humanize %> </span>
+          </li>
+        <%end%>
+      <%else%>
+        <%= link_to blogs_path(:filter => cat.name), :class=>"filter-link", :id =>"#{cat.name}"  do%>
+          <li id="<%= cat.name%>" class="filter">
+               <span><%= cat.name.humanize %> </span>
+          </li>
+        <%end%>
+      <%end%>
+    <%end%>
+  </ul>
 <%end%>
 
 <% content_for :right_menu do%>
@@ -9,16 +40,15 @@
 <div class="content" id="blogs">
   <div class="title"><span>Blog Hop</span></div>
   <p>Here are the blogs that you have subscirbed to!</p>
-  <div class="fr">  <%= link_to 'Subscirbe to some Blogs', feeds_path %></div>
   <div class="blogs">
       <% @blogs.each do |blog| %>
+      <% if !blog.title.include?("Ad")%>
       <div class="blog">
+        <div id="<%= blog.feed.feed_category.name.split(" ").first %>" class="fr blog_origins">
+          <%= blog.feed.name%>
+        </div>
         <div class="blog_title fl">
           <div class="fl" id="title"><%= link_to blog.title, blog_path(blog) %> </div>
-        </div>
-
-        <div class="fr blog_origins">
-          <%= blog.feed.name%>
         </div>
           <span style="margin: 0 0 5px 10px; " class="fl">Posted: <%= blog.published_at %></span>
         <div class='clear'></div>
@@ -49,5 +79,6 @@
         </div>
       </div>
       <% end %>
+      <%end%>
   </div>
 </div>

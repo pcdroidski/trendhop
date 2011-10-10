@@ -21,6 +21,10 @@ end
 
 gem 'feedzirra'
 
+
+#Ruby racer -- to resolve the assets problem
+gem "therubyracer", :require => 'v8'
+
 gem 'jquery-rails'
 
 # Use unicorn as the web server

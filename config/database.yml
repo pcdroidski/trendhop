@@ -33,10 +33,9 @@ test:
   username: root
   password:
 
-  production:
-    adapter: mysql2
-    encoding: utf8
-    database: trendhop_production
-    username: root
-    password: h0wt0dr01d
-
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: trendhop_production
+  username: root
+  password: h0wt0dr01d

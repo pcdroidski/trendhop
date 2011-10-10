@@ -45,18 +45,18 @@ set :keep_releases, 5
      task t, :roles => :app do ; end
    end
 
-   # task :symlink_in_shared_directories, :roles => :app, :except => {:no_symlink => true} do
-   #   run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-   #   run "ln -nfs #{shared_path}/system #{release_path}/public/system"
-   # end
+   task :symlink_in_shared_directories, :roles => :app, :except => {:no_symlink => true} do
+     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+     run "ln -nfs #{shared_path}/system #{release_path}/public/system"
+   end
 
-   # task :ensure_shared_directories_created, :roles => :app do
-   #   %w{config system}.each do |dir|
-   #     run <<-CMD
-   #     mkdir -p #{shared_path}/#{dir}
-   #     CMD
-   #   end
-   # end
+   task :ensure_shared_directories_created, :roles => :app do
+     %w{config system}.each do |dir|
+       run <<-CMD
+       mkdir -p #{shared_path}/#{dir}
+       CMD
+     end
+   end
 
  end
 
@@ -96,6 +96,6 @@ set :keep_releases, 5
  # after "deploy", "thinking_sphinx:configure"
  after "deploy", "thinking_sphinx:start"
 
-#after "deploy:symlink","deploy:symlink_in_shared_directories"
+ after "deploy:symlink","deploy:symlink_in_shared_directories"
  after "deploy:setup", "thinking_sphinx:shared_sphinx_folder"
 

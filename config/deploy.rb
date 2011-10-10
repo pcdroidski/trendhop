@@ -96,6 +96,6 @@ set :keep_releases, 5
  # after "deploy", "thinking_sphinx:configure"
  after "deploy", "thinking_sphinx:start"
 
-after "deploy:symlink","deploy:symlink_in_shared_directories"
+#after "deploy:symlink","deploy:symlink_in_shared_directories"
  after "deploy:setup", "thinking_sphinx:shared_sphinx_folder"
 

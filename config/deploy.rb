@@ -95,7 +95,7 @@ set :keep_releases, 5
 
  after "deploy", "deploy:migrate"
  after "deploy", "deploy:cleanup"
- after "deploy", "deploy:assets"
+ # after "deploy", "deploy:assets"
 
  # Configure thinking sphinx
  after "deploy", "thinking_sphinx:stop"

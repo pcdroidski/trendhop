@@ -17,7 +17,7 @@ set :branch, "master"
 set :user, "deploy"
 set :group, "deploy"
 set :use_sudo, false
-set(:rails_env) {"%w{stage}"}
+set(:rails_env) {"#{stage}"}
 set :keep_releases, 5
 
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`

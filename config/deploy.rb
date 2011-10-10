@@ -50,6 +50,11 @@ set :keep_releases, 5
      run "ln -nfs #{shared_path}/system #{release_path}/public/system"
    end
 
+   desc "Compile asets"
+   task :assets do
+      run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile"
+   end
+
    task :ensure_shared_directories_created, :roles => :app do
      %w{config system}.each do |dir|
        run <<-CMD
@@ -90,11 +95,13 @@ set :keep_releases, 5
 
  after "deploy", "deploy:migrate"
  after "deploy", "deploy:cleanup"
+ after "deploy", "deploy:assets"
 
  # Configure thinking sphinx
  after "deploy", "thinking_sphinx:stop"
  # after "deploy", "thinking_sphinx:configure"
  after "deploy", "thinking_sphinx:start"
+
 
  after "deploy:symlink","deploy:symlink_in_shared_directories"
  after "deploy:setup", "thinking_sphinx:shared_sphinx_folder"

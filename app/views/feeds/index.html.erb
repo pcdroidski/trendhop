@@ -1,37 +1,38 @@
 <% content_for :left_menu do%>
-  Browse through Feeds
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <h4 style="font-size: 16px; font-weight: bold;">Don't see a Feed you want?</h4>
+  <p>Just recommend one! </p>
 <%end%>
 
 <h1>Browse Through Feeds</h1>
-<%= link_to 'New Feed', new_feed_path %><br/>
+<% if can? :manage, @feeds %>
+  <%= link_to 'New Feed', new_feed_path %><br/>
+<%end%>
+
 <% FeedCategory.all.each do |cat|%>
-<div class="feed_table">
-  <h3><%= cat.name%></h3>
-  <table>
-    <tr>
-      <th id="name">Blog Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
+  <div class="feed_table">
+      <div class="feed_name"><%= cat.name%></div>
 
-  <% cat.feeds.each do |feed| %>
-    <tr>
-      <td><%= link_to feed.name, feed %></td>
-      <% if is_subscribed?(feed).blank? %>
-        <td><%= link_to "Subscribe", subscribe_feeds_path(:feed_id => feed.id)%>
-      <% else %>
-        <td><%= link_to "Unsubscribe", unsubscribe_feeds_path(:feed_id => feed.id)%>
-      <%end%>
-      <td><%#= link_to 'Edit', edit_feed_path(feed) %></td>
-      <td><%#= link_to 'Destroy', feed, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
-  </table>
-</div>
+      <div class="table">
+        <% cat.feeds.each do |feed| %>
+          <div class="table-row">
+            <div class="fl" id="name"><%= link_to feed.name, feed %></div>
+            <% if is_subscribed?(feed).blank? %>
+              <div class="fr option"><%= link_to "Subscribe", subscribe_feeds_path(:feed_id => feed.id), :id=>"subscribe"%></div>
+            <% else %>
+              <div class="fr option"><%= link_to "Unsubscribe", unsubscribe_feeds_path(:feed_id => feed.id), :id=>"unsubscribe" %></div>
+            <%end%>
+            <% if can? :manage, feed %>
+              <div class="clear"></div>
+              <div><%= link_to 'Edit', edit_feed_path(feed) %> | | <%= link_to 'Destroy', feed, :confirm => 'Are you sure?', :method => :delete %></div>
+              <br/>
+            <%end%>
+            <div class="clear"></div>
+          </div>
 
-  <br />
+        <% end %>
+      </div>
+  </div>
+<%end%>
 
-  <%end%>
-</div>
 

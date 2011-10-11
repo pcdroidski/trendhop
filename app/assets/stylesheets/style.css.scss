@@ -189,19 +189,20 @@ $post-color: #0000FF;
 
   .profile-mini {
     display: block;
-    height: 65px;
+    height:68px;
     margin: 4px 4px 4px 0;
     padding: 3px;
     background: #fff;
     @include rounded-corners(10px);
 
-    .user-name {
-      margin: 2px 0 0 5px;
+    .user-post {
+      width: 210px;
       font-size: 16px;
     }
 
     .profile-pic-mini {
-      height: 60px;
+      height: 50px;
+      margin-bottom: 2px;
     }
 
   }

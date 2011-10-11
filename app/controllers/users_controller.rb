@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     before_filter :authenticate_user!
     load_and_authorize_resource
+    skip_load_resource :only => :edit
   # GET /users
   # GET /users.json
   def index
@@ -44,8 +45,8 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
- #   @user = User.find(params[:id])
-    check_user(@user)
+    @user = User.find(params[:id])
+    @user = check_user(@user)
   end
 
   # POST /users
@@ -99,7 +100,11 @@ class UsersController < ApplicationController
 
   def check_user(user)
     if user != current_user
-      redirect_to root_url, :notice => "Incorrect credentials"
+      check = current_user.role == "admin" ? user : current_user
+      return check
+      # redirect_to root_url, :notice => "Incorrect credentials"
+    else
+      return current_user
     end
   end
 

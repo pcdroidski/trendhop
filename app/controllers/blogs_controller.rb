@@ -17,7 +17,7 @@ class BlogsController < ApplicationController
     when "Science" then UserFeed.science
     when "Sports" then UserFeed.sports
     when "Health" then UserFeed.health
-    when "Art" then UserFeed.art
+    when "Art_Design" then UserFeed.art
     when "Finance" then UserFeed.finance
     when "US" then UserFeed.us
     when "Business" then UserFeed.business

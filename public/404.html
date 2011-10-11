@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
+  <title>We're sorry, but something went wrong (500)</title>
+  <link href="/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" />
   <style type="text/css">
     body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
     div.dialog {
@@ -17,10 +18,52 @@
 </head>
 
 <body>
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
+
+  <div style="background: white;">
+
+    <!-- Header -->
+    <div id="header_container">
+      <div class="container_16">
+        <div id="header">
+          <header>
+
+            <div class="grid_16 fl alpha">
+              <div class="logo_home">
+               <a href="/" title="Go Home"><img src="images/header/Logo.png" class="logo_link" height="300"></a>
+              </div>
+            </div>
+            </header>
+        </div>
+      </div>
+    </div>
+    <div class="filler-header"></div>
+    <!-- End Header -->
+
+      <div class="clear"></div>
+    <div class="container_16">
+      <div id="page_title">
+        <div class="grid_16 alpha beta">
+          <h1>Doh! The page you were looking for doesn't exist!</h1>
+        </div>
+      </div>
+      <div id="main_page">
+        <div class="grid_3 alpha">
+          <b>= ( </b>
+        </div>
+        <div class="grid_10 omega">
+          <p style="font-size:25px; font-weight: bold; text-align: center;">If you think this is a problem, please report this problem with specific detail at the site's Error-reporting center!</p>
+        </div>
+        <div class="grid_3 beta">
+         <b> ) = </b>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+
   </div>
+
+
+
+
 </body>
 </html>

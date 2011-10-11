@@ -247,9 +247,8 @@ class PostsController < ApplicationController
     @likeable = find_likeable.last
     @likeable_type = find_likeable.first
 
-    if likeable_type == "like"
-      @user_like = UserLike.where(:user_id => current_user.id, :source_id => @likeable.id, :source_type => @likeable_type).first
-    elsif "dislike"
+    @user_like = UserLike.where(:user_id => current_user.id, :source_id => @likeable.id, :source_type => @likeable_type).first
+    if @user_like.blank?
       @user_like = UserDislike.where(:user_id => current_user.id, :source_id => @likeable.id, :source_type => @likeable_type).first
     end
 

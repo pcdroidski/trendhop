@@ -8,13 +8,13 @@ class Ability
       can :manage, :all
     else
       can :read, :all
-     
+
       if user.role == 'standard'
         can :update, User do |me|
           me == user
         end
         can :create, Post
-        can :udpate, Post do |post|
+        can :update, Post do |post|
           post.try(:user) == user
         end
         can :create, Blog

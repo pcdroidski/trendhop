@@ -14,5 +14,6 @@ class UserFeed < ActiveRecord::Base
   scope :us, :conditions => {:feed_group_id => 12}
   scope :science, :conditions => {:feed_group_id => 4}
   scope :art, :conditions => {:feed_group_id => 6}
+  scope :entertainment, :conditions => {:feed_group_id => 7}
 
 end

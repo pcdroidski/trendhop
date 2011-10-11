@@ -181,32 +181,47 @@ $us: #FF3366;
     padding: 0;
 
     .filter-link {
-      height: 22px;
       margin: 2px 0 2px 0;
       display: block;
 
       .filter{
         padding: 2px;
-        font-size: 15px;
+        font-size: 18px;
       }
     }
 
     .active-link{
-      height: 27px;
       margin: 2px 0 4px 0;
       display: block;
 
       .filter{
+        line-height: 25px;
+        height: 29px;
         border: 1px solid #000;
         padding: 2px;
-        font-size: 18px;
+        font-size: 19px;
         font-weight: bold;
       }
 
     }
   }
 
+.subscribe {
+  margin-bottom: 10px;
+  display: block;
+  font-size: 20px;
+  padding: 4px;
+  text-align: center;
 
+  a {
+    padding: 2px;
+    display: block;
+    width: 100%;
+    background: #fc0;
+    @include rounded-corners(4px);
+  }
+
+}
 
 #blogs{
 

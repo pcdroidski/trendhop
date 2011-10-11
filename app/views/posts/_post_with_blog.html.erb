@@ -1,6 +1,7 @@
 <div class="post_content fl">
         
   <div class="post_title">
+
           <%# raise @post1.inspect%>
           <%= link_to @post1.user.full_name, user_path(@post1.user), :id=>"name"%> <%= @post1.retrend_post_id.blank? ? "is trending " : "is RE-trending " %>
 
@@ -54,6 +55,8 @@
 
 <div class="post_bottom_section">
     <div class="post_info fl">
+
+
           <%#if !@post1.retrend %>
         <div class="button1">
             <% case @post1.retrended?(current_user) %>
@@ -113,13 +116,17 @@
                   <%# posted.trends.each do |trend| %>
                   <span> <%#= pluralize(trend.trend_count, "person is", "people are") %> trending <%#= trend.name%>.</span>
                   <%#end%> -->
-  </div>
+
+</div>
+
 
         <%#= link_to 'Show', trend %>
         <%#= link_to 'Edit', edit_trend_path(trend) %>
         <%#= link_to 'Destroy', trend, :confirm => 'Are you sure?', :method => :delete %>
-  <div class="fl" id="comments_index">
-      <div class="comments">
+
+<div class="fl" id="comments_index">
+
+          <div class="comments">
             <% @post1.comment_posts.each do |comment| %>
               <div class="comment-item">
                 <span class="comment-user"><%= link_to comment.user.full_name, user_path(comment.user), :id =>"user" %> commented: </span>
@@ -134,7 +141,9 @@
               <div class="field"><%= f.text_area :body %></div>
               <div class="actions"><%= f.submit(:value => "Comment") %></div>
             <% end %>
-      </div>
-  </div>
+
+          </div>
 </div>
-            <div class="clear"></div>
+
+  <div class="clear"></div>
+

@@ -1,12 +1,22 @@
 <% if user_signed_in? %>
-<div class="fl grid_5 beta">
-   <div class="profile-mini">
-      <div style="height: 40px;">
-      <%= link_to image_tag("/assets/Profile.png", :class=>"profile-pic-mini fl"), user_path(current_user)%>
-      <span class="user-name fl"> <%= current_user.full_name %> </span>
+<div class="fl grid_5 beta alpha">
+   <div class="profile-mini" id="trend-now">
+      <div class="fl">
+        <%= link_to image_tag("/assets/Profile.png", :class=>"profile-pic-mini fl"), user_path(current_user)%>
+        <div class=""><%= link_to "Sign out!", destroy_user_session_path %> </div>
       </div>
-     <div class="fr"><%= link_to "Sign out!", destroy_user_session_path %> </div>
-             <a href="" id="trend-now">Trend now!</a>
+        <div class="user-post fl"> You are trending
+          <% if current_user.posts.last.entry_feed_id.blank?%>
+            <%= raw(list_trends(current_user.posts.last)) %>.
+          <% else %>
+            <% if list_trends(current_user.posts.last) == "" %>
+              a link from <b><%= current_user.posts.last.entry_feed.feed.name %></b>
+            <% else%>
+              <%= raw(list_trends(current_user.posts.last)) %> with a link!
+            <%end%>
+          <%end%>
+        </div>
+       <div class="clear"></div>
     </div>
 </div>
 <% else%>

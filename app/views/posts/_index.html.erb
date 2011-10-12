@@ -1,5 +1,7 @@
 <div class="content" id="post_index">
-  <div class="title"><span><%= @header_title %></span> </div>
+  <% if @posts.blank? %>
+    <h3>There are no posts!</h3>
+  <%else%>
   <ul class="posts_list">
 
   <% @posts.each do |post| %>
@@ -60,5 +62,5 @@
   </ul>
 
 
-
+  <%end%>
 </div>

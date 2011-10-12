@@ -65,7 +65,23 @@ $trend-color: #339966;
 
     }
   }
+}
+
+#user_search{
+
+  .table_row{
+    height: 110px;
+    width: 100%;
+    margin: 2px 0 5px 0;
+    border-bottom: 1px solid #000;
+
+    .name{ width: 100%; font-size: 25px; font-weight: bold; margin: 2px 0 5px 5px;}
+    .count{ width: 20%; font-size: 17px; margin: 2px 5px 0 0;}
+    .location{width: 50%; font-size: 17px; margin: 2px 5px 0 0;}
+    .sex {width: 20%; font-size: 17px; margin: 2px 5px 0 0;}
+    .birth{width: 20%; font-size: 17px; margin: 2px 5px 0 0;}
 
 
+  }
 
 }

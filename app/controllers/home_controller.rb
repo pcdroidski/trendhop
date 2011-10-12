@@ -9,8 +9,10 @@ class HomeController < ApplicationController
     @posts = case @post_group
       when nil then Post
       when "Friends" then Post.friends(@current_user)
+      when "Family" then nil
+      when "Colleagues" then nil
     end
-    @posts = @posts.order("created_at DESC")
+    @posts = @posts.order("created_at DESC") unless @posts.blank?
 
 
     @trend_filter = params[:filter]

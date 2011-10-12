@@ -1,5 +1,7 @@
 <div class="content" id="trends">
-  <div class="title"><span>What's Trending? </span> </div>
+  <% if @trends.blank? %>
+    <h3>There are no Trends!</h3>
+  <%else%>
   <ul class="trends_list"><% @trends.each do |trend| %>
     <li class="trend">
       <div class="trend_info fl">
@@ -33,4 +35,6 @@
     </li>
   <% end %>
   </ul>
+
+  <%end%>
 </div>

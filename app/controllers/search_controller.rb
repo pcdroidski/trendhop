@@ -2,15 +2,16 @@ class SearchController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @header_title = "Results for " + params[:search].to_s
+    @header_title = params[:search].to_s
     @search = params[:search]
 
     @trends = Trend.search(@search)
     @posts = Post.search(@search)
     @users = User.search(@search)
+    @blogs = EntryFeed.search(@search, :order => :published_at, :sort_mode => :asc)
 
-    model_array = ["trends", "posts", "users"]
-    select_array = [@trends.count, @posts.count, @users.count]
+    model_array = ["trends", "posts", "users", "blogs"]
+    select_array = [@trends.count, @posts.count, @users.count, @blogs.count]
     max = nil
     model_array.each do |set|
 
@@ -31,6 +32,8 @@ class SearchController < ApplicationController
       return @users.count
     when "trends"
       return @trends.count
+    when "blogs"
+      return @blogs.count
     end
   end
   helper_method :match_and_count

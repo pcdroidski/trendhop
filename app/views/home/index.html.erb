@@ -28,7 +28,7 @@
                 <span><%= group.name.humanize %> </span>
            </li>
          <%end%>
-         
+
        <%end%>
      <%end%>
    </ul>
@@ -36,21 +36,24 @@
 
 <div class="content" id="post_index">
   <!-- <div class="title"><span>Who's Trending What? </span> </div> -->
-  <ul class="posts_list">
-  <% @posts.each do |post| %>
-    <li class="post">
-      <% @post1 = post %>
-      <% if @post1.entry_feed_id.blank? %>
-        <%= render :partial => "posts/post" %>
-      <%else%>
-        <%= render :partial => "posts/post_with_blog" %>
-      <%end%>
+  <% if @posts.blank? %>
+      <h2 style="widht:100%; text-align:center;">There are no posts to repots!</h2>
+  <%else%>
+    <ul class="posts_list">
+    <% @posts.each do |post| %>
+      <li class="post">
+        <% @post1 = post %>
+        <% if @post1.entry_feed_id.blank? %>
+          <%= render :partial => "posts/post" %>
+        <%else%>
+          <%= render :partial => "posts/post_with_blog" %>
+        <%end%>
 
-    </li>
-      <div class="clear"></div>
-  <% end %>
-  </ul>
-
+      </li>
+        <div class="clear"></div>
+    <% end %>
+    </ul>
+  <%end%>
 
 
 </div>

@@ -55,4 +55,13 @@ class EntryFeed < ActiveRecord::Base
      end
    end
 
+   define_index do
+      indexes title
+      indexes summary
+      indexes content
+      indexes feed.name
+
+      has published_at, :sortable => true
+    end
+
 end

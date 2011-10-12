@@ -1,35 +1,25 @@
-<h1>Listing users</h1>
-
-<table>
-  <tr>
-    <th>Email</th>
-    <th>Domain</th>
-    <th>Name</th>
-    <th>City</th>
-    <th>State</th>
-    <th>Sex</th>
-    <th>Birth Date</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @users.each do |user| %>
-  <tr>
-    <td><%= user.email %></td>
-    <td><%= user.domain %></td>
-    <td><%= user.full_name %></td>
-    <td><%= user.city %></td>
-    <td><%= user.state_id %></td>
-    <td><%= user.sex %></td>
-    <td><%= user.birth_date%></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New User', new_user_path %>
+<div id="user_search">
+<% if @users.blank?%>
+  <h3>There are no users!</h3>
+<%else%>
+  <% @users.each do |user| %>
+    <div class="table_row">
+      <div class="fl name"><%= link_to user.full_name, user %></div>
+      <div class="clear"></div>
+      <div class="fl sex"><%= user.sex %></div>
+      <div class="fl birth"><%= user.birth_date%></div>
+      <div class="clear"></div>
+      <div class="fl location"><%= user.city %>, <%= user.state_id %></div>
+      <div class="clear"></div>
+      <div class="fl count">Posts: <%= user.posts.count %></div>
+      <div class="fl count">Trends: <%= user.trends.count %></div>
+      <% if can? :manage, user%>
+        <div class="fl"><%= link_to 'Edit', edit_user_path(user) %></div>
+        <div><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></div>
+      <%end%>
+    </div>
+    <div class="clear"></div>
+  <% end %>
+    <div class="clear"></div>
+<%end%>
+</div>

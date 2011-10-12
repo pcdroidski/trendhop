@@ -1,25 +1,49 @@
+<div id="blogs">
+  <% if @blogs.blank?%>
+    <h3>There are no blogs!</h3>
+  <%else%>
+
   <div class="blogs">
       <% @blogs.each do |blog| %>
+      <% if !blog.title.include?("Ad")%>
       <div class="blog">
+        <div id="<%= blog.feed.feed_category.name.split(" ").first %>" class="fr blog_origins">
+          <%= blog.feed.name%>
+        </div>
         <div class="blog_title fl">
-          <span><%= link_to blog.title, blog%></span>
+          <div class="fl" id="title"><%= link_to blog.title, blog_path(blog) %> </div>
         </div>
-        <div class="blog_info fl">
-          <span class="">Category: <%= blog.category_id %></span><br/>
-          <span class="">Posted by: <%= blog.user.name %></span>
-        </div>
-        <div class="blog_options fr">
-          <span class="option">Re-Trend</span><br/>
-          <span class="option">Comment</span><br/>
-          <% if can? :update, blog %>
-            <%= link_to 'Edit', edit_blog_path(blog) %>
-          <% end%>
-          <% if can? :update, blog %>
-            <%= link_to 'Destroy', blog, :confirm => 'Are you sure?', :method => :delete %>
-          <% end%>
-        </div>
+          <span style="margin: 0 0 5px 10px; " class="fl">Posted: <%= blog.published_at %></span>
         <div class='clear'></div>
 
+        <div class="blog_info">
+          <span class="fl"><%= pluralize(blog.trend_count, "person", "people") %> have trended this post. </span>
+           <!-- <%# case blog.trended?(current_user) %>
+              <%#when 1%>
+                <%#= link_to untrend_posts_path(:post_id => blog.id) do%>
+                  <div role="button" class="untrend-button">Un-Trend</div>
+                <%#end%>
+              <%#when 2%>
+                <%#= link_to retrend_posts_path(:post_id => @post1.id) do%>
+                  <div role="button" class="retrend-button">Re-Trend</div>
+                <%# end%>
+            <%#end%> -->
+          <span class="fl"><%= link_to "View Original Article", "#{blog.url}" %> </span>
+
+        </div>
+        <div class="blog_content">
+          <p><%= raw(blog.summary) %></p>
+        </div>
+        <div class="blog_trends">
+          <span>Trends in this blog: </span>
+          <%# blog.trends.each do |trend| %>
+            <span> <%#= link_to trend.name, trend_path(trend.name) %></span>
+          <%# end%>
+        </div>
       </div>
       <% end %>
+      <%end%>
   </div>
+  <%end%>
+
+</div>

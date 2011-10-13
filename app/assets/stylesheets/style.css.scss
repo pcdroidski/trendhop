@@ -11,23 +11,108 @@ $post-color: #0000FF;
   -webkit-border-radius: $radius;
   }
 .filler-header {
-  height: 80px;
+  height: 45px;
   background: #0066FF;
+}
+
+.darken-background {
+  background: darken(#fff, 60%) !important;
+  z-index: 300;
+  #comment_post_body, #active-filter, .post-date, .untrend-button, .retrend-button, .trend-button, #comments_index {
+    background: darken(#fff, 60%) !important;
+  }
+
 }
 
 /*Whats trending pop down!!! TEST*/
 
 .whats-trending {
-  height: 165px;
+  height: 215px;
   width: 600px;
   float:right;
-  background: #0066FF;
+  background: #fff;
+  border: 3px solid #0066FF;
 
-  .title {
-    margin: 2px;
-    font-size: 20px;
-    color: #fff;
+  .top-trend-menu{
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px solid #000;
+    margin: 2px 0 4px 0;
+
+    .pop-down-option{
+      height: 30px;
+      padding: 0 0 5px 0;
+      text-align: center;
+      width: 50%;
+      font-weight: bold;
+      font-size: 25px;
+    }
+
+    .inactive {
+      background: #0066FF;
+      color: #fff;
+      &:hover{
+        background: $trend-color;
+      }
+    }
+    .active {
+      background: darken(#0066FF, 30%);
+      color: #fff;
+    }
+
   }
+
+  .menu-content {
+    height: 110px;
+  }
+
+  #current-now {
+    font-size: 20px;
+    color: #000;
+    background: #fff;
+
+    .trending-info {
+      padding: 5px;
+      height: 95px;
+    }
+    .top-trends {
+      background: #D8D8D8;
+      padding: 5px;
+      height: 30px;
+      border-top: 1px solid #0066FF;
+      font-size: 20px;
+
+      ol{
+        margin: 0;
+        display: inline-block;
+        counter-reset: item 0;
+
+        li:before {counter-increment: item; content: counter(item) ". "; }
+        li {list-style-type: none; display: inline-block; font-size: 16px; margin-right: 10px;}
+      }
+    }
+    .bottom-info{
+      padding: 1px 0 1px 0;
+      background: #D8D8D8;
+      height: 30px;
+      width: 100%;
+
+      .info{
+        padding: 3px;
+        margin: 0 4px 0 4px;
+        border-left: 2px solid #0066FF;
+        border-right: 2px solid #0066FF;
+      }
+    }
+  }
+
+  #trend-something {
+    font-size: 20px;
+    color: #000;
+    background: #fff;
+
+  }
+
 
   .field_1 {
     width: 100%;
@@ -89,7 +174,7 @@ $post-color: #0000FF;
   margin: 4px 0 4px 0;
 
   #search {
-    width: 350px;
+    width: 330px;
   }
 }
 
@@ -187,24 +272,39 @@ $post-color: #0000FF;
   line-height: 15px;
 }
 
+
+
+
+/* PROFILE LOGIN &  STYLES*/
+
   .profile-mini {
     display: block;
-    height:68px;
-    margin: 4px 4px 4px 0;
+    height:45px;
+    margin: 0px 0 0px 4px;
     padding: 3px;
-    background: #fff;
-    @include rounded-corners(10px);
-
-    .user-post {
-      width: 210px;
-      font-size: 16px;
-    }
 
     .profile-pic-mini {
-      height: 50px;
-      margin-bottom: 2px;
+      height: 30px;
+      margin: 2px;
     }
 
+    .profile-name {
+      margin: 2px 0 0 2px;
+      font-size: 18px;
+
+      a {
+        color: #fff;
+      }
+    }
+
+    .profile-menu{
+      margin: 5px 0 0 8px;
+      padding: 2px;
+      &:hover{
+       background: #fff;
+       opacity: 0.64;
+      }
+    }
   }
 
   .login-mini {
@@ -219,18 +319,30 @@ $post-color: #0000FF;
       a{
         text-decoration: none;
         font-size: 20px;
-        }
+      }
     }
-
   }
+
+/*END PROFILE*/
+
+
+
+
 
 #header_container {
   background-color: #0066FF;
-  height: 80px;
   position: fixed;
   width: 100%;
+  height: 48px;
   z-index: 11;
   top: 0;
+
+  #header_border{
+    width: 100%;
+    height: 4px;
+    background-image: url("/assets/Tborder.png") repeat-x;
+    background-size: 4px;
+  }
 
 
 
@@ -241,49 +353,47 @@ $post-color: #0000FF;
 
 
   .logo_home {
+    width: 120px;
 
     .logo_link{
-     height: 75px;
-    }
+      height: 42px;
 
+      &:hover{
+        background: {opacity: 1.0}
+      }
+    }
   }
 
   .home-nav {
 
 
     .home-link{
+      font: #fff;
       float: left;
       height: 25px;
       margin: 4px 4px 2px 0;
-      width: 95px;
-      padding: 4px;
-      background: #fff;
+      padding: 3px;
       text-decoration: none;
-      @include rounded-corners(5px);
+      font-weight: bold;
+      text-align: center;
+
+      .link {
+        color: #fff;
+        font-size: 17px;
+        text-decoration: none;
+      }
 
       &:hover{
-        background: $trend-color;
-        color: #fff;
+        background: #fff;
+        color: #000;
+        opacity: 0.64;
 
-      .link {
-        font-weight: bold;
-        text-decoration: none;
+        .link {
+          color: #000;
+        }
       }
-
-      }
-
-      .link {
-        font-size: 20px;
-        text-decoration: none;
-      }
-
     }
-
-
-
   }
-
-
 }
 
 

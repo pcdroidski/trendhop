@@ -1,29 +1,25 @@
 <!-- Header -->
 <div id="header_container">
-  <div class="container_16">
+  <div class="container_16" style="height: 50px;">
     <div id="header">
       <header>
 
-        <div class="grid_3 fl alpha">
-          <div class="logo_home">
+        <div class="grid_5 fl alpha beta">
+          <div class="logo_home fl">
            <%= link_to image_tag("/assets/Logo.png", :class=>"logo_link"), root_path %>
           </div>
-        </div>
         <% if user_signed_in?%>
-        <div class="grid_8 fl">
-          <div class="home-nav">
-            <%= link_to root_path, :class => "home-link" do %>
-              <div class="link">
-                Home
-              </div>
-            <%end%>
-            <% if user_signed_in? %>
-              <%= link_to user_path(current_user), :class => "home-link" do%>
+          <div class="home-nav fl">
+            <!-- <%#= link_to root_path, :class => "home-link" do %>
+                         <div class="link">
+                           Home
+                         </div>
+                       <%#end%> -->
+              <!-- <%#= link_to user_path(current_user), :class => "home-link" do%>
                 <div class="link">
                   Profile
                 </div>
-              <% end%>
-            <%end%>
+              <%# end%> -->
             <%= link_to blogs_path, :class => "home-link" do%>
               <div class="link">
                 Blogs
@@ -36,23 +32,85 @@
             <%end%>
           </div>
           <div class="clear"></div>
+        </div>
+        <div class="grid_7 fl">
           <%= render :partial => "search/search"%>
         </div>
         <%end%>
+
         <%= render :partial =>"users/sessions/header"%>
-        </header>
+                  <div class="clear"></div>
+      </header>
     </div>
 
-    <div class="whats-trending" id="pop-down">
-      <% if check_user? && params[:controller] != "as" %>
-        <div>
-          <span class="title">Share what's #trending!</span>
-          <%= render :partial => "posts/post_from_anywhere" %>
-        </div>
-      <% end %>
+<!-- POP DOWN  -->
+<div class="whats-trending" id="pop-down">
+  <div class="top-trend-menu">
+    <div class="fl pop-down-option" id="current-now-button">
+      Profile
     </div>
+    <div class="fl pop-down-option" id="trend-now-button">
+      Trend Now
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="menu-content" id="current-now">
+    <div class="trending-info">
+      You are trending
+        <% if current_user.posts.blank?%>
+          nothing! <b><u>Post something!</u></b>
+        <%else%>
+          <% if current_user.posts.last.entry_feed_id.blank?%>
+            <%= raw(list_trends(current_user.posts.last)) %>.
+          <% else %>
+            <% if list_trends(current_user.posts.last) == "" %>
+              a link from <b><%= current_user.posts.last.entry_feed.feed.name %></b>
+            <% else%>
+              <%= raw(list_trends(current_user.posts.last)) %> with a link!
+            <%end%>
+          <%end%>
+        <%end%>
+      </div>
+      <div class="top-trends">
+        <span class="fl" style="font-size: 15px;">Top Trends:</span>
+        <ol class="fl">
+        <% @top_trends.each do |trend|%>
+          <li><%=trend.name%></li>
+        <%end%>
+        <div class="clear"></div>
+        </ol>
+      </div>
+      <div class="bottom-info">
+        <div class="fl info">
+          Posts: <%= current_user.posts.count%>
+        </div>
+        <div class="fl info">
+          Trends: <%= current_user.trends.count%>
+        </div>
+        <div class="fl info">
+          New Blogs: *0*
+        </div>
+      </div>
 
   </div>
+  <div class="menu-content" id="trend-something">
+     <% if check_user? && params[:controller] != "as" %>
+      <div>
+        <div class="title">Share what's #trending!</div>
+          <%= render :partial => "posts/post_from_anywhere" %>
+      </div>
+      <% end %>
+  </div>
+
+
+</div>
+  <div class="clear"></div>
+<!-- END POP DOWN -->
+
+  </div>
+  <div class="clear"></div>
+  <div id="header_border"></div>
+
 </div>
 <div class="filler-header"></div>
 <!-- End Header -->

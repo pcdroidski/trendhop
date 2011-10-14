@@ -1,28 +1,19 @@
 <% if user_signed_in? %>
-  <div class="fl grid_5 beta alpha">
-     <div class="profile-mini">
-        <div class="fl">
-          <%= link_to image_tag("/assets/Profile.png", :class=>"profile-pic-mini fl"), user_path(current_user)%>
-          <div class=""><%= link_to "Sign out!", destroy_user_session_path %> </div>
-        </div>
-          <div id="trend-now" class="user-post fl"> You are trending
-            <% if current_user.posts.blank?%>  
-              nothing! <b><u>Post something!</u></b>
-            <%else%>
-              <% if current_user.posts.last.entry_feed_id.blank?%>
-                <%= raw(list_trends(current_user.posts.last)) %>.
-              <% else %>
-                <% if list_trends(current_user.posts.last) == "" %>
-                  a link from <b><%= current_user.posts.last.entry_feed.feed.name %></b>
-                <% else%>
-                  <%= raw(list_trends(current_user.posts.last)) %> with a link!
-                <%end%>
-              <%end%>
-            <%end%>
-          </div>
-         <div class="clear"></div>
+<div class="fr beta alpha">
+   <div class="profile-mini">
+      <div class="profile-menu fr" id="drop-down-button">
+        <%= image_tag("/assets/Append.png")%>
       </div>
-  </div>
+      <div class="profile-name fr">
+        <%= link_to current_user.full_name, current_user %>
+      </div>
+      <div class="fr">
+        <%= link_to image_tag("/assets/Profile.png", :class=>"profile-pic-mini fl"), user_path(current_user)%>
+      </div>
+
+       <div class="clear"></div>
+    </div>
+</div>
 <% else%>
   <div class="fl beta">
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>

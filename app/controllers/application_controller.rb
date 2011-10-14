@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   private
 
   def post_from_anywhere
+    @top_trends = Trend.order("trend_count ASC").limit(5)
     @special_post = Post.new()
     @current_user = current_user
   end

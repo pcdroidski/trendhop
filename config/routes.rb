@@ -30,7 +30,6 @@ Trendhop::Application.routes.draw do
       post :like
       get 'unlike'
       post :unlike
-
       get 'retrend'
       post :retrend
       get 'untrend'
@@ -46,6 +45,7 @@ Trendhop::Application.routes.draw do
 
   resources :trends
 
+  match 'blogs/refresh' => 'blogs#refresh'
   resources :blogs do
     resources :trends
   end

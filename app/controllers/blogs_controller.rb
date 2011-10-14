@@ -1,7 +1,7 @@
 class BlogsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource
-  skip_load_resource :only => :show
+ # load_and_authorize_resource
+ # skip_load_resource :only => [:show, :refresh]
 
   # GET /blogs
   # GET /blogs.json
@@ -33,12 +33,24 @@ class BlogsController < ApplicationController
     @blogs = EntryFeed.where(:feed_id => feeds)
 
 
-    @blogs = @blogs.order("published_at ASC") unless @blogs.blank?
+    @blogs = @blogs.order("published_at DESC") unless @blogs.blank?
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @blogs }
     end
+  end
+
+  # GET /refresh
+  #POST /refresh
+  def refresh
+
+    @feeds = Feed.all
+    @feeds.each do |f|
+        feed = EntryFeed.update_from_feed(f)
+    end
+    redirect_to blogs_path
+    flash[:notice] = "Blogs successfully updated!"
   end
 
   # GET /blogs/1
@@ -158,7 +170,7 @@ class BlogsController < ApplicationController
 
     respond_to do |format|
       if @blog.update_attributes(params[:blog])
-        format.html { redirect_to @blog, :notice => 'Blog was successfully updated.' }
+        format.html { redirect_to @blog, :notice => 'Blogs was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }

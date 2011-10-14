@@ -69,7 +69,7 @@
 
         </div>
         <div class="blog_content">
-          <p><%= raw(blog.summary) %></p>
+          <p><%= strip_tags(raw(blog.summary)) %></p>
         </div>
         <div class="blog_trends">
           <span>Trends in this blog: </span>

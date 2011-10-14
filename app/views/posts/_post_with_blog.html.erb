@@ -36,7 +36,8 @@
               <%= link_to @entry.title, blog_path(@entry.id)%>
             </div>
             <div class="blog_content">
-              <%= truncate raw(@entry.summary), :length =>190)%>
+              <% summary = strip_tags(raw(@entry.summary)) %>
+              <%= truncate summary, :length => 190 %>
             </div>
         </div>
   </div>

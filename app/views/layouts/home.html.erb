@@ -11,7 +11,7 @@
 <body>
   <div id="main-home-background" style="background: white;">
     <%= render :partial => "layouts/header" %>
-    <div class="container_16">
+    <div style="min-height: 800px" class="container_16">
         <div id="notice">
           <%if !notice.blank?%>
             <div class="flash"><%= notice %></div>
@@ -30,7 +30,11 @@
         <div class="grid_12 omega">
           <%= yield %>
         </div>
-        <div class="grid_1 beta">
+        <div style="width:80px" class="fl beta">
+          <div style="margin-top: -20px" class='fr'>
+            <span style="font-size: 20px; font-weight: bold; ">  Trend! ^</span>
+            
+          </div>
            <%= render :partial => "layouts/right_column/right_menu" %>
         </div>
         <div class="clear"></div>

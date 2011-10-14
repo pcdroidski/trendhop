@@ -3,23 +3,16 @@
   <div class="container_16" style="height: 50px;">
     <div id="header">
       <header>
-
+      <% if user_signed_in? %>
         <div class="grid_5 fl alpha beta">
+      <%else%>
+        <div class="grid_3 fl alpha beta">
+      <%end%>
           <div class="logo_home fl">
            <%= link_to image_tag("/assets/Logo.png", :class=>"logo_link"), root_path %>
           </div>
         <% if user_signed_in?%>
           <div class="home-nav fl">
-            <!-- <%#= link_to root_path, :class => "home-link" do %>
-                         <div class="link">
-                           Home
-                         </div>
-                       <%#end%> -->
-              <!-- <%#= link_to user_path(current_user), :class => "home-link" do%>
-                <div class="link">
-                  Profile
-                </div>
-              <%# end%> -->
             <%= link_to blogs_path, :class => "home-link" do%>
               <div class="link">
                 Blogs
@@ -36,14 +29,17 @@
         <div class="grid_7 fl">
           <%= render :partial => "search/search"%>
         </div>
+        <%else%>
+        </div>
         <%end%>
-
+        
         <%= render :partial =>"users/sessions/header"%>
                   <div class="clear"></div>
       </header>
     </div>
 
 <!-- POP DOWN  -->
+<% if user_signed_in? %>
 <div class="whats-trending" id="pop-down">
   <div class="top-trend-menu">
     <div class="fl pop-down-option" id="current-now-button">
@@ -90,6 +86,10 @@
         <div class="fl info">
           New Blogs: *0*
         </div>
+        <div class="fr">
+          <%= link_to "Sign Out", destroy_user_session_path %>
+          
+        </div>
       </div>
 
   </div>
@@ -106,6 +106,7 @@
 </div>
   <div class="clear"></div>
 <!-- END POP DOWN -->
+<%end%>
 
   </div>
   <div class="clear"></div>

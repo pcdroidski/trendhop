@@ -9,10 +9,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div style="background: white;">
+  <div id="main-home-background" style="background: white;">
     <%= render :partial => "layouts/header" %>
 
-    <div class="container_16">
+    <div style="min-height: 800px" class="container_16">
         <div id="notice">
           <%if !notice.blank?%>
             <div class="flash"><%= notice %></div>

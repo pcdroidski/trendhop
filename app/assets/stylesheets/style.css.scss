@@ -18,7 +18,8 @@ $post-color: #0000FF;
 .darken-background {
   background: darken(#fff, 60%) !important;
   z-index: 300;
-  #comment_post_body, #active-filter, .post-date, .untrend-button, .retrend-button, .trend-button, #comments_index {
+  height: 100% !important;
+  .filter-link, #comment_post_body, #active-filter, .post-date, .untrend-button, .retrend-button, .trend-button, #comments_index {
     background: darken(#fff, 60%) !important;
   }
 
@@ -174,7 +175,7 @@ $post-color: #0000FF;
   margin: 4px 0 4px 0;
 
   #search {
-    width: 330px;
+    width: 320px;
   }
 }
 

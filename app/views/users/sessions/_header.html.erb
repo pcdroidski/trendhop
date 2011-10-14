@@ -15,20 +15,21 @@
     </div>
 </div>
 <% else%>
-  <div class="fl beta">
+  
+  <div class="fl grid_13 beta">
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   <div style="margin-top:0;">
     <div class="fl"><%= f.label :email %><br />
     <%= f.email_field :email %></div>
   
-    <div class="fl"><%= f.label :password %><br />
+    <div style="margin-left:10px;" class="fl"><%= f.label :password %><br />
     <%= f.password_field :password %></div>
   
-    <p class="fl"><%= f.submit "Sign in" %></p>
+    <p class="fr"><%= f.submit "Sign in" %></p>
   
     <div class="clear"></div>
     <% if devise_mapping.rememberable? -%>
-      <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+      <div class="fr"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
     <% end -%>
   </div>
   </div>

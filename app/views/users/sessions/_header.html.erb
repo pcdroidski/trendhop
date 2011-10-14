@@ -1,46 +1,46 @@
 <% if user_signed_in? %>
-<div class="fl grid_5 beta alpha">
-   <div class="profile-mini">
-      <div class="fl">
-        <%= link_to image_tag("/assets/Profile.png", :class=>"profile-pic-mini fl"), user_path(current_user)%>
-        <div class=""><%= link_to "Sign out!", destroy_user_session_path %> </div>
-      </div>
-        <div id="trend-now" class="user-post fl"> You are trending
-          <% if current_user.posts.blank?%>  
-            nothing! <b><u>Post something!</u></b>
-          <%else%>
-            <% if current_user.posts.last.entry_feed_id.blank?%>
-              <%= raw(list_trends(current_user.posts.last)) %>.
-            <% else %>
-              <% if list_trends(current_user.posts.last) == "" %>
-                a link from <b><%= current_user.posts.last.entry_feed.feed.name %></b>
-              <% else%>
-                <%= raw(list_trends(current_user.posts.last)) %> with a link!
+  <div class="fl grid_5 beta alpha">
+     <div class="profile-mini">
+        <div class="fl">
+          <%= link_to image_tag("/assets/Profile.png", :class=>"profile-pic-mini fl"), user_path(current_user)%>
+          <div class=""><%= link_to "Sign out!", destroy_user_session_path %> </div>
+        </div>
+          <div id="trend-now" class="user-post fl"> You are trending
+            <% if current_user.posts.blank?%>  
+              nothing! <b><u>Post something!</u></b>
+            <%else%>
+              <% if current_user.posts.last.entry_feed_id.blank?%>
+                <%= raw(list_trends(current_user.posts.last)) %>.
+              <% else %>
+                <% if list_trends(current_user.posts.last) == "" %>
+                  a link from <b><%= current_user.posts.last.entry_feed.feed.name %></b>
+                <% else%>
+                  <%= raw(list_trends(current_user.posts.last)) %> with a link!
+                <%end%>
               <%end%>
             <%end%>
-          <%end%>
-        </div>
-       <div class="clear"></div>
-    </div>
-</div>
+          </div>
+         <div class="clear"></div>
+      </div>
+  </div>
 <% else%>
-<div class="fl beta">
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-<div style="margin-top:0;">
-  <div class="fl"><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-  <div class="fl"><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <p class="fl"><%= f.submit "Sign in" %></p>
-
-  <div class="clear"></div>
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
-</div>
-</div>
-<% end %>
+  <div class="fl beta">
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <div style="margin-top:0;">
+    <div class="fl"><%= f.label :email %><br />
+    <%= f.email_field :email %></div>
+  
+    <div class="fl"><%= f.label :password %><br />
+    <%= f.password_field :password %></div>
+  
+    <p class="fl"><%= f.submit "Sign in" %></p>
+  
+    <div class="clear"></div>
+    <% if devise_mapping.rememberable? -%>
+      <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+    <% end -%>
+  </div>
+  </div>
+  <% end %>
 
 <%end%>

@@ -7,6 +7,8 @@ jQuery ->
   jQuery("#pop-down").hide()
   $("#drop-down-button").click ->
     $("#main-home-background").toggleClass("darken-background")
+    $("#drop-down-button").toggleClass("open-menu")
+    $(".profile-menu").toggleClass("plus-menu")
     $("#current-now").show()
     $("#current-now-button").addClass("active")
     $("#trend-now-button").addClass("inactive")
@@ -31,6 +33,7 @@ jQuery ->
 
   $("#cancel-trend").click ->
     $("#main-home-background").toggleClass("darken-background")
+    $("#drop-down-button").toggleClass("open-menu")
     $("#pop-down").slideToggle("fast")
     false
   # $("#trend-blog").click ->

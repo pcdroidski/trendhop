@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
 <div class="fr beta alpha">
-   <div class="profile-mini">
-      <div class="profile-menu fr" id="drop-down-button">
+   <div class="profile-mini" id="drop-down-button">
+      <div class="profile-menu fr">
         <%= image_tag("/assets/Append.png")%>
       </div>
       <div class="profile-name fr">
@@ -15,18 +15,18 @@
     </div>
 </div>
 <% else%>
-  
+
   <div class="fl grid_13 beta">
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   <div style="margin-top:0;">
     <div class="fl"><%= f.label :email %><br />
     <%= f.email_field :email %></div>
-  
+
     <div style="margin-left:10px;" class="fl"><%= f.label :password %><br />
     <%= f.password_field :password %></div>
-  
+
     <p class="fr"><%= f.submit "Sign in" %></p>
-  
+
     <div class="clear"></div>
     <% if devise_mapping.rememberable? -%>
       <div class="fr"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>

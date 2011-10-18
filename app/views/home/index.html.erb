@@ -1,3 +1,53 @@
+<% content_for :top_section do%>
+<div class="trend-top-section">
+  <div class="trend-section">
+    <div class="title-trends">
+      <span>TOP TRENDS </span>
+    </div>
+    <div class="trends-list">
+      <% @top_trends.each do |trend|%>
+        <div class="trend-body">
+          <div class="title">
+              <span><%= trend.name %></span>
+          </div>
+          <div class="stats">
+            <div class="people_stat"><%= trend.trend_count %></div>
+            <div class="blog_stat"><%= trend.blog_count%></div>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+  <div class="trend-section">
+     <div class="title-trends">
+        <span>TRENDS YOU FOLLOW </span>
+      </div>
+      <div class="trends-list">
+        <% @following_trends.each do |trend|%>
+          <div class="trend-body">
+            <div class="title">
+                <span><%= trend.name %></span>
+            </div>
+            <div class="stats">
+              <div class="people_stat"><%= trend.trend_count %></div>
+              <div class="blog_stat"><%= trend.blog_count%></div>
+            </div>
+          </div>
+        <%end%>
+      </div>
+  </div>
+Universal:
+*Top Trends
+*Most Recent Trends
+
+!! d(posts)/dt
+!! d(trends)/dt
+
+Trends you follow:
+*Most recent blogs & trends?
+</div>
+<%end%>
+
 <% content_for :left_menu do%>
  <br/><br/>
    <span class="section_title">Show posts from:</span>

@@ -19,11 +19,15 @@
         </div>
       <div class="clear"></div>
       <div id="page_title">
-        <div class="grid_16 alpha beta">
+        <div class="cont1ainer_16 alpha beta">
           <%= yield :page_tile %>
         </div>
       </div>
       <div id="main_page">
+        <div class="grid_16 alpha beta top_section">
+          <%= yield :top_section %>
+        </div>
+        <div class="clear">
         <div class="grid_3 alpha">
           <%= render :partial => "layouts/left_column/left_menu" %>
         </div>
@@ -33,7 +37,7 @@
         <div style="width:80px" class="fl beta">
           <div style="margin-top: -20px" class='fr'>
             <span style="font-size: 20px; font-weight: bold; ">  Trend! ^</span>
-            
+
           </div>
            <%= render :partial => "layouts/right_column/right_menu" %>
         </div>

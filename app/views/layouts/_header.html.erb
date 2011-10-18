@@ -32,7 +32,7 @@
         <%else%>
         </div>
         <%end%>
-        
+
         <%= render :partial =>"users/sessions/header"%>
                   <div class="clear"></div>
       </header>
@@ -87,8 +87,10 @@
           New Blogs: *0*
         </div>
         <div class="fr">
-          <%= link_to "Sign Out", destroy_user_session_path %>
-          
+          <%= link_to "Sign Out", destroy_user_session_path, :style => "font-size: 13px" %>
+        </div>
+        <div class="fr info">
+          <%= link_to "Profile", user_path(current_user)%>
         </div>
       </div>
 

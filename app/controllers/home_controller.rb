@@ -14,6 +14,10 @@ class HomeController < ApplicationController
     end
     @posts = @posts.order("created_at DESC") unless @posts.blank?
 
+    # @following_trends = UserFollowedTrend
+
+    @top_trends = Trend.order('trend_count DESC')
+
 
     @trend_filter = params[:filter]
 

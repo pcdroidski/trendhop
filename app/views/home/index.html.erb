@@ -4,18 +4,23 @@
     <div class="title-trends">
       <span>TOP TRENDS </span>
     </div>
-    <div class="trends-list">
-      <% @top_trends.each do |trend|%>
-        <div class="trend-body">
-          <div class="title">
-              <span><%= trend.name %></span>
+    <div class="trends-viewer">
+      <div class="trends-list-container">
+        <div class="trends-panel">
+          <% @top_trends.each do |trend|%>
+            <div class="trend-body fl">
+              <div class="title">
+                  <span><%= trend.name %></span>
+              </div>
+              <div class="stats">
+                <div class="people_stat"><%= trend.trend_count %></div>
+                <div class="blog_stat"><%= trend.blogs.count%></div>
+              </div>
+            </div>
           </div>
-          <div class="stats">
-            <div class="people_stat"><%= trend.trend_count %></div>
-            <div class="blog_stat"><%= trend.blogs.count%></div>
-          </div>
-        </div>
-      <%end%>
+        <%end%>
+      </div>
+      <div class="clear"></div>
     </div>
   </div>
   <div class="trend-section">
@@ -24,7 +29,7 @@
       </div>
       <div class="trends-list">
         <% @following_trends.each do |trend|%>
-          <div class="trend-body">
+          <div class="trend-body fl">
             <div class="title">
                 <span><%= trend.name %></span>
             </div>
@@ -33,6 +38,7 @@
               <div class="blog_stat"><%= trend.blogs.count%></div>
             </div>
           </div>
+
         <%end%>
       </div>
   </div>

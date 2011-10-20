@@ -1,3 +1,46 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*<div id="trend-top-section">
+  <div class="trend-section">
+    <div class="title-trends">
+      <span>TOP TRENDS </span>
+    </div>
+    <div class="trends-list">
+      <% @top_trends.each do |trend|%>
+        <div class="trend-body">
+          <div class="title">
+              <span><%= trend.name %></span>
+          </div>
+          <div class="stats">
+            <div class="stat"><%= trend.trend_count %></div>
+            <div class="stat"><%= trend.blog_count%></div>*/
+
+
+#trend-top-section {
+
+  .trend-section {
+    border:2px solid #fff;
+    border-radius: 4px;
+
+    .title-trends{
+      padding: 5px;
+      width: 100%;
+      height: 35px;
+      span{font-size: 25px;}
+    }
+    .trends-list{
+      .trend-body{
+        .title{}
+        .stats{
+          .stat{}
+        }
+      }
+    }
+  }
+
+
+
+
+}

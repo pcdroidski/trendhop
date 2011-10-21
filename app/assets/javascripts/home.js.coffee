@@ -9,33 +9,38 @@ jQuery ->
   button_L = 0
   button_R = 10
 
-  $("#menuNav-left").hide()
+  $("#menu ul a").live "click" , ->
+    $.getScript(this.href)
+    return false
 
-  $("#menuNav-right").click ->
-    $(".trends-list-container").animate
-      right: "+=" + '312px'
-      200
-    button_L = button_L + 1
-    button_R = button_R - 1
-    $("#menuNav-left").show()
-    if button_R < 4
-      $("#menuNav-right").hide()
-    else
-      $("#menuNav-right").show()
-    return
+  $(document).ready ->
+    $("#menuNav-left").hide()
 
-  $("#menuNav-left").click ->
-    $(".trends-list-container").animate
-      right: "-=" + '312px'
-      200
-    button_L = button_L - 1
-    button_R = button_R + 1
-    if button_L > 0
+    $("#menuNav-right").click ->
+      $(".trends-list-container").animate
+        right: "+=" + '312px'
+        200
+      button_L = button_L + 1
+      button_R = button_R - 1
       $("#menuNav-left").show()
-    else
-      $("#menuNav-left").hide()
-    $("#menuNav-right").show()
-    return
+      if button_R < 4
+        $("#menuNav-right").hide()
+      else
+        $("#menuNav-right").show()
+      return
+
+    $("#menuNav-left").click ->
+      $(".trends-list-container").animate
+        right: "-=" + '312px'
+        200
+      button_L = button_L - 1
+      button_R = button_R + 1
+      if button_L > 0
+        $("#menuNav-left").show()
+      else
+        $("#menuNav-left").hide()
+      $("#menuNav-right").show()
+      return
 
 
   $("#drop-down-button").click ->

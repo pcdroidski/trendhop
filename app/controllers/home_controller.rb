@@ -15,6 +15,7 @@ class HomeController < ApplicationController
     @posts = @posts.order("created_at DESC") unless @posts.blank?
 
     @menu_trends = menu_select
+    @menu_selected = params[:menu_show]
 
     @trend_filter = params[:filter]
     @trends = case params[:filter]

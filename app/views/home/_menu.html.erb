@@ -1,0 +1,32 @@
+  <div class="trend-section">
+    <ul class="title-trends">
+      <%= home_selector "top", "TOP TRENDS"%>
+      <%= home_selector "follow", "TRENDS FOLLOWING"%>  
+      <%= home_selector "user", "YOUR TRENDS"%>      
+    </ul>
+    <div class="trends-viewer">
+      <div class="trends-list-container">
+        <div class="trends-panel">
+          <% if @menu_trends.blank? %>
+             <div style="height: 100px; background: #c00; color: #fff" class="trend-body">
+               <span style="font-size: 30px;"> NO TRENDS LISTED! </span>
+            </div>
+          <%end%>
+          <% @menu_trends.each do |trend|%>
+            <div class="trend-body fl">
+              <div class="title">
+                  <span># <%= trend.name.humanize %></span>
+              </div>
+              <div class="stats">
+                <div>Number of people trending: <span class="stat"><%= trend.trend_count %></span></div>
+                <div>Number of Likes: <span class="stat"><%= trend.like_count%></span></div>
+                <div>Number of Articles trending: <span class="stat"><%= trend.blogs.count%></span></div>
+              </div>
+          </div>
+          <%end%>
+          
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>

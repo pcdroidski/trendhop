@@ -2,6 +2,8 @@ class Trend < ActiveRecord::Base
 
   has_many :post_trends
   has_many :post_contents, :through => :post_trends
+  
+  belongs_to :user_following_trends
 
   has_many :posts, :through => :post_contents
 
@@ -17,6 +19,8 @@ class Trend < ActiveRecord::Base
   scope :set_range, lambda {|field| where (["trends.updated_at >= ?", eval("Time.now-1.#{field}") ])}  #field = [day, week, month, year]
   scope :set_men, joins(:users).where(["users.sex = 0"])
   scope :set_women, joins(:users).where(["users.sex = 1"])
+  
+  # scope :user_follow, lambda {|user| {:joins => :user_following_trends, :conditions => ["user_following_trends.user_id == #{user}"] }}
 
 # Trend filtering #
   #Ages: 13 & younger, 13-15, 16-18, 19-21, 21-24, 25-29, 30-35, 36-40,
@@ -31,6 +35,5 @@ class Trend < ActiveRecord::Base
   define_index do
     indexes :name
   end
-
-
+  
 end

@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
 
   has_many :user_friends, :dependent => :destroy
   has_many :friends, :through => :user_friends
+  
+  has_many :user_following_trends
+  has_many :trends, :through => :user_following_trends
 
   has_many :groups, :dependent => :destroy
 

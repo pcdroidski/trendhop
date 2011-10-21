@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$border-color: #000;
+$border-color: #06F;;
 $text-color: #000;
 $name-color: #0000FF;
 $trend-color: #339966;
@@ -229,17 +229,29 @@ $post-border: #616D7E;
   
   /* Trend Filter */
   
+  .left_menu_post_select{
+    width: 100%;
+    margin: 15px 0 0 0;
+    border: 2px solid #06F;
+    
+    .section_title{
+      height: 25px;
+      width: 100%;
+      background: #06F;
+      span{font-size:17px;font-weight: bold; color: #fff; padding: 3px;}  
+    }
+  }
+  
   ul.trend_filters {
     list-style: none;
     padding: 0;
     margin: 0;
     
     .filter-link {
-      margin: 2px 0 5px 2px;
       display: block;
       height: 24px;
-      @include rounded-corners(5px);
-      border: 1px solid $border-color;
+      border-top: 1px solid $border-color;
+      border-bottom: 1px solid $border-color;
       padding: 5px;
       text-decoration: none;
       

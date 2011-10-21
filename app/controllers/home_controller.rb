@@ -1,9 +1,9 @@
 class HomeController < ApplicationController
   before_filter :authenticate_user!
+  helper_method :menu_select
 
   def index
 
-  #  raise params.inspect
     @post_group = params[:group].blank? ? nil : params[:group]
 
     @posts = case @post_group
@@ -14,12 +14,9 @@ class HomeController < ApplicationController
     end
     @posts = @posts.order("created_at DESC") unless @posts.blank?
 
-    @following_trends = [] # UserFollowedTrend
-
-    @top_trends = Trend.order('trend_count DESC')
+    @menu_trends = menu_select
 
     @trend_filter = params[:filter]
-
     @trends = case params[:filter]
       when "recent" then Trend.order("created_at DESC")
       when "popular" then Trend.order("trend_count DESC")
@@ -31,9 +28,19 @@ class HomeController < ApplicationController
       else Trend.order("created_at DESC")
     end
 
-        render(:layout => "home")
+    render(:layout => "home")
   end
-
-
+  
+  private
+  
+  def menu_select
+    if params[:menu_show] == "top" || params[:menu_show].blank?
+      Trend.order('trend_count DESC').limit(10)
+    elsif params[:menu_show] == "follow"
+      User.where(:id => current_user.id).first.trends   
+    elsif params[:menu_show] =="user"
+      []
+    end    
+  end
 
 end

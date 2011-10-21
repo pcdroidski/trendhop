@@ -36,3 +36,9 @@
 
 
 
+$(function(){
+  $("#menu ul a").live("click", function() {
+    $.getScript(this.href);
+    return false;
+  });
+});

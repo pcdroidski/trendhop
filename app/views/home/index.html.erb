@@ -1,62 +1,12 @@
 <% content_for :top_section do%>
 <div class="grid_16" id="trend-top-section">
-  <div class="trend-section">
-    <div class="title-trends">
-      <span>TOP TRENDS </span>
-    </div>
-    <div class="trends-viewer">
-      <div class="trends-list-container">
-        <div class="trends-panel">
-          <% @top_trends.each do |trend|%>
-            <div class="trend-body fl">
-              <div class="title">
-                  <span><%= trend.name %></span>
-              </div>
-              <div class="stats">
-                <div class="people_stat"><%= trend.trend_count %></div>
-                <div class="blog_stat"><%= trend.blogs.count%></div>
-              </div>
-            </div>
-          </div>
-        <%end%>
-      </div>
-      <div class="clear"></div>
-    </div>
-  </div>
-  <div class="trend-section">
-     <div class="title-trends">
-        <span>TRENDS YOU FOLLOW </span>
-      </div>
-      <div class="trends-list">
-        <% @following_trends.each do |trend|%>
-          <div class="trend-body fl">
-            <div class="title">
-                <span><%= trend.name %></span>
-            </div>
-            <div class="stats">
-              <div class="people_stat"><%= trend.trend_count %></div>
-              <div class="blog_stat"><%= trend.blogs.count%></div>
-            </div>
-          </div>
-
-        <%end%>
-      </div>
-  </div>
-Universal:
-*Top Trends
-*Most Recent Trends
-
-!! d(posts)/dt
-!! d(trends)/dt
-
-Trends you follow:
-*Most recent blogs & trends?
+  <div id="menu"><%= render "menu"%></div>
 </div>
 <%end%>
 
 <% content_for :left_menu do%>
- <br/><br/>
-   <span class="section_title">Show posts from:</span>
+ <div class="left_menu_post_select">
+   <div class="section_title"><span>Show posts from:</span></div>
    <ul class="trend_filters">
       <% if params[:group].blank?%>
         <%= link_to root_path(:group => nil), :class=>"filter-link", :id=>"active-filter" do%>
@@ -88,6 +38,7 @@ Trends you follow:
        <%end%>
      <%end%>
    </ul>
+  </div>
  <%end%>
 
 <div class="content" id="post_index">

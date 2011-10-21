@@ -247,6 +247,31 @@ $post-color: #0000FF;
   }
 
 
+.follow-button {
+  background-color: #3D9400;
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+  text-align:center;
+  border:1px solid #fff;
+  padding: 0 5px;
+  height: 18px;
+  min-width: 40px;
+  line-height: 15px;
+}
+
+.unfollow-button {
+  background-color: #c00;
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+  text-align:center;
+  border:1px solid #fff;
+  padding: 0 5px;
+  height: 18px;
+  min-width: 40px;
+  line-height: 15px;
+}
 
 .retrend-button {
   background-color: $trend-color;
@@ -259,6 +284,20 @@ $post-color: #0000FF;
   height: 18px;
   min-width: 40px;
   line-height: 15px;
+
+/*  -webkit-box-shadow:
+      0 4px 0 #000,
+      0 8px 10px rgba(0,0,0,.35);
+    -moz-box-shadow:
+      0 4px 0 #000,
+      0 8px 10px rgba(0,0,0,.35);
+    box-shadow:
+      0 4px 0 #000,
+      0 8px 10px rgba(0,0,0,.35);
+    -webkit-transition: -webkit-box-shadow .2s ease-in-out;
+    -moz-transition: -moz-box-shadow .2s ease-in-out;
+    -o-transition: -o-box-shadow .2s ease-in-out;
+    transition: box-shadow .2s ease-in-out;*/
 }
 .untrend-button {
   background-color: #c00;
@@ -271,6 +310,20 @@ $post-color: #0000FF;
   height: 18px;
   min-width: 40px;
   line-height: 15px;
+
+/*  -webkit-box-shadow:
+      0 8px 0 #1a74a1,
+      0 15px 20px rgba(0,0,0,.35);
+    -moz-box-shadow:
+      0 8px 0 #1a74a1,
+      0 15px 20px rgba(0,0,0,.35);
+    box-shadow:
+      0 8px 0 #1a74a1,
+      0 15px 20px rgba(0,0,0,.35);
+    -webkit-transition: -webkit-box-shadow .2s ease-in-out;
+    -moz-transition: -moz-box-shadow .2s ease-in-out;
+    -o-transition: -o-box-shadow .2s ease-in-out;
+    transition: box-shadow .2s ease-in-out;*/
 }
 
 

@@ -1,21 +1,30 @@
   <div class="trend-section">
     <ul class="title-trends">
       <%= home_selector "top", "TOP TRENDS"%>
-      <%= home_selector "follow", "TRENDS FOLLOWING"%>  
-      <%= home_selector "user", "YOUR TRENDS"%>      
+      <%= home_selector "follow", "TRENDS FOLLOWING"%>
+      <%= home_selector "user", "YOUR TRENDS"%>
     </ul>
     <div class="trends-viewer">
       <div class="trends-list-container">
         <div class="trends-panel">
           <% if @menu_trends.blank? %>
-             <div style="height: 100px; background: #c00; color: #fff" class="trend-body">
-               <span style="font-size: 30px;"> NO TRENDS LISTED! </span>
+             <div style="height: 100px; line-height: 90px; width: 400px; text-align: center; background: #fff; color: #c00; margin: 70px 0 0 300px;" class="trend-body">
+               <span style="width: 100%; font-size: 30px;"> NO TRENDS LISTED! </span>
             </div>
           <%end%>
           <% @menu_trends.each do |trend|%>
             <div class="trend-body fl">
               <div class="title">
                   <span># <%= trend.name.humanize %></span>
+                  <% if is_follow_trend(trend).blank? %>
+                    <%= link_to follow_trends_path(:id => trend.id), :class=>"fr" do%>
+                      <div role="button" class="follow-button">Follow</div>
+                    <%end%>
+                  <%else%>
+                   <%= link_to unfollow_trends_path(:id => trend.id), :class=>"fr" do%>
+                      <div role="button" class="unfollow-button">Un-Follow</div>
+                    <%end%>
+                  <%end%>
               </div>
               <div class="stats">
                 <div>Number of people trending: <span class="stat"><%= trend.trend_count %></span></div>
@@ -24,9 +33,10 @@
               </div>
           </div>
           <%end%>
-          
         </div>
       </div>
       <div class="clear"></div>
     </div>
+    <div id="menuNav-left" class="stripNavL" style= <%= :position['right'] == "0px" || nil ? 'display: none' : nil %>><< </div>
+    <div id="menuNav-right" class="stripNavR"> >> </div>
   </div>

@@ -48,6 +48,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :list_trends
 
+  def is_follow_trend(trend)
+    follow = UserFollowingTrend.where(:user_id => @current_user.id, :trend_id => trend.id).first
+    follow
+  end
+  helper_method :is_follow_trend
+
   def is_friend?(user)
     friend = UserFriend.where(:user_id => @current_user.id, :friend_id => user.id).first
     friend

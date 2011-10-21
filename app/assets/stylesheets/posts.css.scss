@@ -20,6 +20,13 @@ $trend-color: #339966;
 
 #post_index, #like_index{
 
+  .title {
+    margin-top: 15px;
+    width: 100%;
+    background: #06F;
+    span { font-size: 25px; font-weight: bold; color: #fff; padding: 5px; }
+  }
+
   .post-date {
     padding: 4px;
     display: block;

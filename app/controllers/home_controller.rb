@@ -30,17 +30,17 @@ class HomeController < ApplicationController
 
     render(:layout => "home")
   end
-  
+
   private
-  
+
   def menu_select
     if params[:menu_show] == "top" || params[:menu_show].blank?
       Trend.order('trend_count DESC').limit(10)
     elsif params[:menu_show] == "follow"
-      User.where(:id => current_user.id).first.trends   
+      User.where(:id => current_user.id).first.trends.limit(10)
     elsif params[:menu_show] =="user"
       []
-    end    
+    end
   end
 
 end

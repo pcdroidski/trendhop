@@ -106,6 +106,36 @@ class TrendsController < ApplicationController
     end
   end
 
+  def follow
+    @trend = Trend.find(params[:id])
+    @user_follow = UserFollowingTrend.new(:user_id => current_user.id, :trend_id => @trend.id)
+
+    if @user_follow.save
+      flash[:notice] = "Oh are not following #{@trend.name}"
+      redirect_to root_path
+    else
+      flash[:notice] = "There was an error!!!!"
+    end
+
+  end
+
+  def unfollow
+    @trend = Trend.find(params[:id])
+    @user_follow = UserFollowingTrend.where(:user_id => current_user.id, :trend_id => @trend.id).first
+
+    @user_follow.destroy
+
+    respond_to do |format|
+      format.html {redirect_to root_path }
+      format.json {head :ok}
+    end
+  end
+
+
+
+
+
+
   private
 
   def list_trend_categories(trends)

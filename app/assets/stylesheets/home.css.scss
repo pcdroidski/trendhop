@@ -42,10 +42,10 @@
       li{
         border: 1px solid #fff;
         margin: 3px;
-        font-size: 25px; 
-        font-weight: bold; 
-        padding: 5px; 
-        color: #fff; 
+        font-size: 25px;
+        font-weight: bold;
+        padding: 5px;
+        color: #fff;
         display: inline-block;
         background: #06F;
         &:hover{
@@ -55,21 +55,57 @@
       #active-selection {
         background: #fff;
         color: #396;
-        
+
+      }
+    }
+
+    .stripNavL {
+      border: 2px solid #06F;
+      border-radius: 40px;
+      moz-border-radius: 40px;
+      -webkit-border-radius: 40px;
+      background: #fff;
+      padding: 2px;
+      z-index: 50;
+      position: absolute;
+      top: 200px;
+      left: -15px;
+      font-weight: bold;
+
+      &:hover{
+        background: #396;
+        color: #fff;
+      }
+    }
+    .stripNavR {
+      border: 2px solid #06F;
+      border-radius: 40px;
+      moz-border-radius: 40px;
+      -webkit-border-radius: 40px;
+      background: #fff;
+      padding: 2px;
+      z-index: 50;
+      position: absolute;
+      top: 200px;
+      right: -15px;
+      font-weight: bold;
+
+      &:hover{
+        background: #396;
+        color: #fff;
       }
     }
     .trends-viewer {
-      overflow: auto;
+      overflow: hidden;
       width: 100%;
       position: relative;
 
       .trends-list-container{
-        left: 0;
         height: 345px;
         list-style-type: none;
         position: relative;
         top:0;
-        width: 1800px;
+        width: 3120px;
 
         .trends-panel{
           float: left;
@@ -83,6 +119,7 @@
 
       /*Each Trend Displayed here*/
       .trend-body{
+        display: inline-block;
         background: #fff;
         height: 300px;
         width: 300px;
@@ -102,7 +139,7 @@
         .stats{
           margin: 4px;
           font-size: 17px;
-          
+
           .stat{
             font-size: 18px;
             font-weight: bold;

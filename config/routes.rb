@@ -43,7 +43,14 @@ Trendhop::Application.routes.draw do
 
 
 
-  resources :trends
+  resources :trends do
+    collection do
+      get 'follow'
+      post :follow
+      get 'unfollow'
+      post :unfollow
+    end
+  end
 
   match 'blogs/refresh' => 'blogs#refresh'
   resources :blogs do

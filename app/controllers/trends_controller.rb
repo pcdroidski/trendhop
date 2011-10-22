@@ -108,12 +108,13 @@ class TrendsController < ApplicationController
   end
 
   def follow
+    session[:return_to] ||= request.referer
     @trend = Trend.find(params[:id])
     @user_follow = UserFollowingTrend.new(:user_id => current_user.id, :trend_id => @trend.id)
 
     if @user_follow.save
       flash[:notice] = "Oh are not following #{@trend.name}"
-      redirect_to root_path
+      redirect_to session[:return_to]
     else
       flash[:notice] = "There was an error!!!!"
     end
@@ -121,13 +122,14 @@ class TrendsController < ApplicationController
   end
 
   def unfollow
+    session[:return_to] ||= request.referer
     @trend = Trend.find(params[:id])
     @user_follow = UserFollowingTrend.where(:user_id => current_user.id, :trend_id => @trend.id).first
 
     @user_follow.destroy
 
     respond_to do |format|
-      format.html {redirect_to root_path }
+      format.html {redirect_to session[:return_to]}
       format.json {head :ok}
     end
   end

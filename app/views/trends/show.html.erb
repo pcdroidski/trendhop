@@ -1,7 +1,15 @@
-<div class='content' id="trend_show">
-  <%= link_to 'Back', :back %>
+<div id="trend_show">
   <div class="trend-title">
     Show information related to <span id="title"># <%= @trend_search.humanize %> </span>
+    <% if is_follow_trend(@trends.first).blank? %>
+    <%= link_to follow_trends_path(:id => @trends.first.id), :class=>"fr" do%>
+      <div role="button" class="follow-button">Follow</div>
+    <%end%>
+  <%else%>
+    <%= link_to unfollow_trends_path(:id => @trends.first.id), :class=>"fr" do%>
+      <div role="button" class="unfollow-button">Un-Follow</div>
+    <%end%>
+  <%end%>
   </div>
   <div class="trend-info">
     <div class="fl" id="category">
@@ -42,8 +50,9 @@
     <span class="title">What People are saying: </span>
     <%= render :partial => "posts/content"%>
   </div>
-  <div class="fl trends_post">
+  <div class="fl trend_posts">
     <span class="title">Blogs containing <%=@trend_search%> </span>
-    <%= render :partial => "blogs/content"%>
+    <%= render :partial => "blogs/conten1t"%>
   </div>
+    <div class="clear"></div>
 </div>

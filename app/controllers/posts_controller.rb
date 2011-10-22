@@ -44,6 +44,7 @@ class PostsController < ApplicationController
   # POST /retrends
   #POST /retrends.json
   def retrend
+    session[:return_to] ||= request.referer
     retrend = Post.where(:id => params[:post_id]).first
 
     @post = Post.new(:post_content_id => retrend.post_content_id, :retrend_user_id => retrend.user_id, :retrend_post_id => retrend.id, :user_id => @current_user.id, :retrend => true)
@@ -71,7 +72,7 @@ class PostsController < ApplicationController
           @user_trend.save
         end
 
-        format.html { redirect_to root_path, :notice => 'Post was successfully retrended!' }
+        format.html { redirect_to session[:return_to], :notice => 'Post was successfully retrended!' }
         format.json { render :json => @post, :status => :created, :location => @post }
       else
         format.html { render :action => "new" }
@@ -84,6 +85,7 @@ class PostsController < ApplicationController
   # DELETE /untrends
   #DELETE /untrends.json
   def untrend
+    session[:return_to] ||= request.referer
     untrend = Post.where(:user_id => current_user.id, :retrend => true, :retrend_post_id => params[:post_id]).first
     untrend.trends.each do |t|
       @trend = Trend.where(:name => t.name).first
@@ -97,10 +99,10 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if untrend.destroy
-        format.html { redirect_to root_path, :notice => 'Post was successfully Un-Trended.' }
+        format.html { redirect_to session[:return_to], :notice => 'Post was successfully Un-Trended.' }
         format.json { head :ok }
       else
-        format.html { redirect_to root_path, :notice => 'There was a problem Un-Trending your post!' }
+        format.html { redirect_to session[:return_to], :notice => 'There was a problem Un-Trending your post!' }
         format.json { head :ok }
       end
     end
@@ -109,6 +111,7 @@ class PostsController < ApplicationController
   # /GET Hide Post
   #/POST hide Post
   def hide
+    session[:return_to] ||= request.referer
     hide_trend = Post.find(:id => params[:id])
 
   end
@@ -116,6 +119,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    session[:return_to] ||= request.referer
     @post_content = PostContent.new(params[:post][:post_content])
     @post_content.save
     @post = Post.new(:user_id => params[:post][:user_id], :post_content_id => @post_content.id, :entry_feed_id => params[:post][:entry_feed_id], :retrend => false)
@@ -190,7 +194,7 @@ class PostsController < ApplicationController
 
         end
 
-        format.html { redirect_to root_path, :notice => 'Post was successfully created.' }
+        format.html { redirect_to session[:return_to], :notice => 'Post was successfully created.' }
         format.json { render :json => @post, :status => :created, :location => @post }
       else
         format.html { render :action => "new" }
@@ -218,16 +222,18 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
+    session[:return_to] ||= request.referer
   #  @post = Post.find(params[:id])
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to session[:return_to] }
       format.json { head :ok }
     end
   end
 
   def like
+    session[:return_to] ||= request.referer
     @likeable = find_likeable.last
     @likeable_type = find_likeable.first
     @user_like = UserLike.new(:user_id => current_user.id, :source_id => @likeable.id, :source_type => @likeable_type)
@@ -236,14 +242,15 @@ class PostsController < ApplicationController
 
     if @user_like.save
       flash[:notice] = "Oh you like it!"
-      redirect_to root_path
+      redirect_to session[:return_to]
     else
       flash[:notice] = "There was an error!!!!"
-     redirect_to root_path
+     redirect_to session[:return_to]
     end
   end
 
   def unlike
+    session[:return_to] ||= request.referer
     @likeable = find_likeable.last
     @likeable_type = find_likeable.first
 
@@ -262,6 +269,7 @@ class PostsController < ApplicationController
   end
 
   def dislike
+    session[:return_to] ||= request.referer
     @likeable = find_likeable.last
     @likeable_type = find_likeable.first
     @user_like = UserDislike.new(:user_id => current_user.id, :source_id => @likeable.id, :source_type => @likeable_type)
@@ -270,10 +278,12 @@ class PostsController < ApplicationController
 
       if @user_like.save
         flash[:notice] = "Oh you like it!"
-        redirect_to root_path
+        redirect_to session[:return_to]
+
       else
         flash[:notice] = "There was an error!!!!"
-       redirect_to root_path
+       redirect_to session[:return_to]
+
       end
   end
 

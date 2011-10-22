@@ -62,3 +62,7 @@ group :test do
   gem "capybara"
   gem "guard-rspec"
 end
+
+
+# CRON JOBS
+gem 'whenever', :require => false

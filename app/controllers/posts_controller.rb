@@ -119,7 +119,6 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    session[:return_to] ||= request.referer
     @post_content = PostContent.new(params[:post][:post_content])
     @post_content.save
     @post = Post.new(:user_id => params[:post][:user_id], :post_content_id => @post_content.id, :entry_feed_id => params[:post][:entry_feed_id], :retrend => false)
@@ -194,7 +193,7 @@ class PostsController < ApplicationController
 
         end
 
-        format.html { redirect_to session[:return_to], :notice => 'Post was successfully created.' }
+        format.html { redirect_to root_path, :notice => 'Post was successfully created.' }
         format.json { render :json => @post, :status => :created, :location => @post }
       else
         format.html { render :action => "new" }

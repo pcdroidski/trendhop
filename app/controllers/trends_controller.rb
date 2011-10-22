@@ -36,6 +36,9 @@ class TrendsController < ApplicationController
   def show
     @trend_search = params[:id].to_s
     @trends = Trend.search :conditions => {:name => params[:id] }
+    if @trends.blank?
+      @trends = Trend.where(:name => params[:id])
+    end
 
     @trend_hops = trend_hops(@trends)
     @posts = get_trend_posts(@trends)

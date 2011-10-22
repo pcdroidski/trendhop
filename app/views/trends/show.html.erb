@@ -1,24 +1,14 @@
 <div class='content' id="trend_show">
-
+  <%= link_to 'Back', :back %>
   <div class="trend-title">
-    Viewing trendormation on <span id="title"><%= @trend_search %> </span>
+    Show information related to <span id="title"># <%= @trend_search.humanize %> </span>
   </div>
   <div class="trend-info">
     <div class="fl" id="category">
-      <% case @categories.count%>
-      <% when "0"%>
-        No Categories Found
-      <% when "1"%>
-        Category: <%= @categories.first %>
-      <% else %>
-        Categories:
-        <% @categories.each do |cat| %>
-          <span><%= cat %>
-        <%end%>
-      <%end%>
+      <%= pluralize(like_counts(@trends), "person", "people") %> like <%= @trend_search.humanize%>!
     </div>
     <div class="fl" id="count">
-      Trend count: <%= trend_counts(@trends) %>
+      <%= pluralize(trend_counts(@trends), "person is", "people are") %> trending <%= @trend_search.humanize%>!
     </div>
   </div>
 
@@ -48,13 +38,12 @@
 
   <div class="clear"></div>
 
-  <div class="trend_posts">
-    <span class="section_title">What people are saying: </span>
-
-    <%= render :partial => "posts/index"%>
+  <div class="fl trend_posts">
+    <span class="title">What People are saying: </span>
+    <%= render :partial => "posts/content"%>
   </div>
-
-  <%= link_to 'Edit', edit_trend_path(@trend) %> |
-  <%= link_to 'Back', trends_path %>
-
+  <div class="fl trends_post">
+    <span class="title">Blogs containing <%=@trend_search%> </span>
+    <%= render :partial => "blogs/content"%>
+  </div>
 </div>

@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-$border-color: #000;
+$border-color: #06f;
 $text-color: #000;
 $name-color: #0000FF;
 $trend-color: #339966;
@@ -57,8 +57,7 @@ $trend-color: #339966;
     list-style: none;
   }
     .post {
-      padding-top: 5px;
-      padding-bottom: 10px;
+      padding: 5px 3px 10px 0;
       margin: 2px 0 2px 0;
       display: block;
       @include border($border-color);

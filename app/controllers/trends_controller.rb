@@ -36,9 +36,10 @@ class TrendsController < ApplicationController
   def show
     @trend_search = params[:id].to_s
     @trends = Trend.search :conditions => {:name => params[:id] }
-    @categories = list_trend_categories(@trends)
+
     @trend_hops = trend_hops(@trends)
     @posts = get_trend_posts(@trends)
+    @blogs = get_trend_blogs(@trends)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -146,6 +147,15 @@ class TrendsController < ApplicationController
     categories
   end
   helper_method :list_trend_categories
+  
+  def like_counts(trends)
+    count = 0
+    trends.each do |trend|
+      count = count + trend.like_count unless trend.like_count.blank?
+    end
+    count
+  end
+  helper_method :like_counts
 
   def trend_counts(trends)
     count = 0
@@ -175,6 +185,16 @@ class TrendsController < ApplicationController
       end
     end
     posts
+  end
+  
+  def get_trend_blogs(trends)
+    blogs =[]
+    trends.each do |trend|
+      EntryFeed.search(trend, :order => :published_at, :sort_mode => :asc).each do |blog|
+        blogs << blog
+      end
+    end
+    blogs
   end
 
 end

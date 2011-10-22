@@ -60,6 +60,7 @@
     }
 
     .stripNavL {
+      cursor: pointer;
       border: 2px solid #06F;
       border-radius: 40px;
       moz-border-radius: 40px;
@@ -78,6 +79,7 @@
       }
     }
     .stripNavR {
+      cursor: pointer;
       border: 2px solid #06F;
       border-radius: 40px;
       moz-border-radius: 40px;
@@ -134,6 +136,9 @@
             font-weight: bold;
             font-size: 20px;
             padding: 5px;
+          }
+          a {
+            color: #fff;
           }
         }
         .stats{

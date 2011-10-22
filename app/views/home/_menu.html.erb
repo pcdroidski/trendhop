@@ -15,7 +15,7 @@
           <% @menu_trends.each do |trend|%>
             <div class="trend-body fl">
               <div class="title">
-                  <span># <%= trend.name.humanize %></span>
+                  <span># <%= link_to trend.name.humanize, trend_path(trend.name) %></span>
                   <% if is_follow_trend(trend).blank? %>
                     <%= link_to follow_trends_path(:id => trend.id), :class=>"fr" do%>
                       <div role="button" class="follow-button">Follow</div>

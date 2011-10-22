@@ -92,6 +92,24 @@ set :keep_releases, 5
    end
  end
 
+namespace :logs do
+  desc "stream log files"
+  task :stream, :roles => :app do
+    run "tail -f #{shared_path}/log/#{rails_env}.log" do |channel, stream, data|
+      puts  # for an extra line break before the host name
+      puts "#{channel[:host]}: #{data}"
+      break if stream == :err
+    end
+  end
+
+  desc "get last n lines. cap staging logs:get lines=100 "
+  task :get, :roles => :app do
+    run "tail -n#{ENV['lines'] || 100} #{shared_path}/log/#{rails_env}.log" do |channel, stream, data|
+      puts  # for an extra line break before the host name
+      puts "#{channel[:host]}: #{data}"
+    end
+  end
+end
 
  after "deploy", "deploy:migrate"
  after "deploy", "deploy:cleanup"

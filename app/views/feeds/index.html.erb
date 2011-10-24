@@ -6,7 +6,8 @@
 
 <h1>Browse Through Feeds</h1>
 <% if can? :manage, @feeds %>
-  <%= link_to 'New Feed', new_feed_path %><br/>
+  <%= link_to 'Test New Feed & add', new_feed_path %><br/>
+
 <%end%>
 
 <% FeedCategory.all.each do |cat|%>

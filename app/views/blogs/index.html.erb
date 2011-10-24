@@ -55,18 +55,7 @@
 
         <div class="blog_info">
           <span class="fl"><%= pluralize(blog.trend_count, "person", "people") %> have trended this post. </span>
-           <!-- <%# case blog.trended?(current_user) %>
-              <%#when 1%>
-                <%#= link_to untrend_posts_path(:post_id => blog.id) do%>
-                  <div role="button" class="untrend-button">Un-Trend</div>
-                <%#end%>
-              <%#when 2%>
-                <%#= link_to retrend_posts_path(:post_id => @post1.id) do%>
-                  <div role="button" class="retrend-button">Re-Trend</div>
-                <%# end%>
-            <%#end%> -->
           <span class="fl"><%= link_to "View Original Article", "#{blog.url}" %> </span>
-
         </div>
         <div class="blog_content">
           <p><%= strip_tags(raw(blog.summary)) %></p>

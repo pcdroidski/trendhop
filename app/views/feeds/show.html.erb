@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+
 <p>
   <b>Name:</b>
   <%= @feed.name %>
@@ -11,15 +12,14 @@
 </p>
 
 <p>
-  <b>Category:</b>
-  <%#= @feed.etag %>
 </p>
 <hr/>
 <% @entries.each do |entry| %>
   <h2><%= entry.title %></h2>
   <h5>By <%#= entry.author%>, posted on <%= entry.published_at %></h5>
-  <p><%= raw(entry.summary) %></p>
-  <p>Categories: <%#= entry.categories %></p>
+  <p>Summary: <%= raw(entry.summary) %></p>
+  <p>Content: <%= raw(entry.content)%>
+  <p>Trends: <%= get_entry_trends(entry) %></p>
   <hr/><br/>
 <%end%>
 

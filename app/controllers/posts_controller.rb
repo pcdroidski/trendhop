@@ -128,7 +128,6 @@ class PostsController < ApplicationController
     @post.post_content.content.split(" ").each do |str|
       if str.include?("#")
         trend = delete_chars(str)
- #         raise "#{trend.inspect} #{trend_array.inspect}"
         trend_array << trend if !trend_array.include?(trend)
       end
       # if str.include?("@")
@@ -139,7 +138,7 @@ class PostsController < ApplicationController
     end
 
     respond_to do |format|
-      if @post.save
+      if !trend_array.blank? && @post.save
         trend_array.each do |t|
           @trend = Trend.where(:name => t).first
           if @trend.blank?
@@ -196,7 +195,7 @@ class PostsController < ApplicationController
         format.html { redirect_to root_path, :notice => 'Post was successfully created.' }
         format.json { render :json => @post, :status => :created, :location => @post }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to root_path, :notice => 'You must include a trend!'}
         format.json { render :json => @post.errors, :status => :unprocessable_entity }
       end
     end
@@ -289,8 +288,9 @@ class PostsController < ApplicationController
   private
 
   def delete_chars(trend)
-    trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").delete("?")
+    trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").delete("?").delete(".").delete(",").delete("<").delete(">").delete("/").delete('\\')
   end
+  helper_method :delete_chars
 
   def find_likeable
     params.each do |name, value|

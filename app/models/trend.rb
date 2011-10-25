@@ -4,13 +4,13 @@ class Trend < ActiveRecord::Base
   has_many :post_contents, :through => :post_trends
 
   belongs_to :user_following_trends
-  
+
   has_many :entry_feed_trends
 
   has_many :posts, :through => :post_contents
 
-  has_many :blog_trends
-  has_many :blogs, :through => :blog_trends
+  has_many :entry_feed_trends
+  has_many :entry_feeds, :through => :entry_feed_trends
 
   has_many :user_trends
   has_many :users, :through => :user_trends
@@ -44,6 +44,7 @@ class Trend < ActiveRecord::Base
   def self.entry_feed_trend(trend)
     trend_find = Trend.where(:name => trend).first
     if trend_find.blank?
+      trend_find = trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").delete("?").delete(".").delete(",").delete("<").delete(">").delete("/").delete('\\')
       create!(
         :name         => trend,
         :trend_count  => 0,

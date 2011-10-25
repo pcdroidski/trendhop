@@ -7,7 +7,7 @@ Trendhop::Application.routes.draw do
       get 'unsubscribe'
       post :unsubscribe
 
-      get 'create'
+      get 'create_feed'
       post :create_feed
     end
   end

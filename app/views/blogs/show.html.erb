@@ -17,7 +17,7 @@
   </div>
   <div class="clear"></div>
   <div class="blog-content">
-    <p><%= raw(@blog.content) %></p>
+    <p><%= strip_tags(raw(@blog.content)) %></p>
     <b>Attached websites:</b>
     <%= @blog.url %>
   </p>

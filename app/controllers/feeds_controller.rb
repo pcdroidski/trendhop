@@ -133,12 +133,5 @@ class FeedsController < ApplicationController
   end
   helper_method :is_subscribed?
 
-  def get_entry_trends(entry)
-    trends = []
-    EntryFeedTrends.where(:entry_feed_id => entry.id).each do |get|
-      trends << get.trend
-    end
-    trends
-  end
-  helper_method :get_entry_trends
+  
 end

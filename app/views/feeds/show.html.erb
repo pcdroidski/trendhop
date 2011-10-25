@@ -17,9 +17,10 @@
 <% @entries.each do |entry| %>
   <h2><%= entry.title %></h2>
   <h5>By <%#= entry.author%>, posted on <%= entry.published_at %></h5>
-  <p>Summary: <%= raw(entry.summary) %></p>
-  <p>Content: <%= raw(entry.content)%>
-  <p>Trends: <%= get_entry_trends(entry) %></p>
+  <p><b>Quick Summary: </b> <%= strip_tags(raw(entry.summary)) %></p>
+  <hr/>
+  <p><b>Content: </b> <%= strip_tags(raw(entry.content)) %>
+  <p><b>Trends: </b><% entry.trends.each do |trend| %><%= trend.name %><br/><%end%> </p>
   <hr/><br/>
 <%end%>
 

@@ -4,7 +4,7 @@ class EntryFeed < ActiveRecord::Base
 
   has_many :posts
 
-  belongs_to :entry_feed_trends
+  has_many :entry_feed_trends
   has_many :trends, :through => :entry_feed_trends
 
   def self.create_from_feed(feed_info)
@@ -51,7 +51,7 @@ class EntryFeed < ActiveRecord::Base
            :published_at => entry.published,
            :guid         => entry.id,
            :like        => 0,
-           :trend_count   => 0,
+           :trend_count   => 0
          )
        the_entry = EntryFeed.where(:guid => entry.id).first
        EntryFeedTrend.create_trends(the_entry, entry)

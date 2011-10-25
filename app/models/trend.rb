@@ -4,6 +4,8 @@ class Trend < ActiveRecord::Base
   has_many :post_contents, :through => :post_trends
 
   belongs_to :user_following_trends
+  
+  has_many :entry_feed_trends
 
   has_many :posts, :through => :post_contents
 

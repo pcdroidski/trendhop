@@ -4,6 +4,9 @@ class EntryFeed < ActiveRecord::Base
 
   has_many :posts
 
+  belongs_to :entry_feed_trends
+  has_many :trends, :through => :entry_feed_trends
+
   def self.create_from_feed(feed_info)
      feed = Feedzirra::Feed.fetch_and_parse(feed_info.url)
      add_entries(feed.entries, feed_info)
@@ -49,11 +52,13 @@ class EntryFeed < ActiveRecord::Base
            :guid         => entry.id,
            :like        => 0,
            :trend_count   => 0,
-           :tags       => entry.categories
          )
-       end
-     end
+       the_entry = EntryFeed.where(:guid => entry.id).first
+       EntryFeedTrend.create_trends(the_entry, entry)
+      end
+    end
    end
+
 
    define_index do
       indexes title

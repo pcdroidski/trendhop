@@ -2,7 +2,7 @@ class Trend < ActiveRecord::Base
 
   has_many :post_trends
   has_many :post_contents, :through => :post_trends
-  
+
   belongs_to :user_following_trends
 
   has_many :posts, :through => :post_contents
@@ -19,7 +19,7 @@ class Trend < ActiveRecord::Base
   scope :set_range, lambda {|field| where (["trends.updated_at >= ?", eval("Time.now-1.#{field}") ])}  #field = [day, week, month, year]
   scope :set_men, joins(:users).where(["users.sex = 0"])
   scope :set_women, joins(:users).where(["users.sex = 1"])
-  
+
   # scope :user_follow, lambda {|user| {:joins => :user_following_trends, :conditions => ["user_following_trends.user_id == #{user}"] }}
 
 # Trend filtering #
@@ -35,5 +35,21 @@ class Trend < ActiveRecord::Base
   define_index do
     indexes :name
   end
-  
+
+
+  private
+
+  def self.entry_feed_trend(trend)
+    trend_find = Trend.where(:name => trend).first
+    if trend_find.blank?
+      create!(
+        :name         => trend,
+        :trend_count  => 0,
+        :like_count   => 0
+        )
+      trend_find = Trend.where(:name => trend).first
+    end
+    return trend_find
+  end
+
 end

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_for @feed, :url => {:action => "create_feed"} do |f| %>
+  <%= f.hidden_field :name, :value => @feed.name %>
+  <%= f.hidden_field :url, :value => @feed.url%>
+  <%= f.hidden_field :feed_category_id, :value => @feed.feed_category_id %>
+  <%= f.submit %>
+<%end%>
+<p>
+  <b>Name:</b>
+  <%= @e_feed.title %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @e_feed.url %>
+</p>
+
+<p>
+  <b>Sample entries:</b>
+</p>
+<hr/>
+
+<% @e_feed.entries.each do |entry| %>
+  <h2><%= entry.title %></h2>
+  <h5><b>By: <%= entry.author%>, posted on <%= entry.published %></b></h5>
+  <p><b>Summary:</b> <%= raw(entry.summary) %></p>
+  <p><b>Content:</b> <%= raw(entry.content)%>
+  <p><b>Trends:></b> <% entry.categories.each do |trend| %> <%= trend%>, <%end%></p>
+  <hr/><br/><hr></br>
+<%end%>
+
+<%= link_to 'Back', feeds_path %>

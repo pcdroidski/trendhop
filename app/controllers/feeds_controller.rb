@@ -44,6 +44,16 @@ class FeedsController < ApplicationController
     end
   end
 
+  def create
+    @feed = Feed.new(params[:feed])
+
+    @e_feed = Feedzirra::Feed.fetch_and_parse(@feed.url)
+
+    respond_to do |format|
+      format.html #test.html.erb
+    end
+  end
+
   # GET /feeds/1/edit
   def edit
     @feed = Feed.find(params[:id])
@@ -51,7 +61,7 @@ class FeedsController < ApplicationController
 
   # POST /feeds
   # POST /feeds.json
-  def create
+  def create_feed
     @feed = Feed.new(params[:feed])
 
     respond_to do |format|
@@ -123,4 +133,12 @@ class FeedsController < ApplicationController
   end
   helper_method :is_subscribed?
 
+  def get_entry_trends(entry)
+    trends = []
+    EntryFeedTrends.where(:entry_feed_id => entry.id).each do |get|
+      trends << get.trend
+    end
+    trends
+  end
+  helper_method :get_entry_trends
 end

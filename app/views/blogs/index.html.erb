@@ -41,6 +41,7 @@
   <div class="title"><span>Blog Hop</span></div>
   <p>Here are the blogs that you have subscirbed to!</p>
   <div class="blogs">
+    <div class="paginate"><%= paginate @blogs, :windows => 5%> </div>
       <% @blogs.each do |blog| %>
       <% if !blog.title.include?("Ad")%>
       <div class="blog">
@@ -69,5 +70,6 @@
       </div>
       <% end %>
       <%end%>
+    <div class="paginate"><%= paginate @blogs, :windows => 5%> </div>
   </div>
 </div>

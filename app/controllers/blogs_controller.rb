@@ -31,9 +31,8 @@ class BlogsController < ApplicationController
     end
 
     @blogs = EntryFeed.where(:feed_id => feeds)
-
-
     @blogs = @blogs.order("published_at DESC") unless @blogs.blank?
+    @blogs = @blogs.page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb

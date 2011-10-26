@@ -9,7 +9,7 @@ gem 'rails', '3.1.0'
 gem 'mysql2', "0.3.6"
 
 # Rails 3.1 - Pagination - Use the head for rails 3.1
-gem 'kaminari', :git => "git://github.com/amatsuda/kaminari.git"
+gem 'kaminari'
 
 # Asset template engines
 gem 'json'

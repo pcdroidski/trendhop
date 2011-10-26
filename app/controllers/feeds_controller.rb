@@ -127,11 +127,5 @@ class FeedsController < ApplicationController
     end
   end
 
-  def is_subscribed?(feed)
-    feed = UserFeed.where(:user_id => @current_user.id, :feed_id => feed.id).first
-    feed
-  end
-  helper_method :is_subscribed?
 
-  
 end

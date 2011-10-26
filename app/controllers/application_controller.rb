@@ -16,11 +16,6 @@ class ApplicationController < ActionController::Base
     @current_user = current_user
   end
 
-  def check_user?
-    user_signed_in?
-  end
-  helper_method :check_user?
-
   def create_groups(user)
     #Rake::Task["import:tracking:all"].invoke
     friends = Group.new(:name => "Friends", :user_id => user)
@@ -31,22 +26,6 @@ class ApplicationController < ActionController::Base
     colleagues.save
   end
 
-  def list_trends(post)
-    trend_list = []
-
-    if (post.retrend_post_id == nil)
-      post.trends.map do |trend|
-        trend_list << "<a id='trend' href='#{url_for(trend_path(trend.name))}'>#{trend.name} </a>"
-      end
-    else
-      repost = Post.where(:id => post.retrend_post_id).first
-       repost.trends.map do |trend|
-          trend_list << "<a id='trend' href='#{url_for(trend_path(trend.name))}'>#{trend.name} </a>"
-        end
-    end
-    trend_list.to_sentence
-  end
-  helper_method :list_trends
 
   def is_follow_trend(trend)
     follow = UserFollowingTrend.where(:user_id => @current_user.id, :trend_id => trend.id).first

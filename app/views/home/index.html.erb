@@ -46,6 +46,7 @@
   <% if @posts.blank? %>
       <h2 style="widht:100%; text-align:center;">There are no posts to repots!</h2>
   <%else%>
+    <div class="paginate"> <%= paginate @posts, :windows => 4 %></div>
     <ul class="posts_list">
     <% @posts.each do |post| %>
       <li class="post">
@@ -60,7 +61,7 @@
         <div class="clear"></div>
     <% end %>
     </ul>
+    <div class="paginate"> <%= paginate @posts, :windows => 4 %></div>
   <%end%>
-
 
 </div>

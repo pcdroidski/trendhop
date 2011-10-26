@@ -144,33 +144,6 @@ class TrendsController < ApplicationController
 
   private
 
-  def list_trend_categories(trends)
-    categories = []
-    trends.each do |trend|
-      categories <<" " + trend.trend_category_id unless trend.trend_category_id.blank?
-    end
-    categories
-  end
-  helper_method :list_trend_categories
-  
-  def like_counts(trends)
-    count = 0
-    trends.each do |trend|
-      count = count + trend.like_count unless trend.like_count.blank?
-    end
-    count
-  end
-  helper_method :like_counts
-
-  def trend_counts(trends)
-    count = 0
-    trends.each do |trend|
-      count = count + trend.trend_count unless trend.trend_count.blank?
-    end
-    count
-  end
-  helper_method :trend_counts
-
   def trend_hops(trends)
     hops = []
     trends.each do |trend|
@@ -180,7 +153,6 @@ class TrendsController < ApplicationController
     end
     hops
   end
-  helper_method :trend_hops
 
   def get_trend_posts(trends)
     posts = []
@@ -191,7 +163,7 @@ class TrendsController < ApplicationController
     end
     posts
   end
-  
+
   def get_trend_blogs(trends)
     blogs =[]
     trends.each do |trend|

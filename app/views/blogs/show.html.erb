@@ -1,8 +1,9 @@
 <% content_for :left_menu do %>
   <p>Options: </p>
     <%= link_to "More from this Blog", feed_path(@blog.feed_id)%><br/>
-    <a href="" id="trend-blog">Trend this Article</a><br/>
-    <%= link_to 'Back to Blog Hop', blogs_path %>
+    <%= link_to 'Back to Blog Hop', blogs_path %> <br/>
+    <a href="" id="trend-article-button">Trend this Article</a><br/>
+    Like this Article
 <%end%>
 
 <div class='content' id="blog">

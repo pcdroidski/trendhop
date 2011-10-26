@@ -144,6 +144,7 @@ class PostsController < ApplicationController
           if @trend.blank?
             @trend = Trend.new()
             @trend.name = t
+            @trend.like_count = 0
           end
           @trend.increment(:trend_count)
           @trend.save
@@ -288,9 +289,8 @@ class PostsController < ApplicationController
   private
 
   def delete_chars(trend)
-    trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").delete("?").delete(".").delete(",").delete("<").delete(">").delete("/").delete('\\')
+    trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").delete("?").delete(".").delete(",").delete("<").delete(">").delete("/").delete('\\').delete("-")
   end
-  helper_method :delete_chars
 
   def find_likeable
     params.each do |name, value|

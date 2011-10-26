@@ -9,10 +9,11 @@ class HomeController < ApplicationController
     @posts = case @post_group
       when nil then Post
       when "Friends" then Post.friends(@current_user)
-      when "Family" then nil
-      when "Colleagues" then nil
+      when "Family" then Post
+      when "Colleagues" then Post
     end
     @posts = @posts.order("created_at DESC") unless @posts.blank?
+    @posts = @posts.page(params[:page]).per(15)
 
     @menu_trends = menu_select
     @menu_selected = params[:menu_show]

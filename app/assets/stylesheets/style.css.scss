@@ -19,8 +19,9 @@ $post-color: #0000FF;
   background: darken(#fff, 60%) !important;
   z-index: 300;
   height: 100% !important;
-  .filter-link, #comment_post_body, #active-filter, .post-date, .untrend-button, .retrend-button, .trend-button, #comments_index {
+  .section_title, .left_menu_post_select, .title, .title-trends, .title-trends li, .trend-body, .trend-section, .filter-link, #comment_post_body, #active-filter, .post-date, .untrend-button, .retrend-button, .trend-button, #comments_index {
     background: darken(#fff, 60%) !important;
+
   }
 
 }
@@ -37,6 +38,29 @@ $post-color: #0000FF;
 .yellow {
   color: yellow;
 }
+
+/*Pagination*/
+
+.paginate {
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  background: #396;
+
+  .pagination {
+    padding: 3px 0 3px 0;
+  }
+
+  a {
+    margin: 2px;
+    color: #fff;
+  }
+  .page {
+    margin: 3px 0 3px 0;
+  }
+}
+
 /*Whats trending pop down!!! TEST*/
 
 .whats-trending {
@@ -105,9 +129,10 @@ $post-color: #0000FF;
       }
     }
     .bottom-info{
-      padding: 1px 0 1px 0;
+      padding: 15px 0 1px 0;
       background: #D8D8D8;
-      height: 30px;
+      height: 55px;
+
       width: 100%;
 
       .info{
@@ -404,7 +429,7 @@ $post-color: #0000FF;
   position: fixed;
   width: 100%;
   height: 48px;
-  z-index: 11;
+  z-index: 81;
   top: 0;
 
   #header_border{

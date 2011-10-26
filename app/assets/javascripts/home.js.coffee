@@ -42,7 +42,19 @@ jQuery ->
       $("#menuNav-right").show()
       return
 
+  # Article trend button
+  $("#trend-article-button").click ->
+    $("#main-home-background").toggleClass("darken-background")
+    $("#drop-down-button").toggleClass("open-menu")
+    $(".profile-menu").toggleClass("plus-menu")
+    $("#trend-something").show()
+    $("#current-now-button").addClass("inactive")
+    $("#trend-now-button").addClass("active")
+    $("#current-now").hide()
+    $("#pop-down").slideToggle("fast")
+    false
 
+  # MAin drop down
   $("#drop-down-button").click ->
     $("#main-home-background").toggleClass("darken-background")
     $("#drop-down-button").toggleClass("open-menu")
@@ -50,7 +62,6 @@ jQuery ->
     $("#current-now").show()
     $("#current-now-button").addClass("active")
     $("#trend-now-button").addClass("inactive")
-
     $("#trend-something").hide()
     $("#pop-down").slideToggle("fast")
     false

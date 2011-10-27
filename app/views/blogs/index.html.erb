@@ -1,5 +1,13 @@
 <% content_for :left_menu do%>
   <div class="subscribe">  <%= link_to 'Subscirbe to Blogs', feeds_path %></div>
+
+  <div>
+    <br/>    <br/>    <br/>    <br/>
+    Sort by Date
+        <br/>    <br/>    <br/><br/>
+
+  </div>
+
   <span class="section_title">Categories</span>
   <ul id="blog_filters">
      <% if params[:filter].blank?%>

@@ -47,7 +47,7 @@ class PostsController < ApplicationController
     session[:return_to] ||= request.referer
     retrend = Post.where(:id => params[:post_id]).first
 
-    @post = Post.new(:post_content_id => retrend.post_content_id, :retrend_user_id => retrend.user_id, :retrend_post_id => retrend.id, :user_id => @current_user.id, :retrend => true)
+    @post = Post.new(:post_content_id => retrend.post_content_id, :entry_feed_id => retrend.entry_feed_id, :retrend_user_id => retrend.user_id, :retrend_post_id => retrend.id, :user_id => @current_user.id, :retrend => true)
 
     retrend.increment(:retrend_count)
 
@@ -138,7 +138,7 @@ class PostsController < ApplicationController
     end
 
     respond_to do |format|
-      if !trend_array.blank? && @post.save
+      if (!trend_array.blank? && @post.save) || (@post.save && !@post.entry_feed_id.blank?)
         trend_array.each do |t|
           @trend = Trend.where(:name => t).first
           if @trend.blank?

@@ -78,6 +78,8 @@ jQuery ->
     $("#trend-something").show()
     $("#current-now-button").removeClass("active").addClass("inactive")
     $("#trend-now-button").removeClass("inactive").addClass("active")
+    $("#input_content").startTag()
+    $("#tags").tagsInput();
     return
 
   $("#cancel-trend").click ->

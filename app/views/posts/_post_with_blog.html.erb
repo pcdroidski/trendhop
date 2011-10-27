@@ -81,14 +81,14 @@
         <% if  !@post1.retrend_count.blank? %>
         <div>
             <div class="clear"></div>
-            <%= pluralize(@post1.retrend_count, "person", "people") %> re-trended.
+            <%= pluralize(@post1.retrend_count, "retrend", "retrends") %>
         </div>
         <% end%>
 
       <div class="button1">
           <% case @post1.liked?(current_user) %>
             <% when "liked" %>
-             <%= link_to unlike_posts_path(:post_id => @post1.id), :confirm => 'Do you want to make this post disappear?' do%>
+             <%= link_to unlike_posts_path(:post_id => @post1.id) do%>
                 <div role="button" class="untrend-button">Unlike</div>
               <%end%>
             <% when "not_liked"%>
@@ -99,6 +99,12 @@
 
           <%end%>
       </div>
+
+      <div>
+        <div class="clear"></div>
+        <%= pluralize(@post1.like, "like", "likes") %>
+      </div>
+
 
       <div class="trend_hops fl">
             <span class="subsection_title">Hop to related trends: </span>

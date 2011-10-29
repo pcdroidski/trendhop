@@ -31,6 +31,16 @@
 				}
 
 				value = jQuery.trim(value);
+				
+				array = value.split("#")
+				real_array = $.makeArray(array)
+				
+				var the_trend = real_array[real_array.length-1]
+        old_text = real_array[real_array.length-2]
+        
+        value = jQuery.trim(the_trend);
+				
+        console.log(value)
 
 				if (options.unique) {
 					skipTag = $(tagslist).tagExist(value);
@@ -39,6 +49,8 @@
 				}
 
 				if (value !='' && skipTag != true) {
+				          $('<span>').addClass('text_holder').append(
+				            $('<span class="fl">').text(old_text).append("</span>"),
                     $('<span>').addClass('tag').append(
                         $('<span>').text(value).append('&nbsp;&nbsp;'),
                         $('<a>', {
@@ -48,7 +60,7 @@
                         }).click(function () {
                             return $('#' + id).removeTag(escape(value));
                         })
-                    ).insertBefore('#' + id + '_addTag');
+                    )).insertBefore('#' + id + '_addTag');
 
 					tagslist.push(value);
 
@@ -121,10 +133,10 @@
 	$.fn.tagsInput = function(options) {
     var settings = jQuery.extend({
       interactive:true,
-      defaultText:'add a tag',
+      defaultText:'Add your post or a #trend! ',
       minChars:0,
-      width:'300px',
-      height:'100px',
+      width:'95%',
+      height:'80px',
       autocomplete: {selectFirst: false },
       'hide':true,
       'delimiter':',',
@@ -233,7 +245,6 @@
 					if (event.which==event.data.delimiter.charCodeAt(0) || event.which==13 ) {
 						if( (event.data.minChars <= $(event.data.fake_input).val().length) && (!event.data.maxChars || (event.data.maxChars >= $(event.data.fake_input).val().length)) )
 							$(event.data.real_input).addTag($(event.data.fake_input).val(),{focus:true,unique:(settings.unique)});
-																                console.log($(event.data.real_input).val())
 
 						return false;
 					}

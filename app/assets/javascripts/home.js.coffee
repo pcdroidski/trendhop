@@ -54,6 +54,8 @@ jQuery ->
     $("#pop-down").slideToggle("fast")
     false
 
+  $("#tags").tagsInput();
+
   # MAin drop down
   $("#drop-down-button").click ->
     $("#main-home-background").toggleClass("darken-background")
@@ -79,7 +81,6 @@ jQuery ->
     $("#current-now-button").removeClass("active").addClass("inactive")
     $("#trend-now-button").removeClass("inactive").addClass("active")
     $("#input_content").startTag()
-    $("#tags").tagsInput();
     return
 
   $("#cancel-trend").click ->

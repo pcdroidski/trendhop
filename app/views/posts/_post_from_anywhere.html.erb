@@ -20,11 +20,11 @@
   <%else%>
     <%= f.fields_for :post_content do |post_form| %>
       <div class="field_1" >
-        <%= post_form.text_area :content, :rows=>'4', :id => "input_content", :value => "" %>
+        <%= post_form.text_field :content, :id => "tags", :value => "" %>
       </div>
       <div class="field" >
-        <%= f.label :trends %>
-        <%= f.text_field :trends, :id => "tags", :value => "" %>
+        <%#= f.label :trends %>
+        <%#= f.text_field :trends, :id => "tags", :value => "" %>
       </div>
     <% end%>
   <%end%>

@@ -27,30 +27,41 @@
     var thesettings = jQuery.extend({
       minChars:0,
       placeholderColor:'#666666',
-      defaultText: "Enter  your post here!",
+      defaultText: "Enter your post here!",
       width: '300px',
       height: '250px',
       first: true
     },options);
 
   	this.each(function() {
+  		
+  		$(this).hide()
 
-    id = $(this).attr('id')
+   		id = $(this).attr('id')
 
 		data_input = jQuery.extend({
 			pid:id,
 			real_input: '#'+id,
-      // holder: '#'+id+'_tagsinput',
+      		holder: '#'+id+'_tagsinput',
 			text_wrapper: '#'+id+'_text',
 			fake_input: '#'+id+'_addTag'
 		}, thesettings);
 
-    // input_text_area = $(real_input)
-    var first_run = true;
+  	  // input_text_area = $(real_input)
+   	 	var first_run = true;
 
 		var markup = '<div id="'+id+'_tagsinput" class="tagsinput"><div id="'+id+'_addTag">';
-
-    // $(markup).insertAfter(this);
+	
+		// markup = markup + '<input id="'+id+'_tag" value="" data-default="'+settings.defaultText+'" />';
+		// 	
+		// 
+		// markup = markup + '</div><div class="tags_clear"></div></div>';
+		// 
+		// 
+		//      	$(markup).insertAfter(this);
+    
+		//      	$(data.holder).css('width',settings.width);
+		// $(data.holder).css('height',settings.height);
 
 		$(data_input.real_input).keypress(function(e) {
 		  if (e.which == 35) {

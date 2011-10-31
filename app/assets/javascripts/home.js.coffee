@@ -54,7 +54,8 @@ jQuery ->
     $("#pop-down").slideToggle("fast")
     false
 
-  $("#tags").tagsInput();
+  $("#trend_input").trendsInput();
+  # $("#trends").tagsInput();
 
   # MAin drop down
   $("#drop-down-button").click ->
@@ -80,7 +81,6 @@ jQuery ->
     $("#trend-something").show()
     $("#current-now-button").removeClass("active").addClass("inactive")
     $("#trend-now-button").removeClass("inactive").addClass("active")
-    $("#input_content").startTag()
     return
 
   $("#cancel-trend").click ->

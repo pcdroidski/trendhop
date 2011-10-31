@@ -125,17 +125,26 @@ class PostsController < ApplicationController
 
     at_array =[]
     trend_array=[]
-    @post.post_content.content.split(" ").each do |str|
-      if str.include?("#")
-        trend = delete_chars(str)
-        trend_array << trend if !trend_array.include?(trend)
+
+    if params[:post][:trends].blank?
+      @post.post_content.content.split(" ").each do |str|
+        if str.include?("#")
+          trend = delete_chars(str)
+          trend_array << trend if !trend_array.include?(trend)
+        end
       end
+    else
+      trends = params[:post][:trends].split(",")
+      trends.each do |tr|
+        trend_array << tr if !trend_array.include?(tr)
+      end
+    end
       # if str.include?("@")
       #   str.delete("@")
       #
       #   at_array <<
       # end
-    end
+
 
     respond_to do |format|
       if (!trend_array.blank? && @post.save) || (@post.save && !@post.entry_feed_id.blank?)

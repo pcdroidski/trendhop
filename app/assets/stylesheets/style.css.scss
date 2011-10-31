@@ -64,7 +64,7 @@ $post-color: #0000FF;
 /*Whats trending pop down!!! TEST*/
 
 .whats-trending {
-  height: 215px;
+  height: auto;
   width: 600px;
   float:right;
   background: #fff;
@@ -174,10 +174,18 @@ $post-color: #0000FF;
   }
   .info_field{
     width: 90%;
-    margin: 0 0 5px 20px;
+    margin: 0 0 5px 10px;
     padding: 3px;
-    font-size: 15px;
-    background: #fff;
+    background: #FFF380;
+    font-size: 17px;
+    font-weight:bold;
+    font-style: italic;
+  }
+
+  #trends_container {
+    width: 98%;
+    height: 40px;
+    padding: 8px;
   }
 
   .cancel-action{

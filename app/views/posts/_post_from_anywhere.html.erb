@@ -9,22 +9,32 @@
   <% if !@blog.blank? %>
     <%= f.fields_for :post_content do |post_form| %>
       <div class="field_2" >
-        <%= post_form.text_area :content, :rows=>'2' %>
+        <%= post_form.text_field :content, :id => "trend_input", :value => "" %>
       </div>
     <% end%>
       <div class="info_field">
         <%= f.hidden_field :entry_feed_id, :value => @blog.id %>
         <%= @blog.title%>
       </div>
+      <div class="field" >
+        <% blog_trend_list = ""%>
+        <% @blog.trends.each do |bt|%>
+          <% blog_trend_list = blog_trend_list +", "+ bt.name %>
+        <%end%>
+        <%= f.hidden_field :trends, :id => "trends_form" %>
+        <p style="margin: 0 0 0 5px; font-size: 18px;">Trends you will be posting: </p>
+        <div style="display: none !important;" id="blog_trend_list"><%=blog_trend_list%></div>
+        <div id="trends_container"></div>
+      </div>
 
   <%else%>
     <%= f.fields_for :post_content do |post_form| %>
       <div class="field_1" >
-        <%= post_form.text_field :content, :id => "tags", :value => "" %>
+        <%= post_form.text_field :content, :id => "trend_input", :value => "" %>
       </div>
       <div class="field" >
-        <%#= f.label :trends %>
-        <%#= f.text_field :trends, :id => "tags", :value => "" %>
+        <%= f.hidden_field :trends, :id => "trends_form" %>
+        <div id="trends_container" style="width: 80%; height: 40px;" ></div>
       </div>
     <% end%>
   <%end%>

@@ -4,7 +4,7 @@ class EntryFeed < ActiveRecord::Base
 
   has_many :posts
 
-  has_many :entry_feed_trends
+  has_many :entry_feed_trends, :dependent => :destroy
   has_many :trends, :through => :entry_feed_trends
 
   def self.create_from_feed(feed_info)

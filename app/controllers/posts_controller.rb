@@ -134,9 +134,12 @@ class PostsController < ApplicationController
         end
       end
     else
-      trends = params[:post][:trends].split(",")
-      trends.each do |tr|
-        trend_array << tr if !trend_array.include?(tr)
+      if params[:post][:trends] != "[]"
+        trends = params[:post][:trends].split(",")
+        trends.each do |tr|
+          trend = delete_chars(tr)
+          trend_array << tr if !trend_array.include?(trend) || !trend.blank?
+        end
       end
     end
       # if str.include?("@")
@@ -205,6 +208,8 @@ class PostsController < ApplicationController
         format.html { redirect_to root_path, :notice => 'Post was successfully created.' }
         format.json { render :json => @post, :status => :created, :location => @post }
       else
+        @post_content.destroy
+        @post.destroy
         format.html { redirect_to root_path, :notice => 'You must include a trend!'}
         format.json { render :json => @post.errors, :status => :unprocessable_entity }
       end

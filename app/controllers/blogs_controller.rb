@@ -31,6 +31,17 @@ class BlogsController < ApplicationController
     end
 
     @blogs = EntryFeed.where(:feed_id => feeds)
+
+    if !params[:date_selected].blank?
+      selected_dates = params[:date_selected].split(",").first
+      date_1 = selected_dates.first
+      date_2 = selected_dates.last
+      @blogs = @blogs.find(:all, :conditions => ['published_at >= ? and published_at <= ?', date_1, date_2])
+    end
+
+    raise @blogs.inspect
+
+
     @blogs = @blogs.order("published_at DESC") unless @blogs.blank?
     @blogs = @blogs.page(params[:page]).per(10)
 
@@ -52,6 +63,15 @@ class BlogsController < ApplicationController
     redirect_to blogs_path
     flash[:notice] = "Blogs successfully updated"
   end
+
+  def filter
+    selected_dates = params[:date_select].split(",")
+    date_1 = selected_dates.first
+    date_2 = selected_dates.last
+
+    redirect_to blogs_path(:date_selected => selected_dates)
+  end
+
 
   # GET /blogs/1
   # GET /blogs/1.json

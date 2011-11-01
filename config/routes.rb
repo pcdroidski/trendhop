@@ -57,6 +57,10 @@ Trendhop::Application.routes.draw do
 
   match 'blogs/refresh' => 'blogs#refresh'
   resources :blogs do
+    collection do
+      get 'filter'
+      post :filter
+    end
     resources :trends
   end
 

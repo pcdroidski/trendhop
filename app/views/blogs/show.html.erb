@@ -28,7 +28,7 @@
     <span class="section_title">Trends: </span>
     <div class="blog-list">
       <% @blog.trends.each do |trend| %>
-      <div class="blog-trend fl"><%= link_to trend.name, trend_path(trend.name)%></div>
+      <span class="tag fl"><%= link_to trend.name, trend_path(trend.name)%></span>
       <%end %>
       <div class="clear"></div>
     </div>

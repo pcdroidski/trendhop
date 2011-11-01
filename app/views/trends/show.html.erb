@@ -1,24 +1,25 @@
 <div id="trend_show">
   <div class="trend-title">
-    Show information related to <span id="title"># <%= @trend_search.humanize %> </span>
+    <span id="title"># <%= @trend_search.humanize %> </span>
     <% if is_follow_trend(@trends.first).blank? %>
     <%= link_to follow_trends_path(:id => @trends.first.id), :class=>"fr" do%>
-      <div role="button" class="follow-button">Follow</div>
+      <div role="button" class="follow-button">Add to Favorites</div>
     <%end%>
   <%else%>
     <%= link_to unfollow_trends_path(:id => @trends.first.id), :class=>"fr" do%>
-      <div role="button" class="unfollow-button">Un-Follow</div>
+      <div role="button" class="unfollow-button">Remove from Favorites</div>
     <%end%>
   <%end%>
   </div>
   <div class="trend-info">
-    <div class="fl" id="category">
-      <%= pluralize(like_counts(@trends), "person", "people") %> like <%= @trend_search.humanize%>!
+    <div id="category">
+      <%= pluralize(like_counts(@trends), "person", "people") %> like <%= @trend_search.humanize%>
     </div>
-    <div class="fl" id="count">
-      <%= pluralize(trend_counts(@trends), "person is", "people are") %> trending <%= @trend_search.humanize%>!
+    <div id="count">
+      <%= pluralize(trend_counts(@trends), "person is", "people are") %> trending <%= @trend_search.humanize%>
     </div>
   </div>
+  <div class="clear"></div>
 
   <% content_for :right_menu do%>
     <span class="section_title">Hop to another trend: </span>

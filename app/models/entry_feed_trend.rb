@@ -12,6 +12,12 @@ class EntryFeedTrend < ActiveRecord::Base
        :entry_feed_id       => db_entry.id,
        :trend_id      => get_trend.id
        )
+       entry.categories.each do |trend_2|
+         get_trend2 = Trend.entry_feed_trend(trend_2)
+         if get_trend != get_trend2
+           TrendHop.create_hops(get_trend, get_trend2)
+         end
+       end
     end
   end
 

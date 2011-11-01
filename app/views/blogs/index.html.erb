@@ -2,10 +2,11 @@
   <div class="subscribe">  <%= link_to 'Subscirbe to Blogs', feeds_path %></div>
 
   <div>
-    <br/>    <br/>    <br/>    <br/>
-    Sort by Date
-        <br/>    <br/>    <br/><br/>
-
+    <%= form_tag(:controller =>"blogs", :action=>"filter", :method => "get") do%>
+      <p style="margin-top:0; margin-left:-20px" id="date-selector"></p>
+      <%= hidden_field_tag :date_select %>
+      <%= submit_tag("Go!") %>
+    <%end%>
   </div>
 
   <span class="section_title">Categories</span>
@@ -70,11 +71,13 @@
           <p><%= strip_tags(raw(blog.summary)) %></p>
         </div>
         <div class="blog_trends">
-          <span>Trends in this blog: </span>
-          <%# blog.trends.each do |trend| %>
-            <span> <%#= link_to trend.name, trend_path(trend.name) %></span>
-          <%# end%>
+          <span style="margin-bottom: 4px;" class="fl">Trends in this blog: </span>
+          <div class="clear"></div>
+          <% blog.trends.each do |trend| %>
+            <span class="tag"> <%= link_to trend.name, trend_path(trend.name) %></span>
+          <% end%>
         </div>
+        <div class="clear"></div>
       </div>
       <% end %>
       <%end%>

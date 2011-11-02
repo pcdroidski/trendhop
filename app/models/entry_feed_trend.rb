@@ -21,4 +21,11 @@ class EntryFeedTrend < ActiveRecord::Base
     end
   end
 
+  define_index do
+    indexes entry_feed
+    indexes trend.name
+
+  end
+
+
 end

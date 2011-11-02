@@ -30,7 +30,7 @@
             <%#end%> -->
         </div>
         <div class="blog_content">
-          <p><%= raw(blog.summary) %></p>
+          <p><%= sanitize(raw(blog.summary), :tags => %w(p blockquote)) %></p>
         </div>
       </div>
       <% end %>

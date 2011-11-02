@@ -2,7 +2,9 @@
   <p>Options: </p>
     <%= link_to "More from this Blog", feed_path(@blog.feed_id)%><br/>
     <%= link_to 'Back to Blog Hop', blogs_path %> <br/>
-    <a href="" id="trend-article-button">Trend this Article</a><br/>
+     <%= link_to nil, :id => "trend-article-button" do%>
+        <div role="button" class="retrend-button">Trend this Article</div>
+      <% end%>
     Like this Article
 <%end%>
 
@@ -12,15 +14,12 @@
   </div>
 
   <div class="blog-info">
-    <%#= link_to "Trend this Article!", trend_blog_path(@blog.id) %>
-    <!-- <div class="fl">Posted by: <span id="user"><%#= @blog.user.name %></span> </div>
-    <div class="fr" style="width:200px;">Category: <span id="category"><%#= @blog.category_id %> </span> </div> -->
+    Posted: <%= @blog.published_at %>
   </div>
   <div class="clear"></div>
   <div class="blog-content">
-    <p><%= strip_tags(raw(@blog.content)) %></p>
-    <b>Attached websites:</b>
-    <%= @blog.url %>
+    <p><%= sanitize(raw(@blog.content), :tags => %w(p blockquote)) %></p>
+    <b>Attached websites:</b>  <%= link_to @blog.url, @blog.url %>
   </p>
 
   </div>

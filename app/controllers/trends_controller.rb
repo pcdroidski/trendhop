@@ -42,7 +42,7 @@ class TrendsController < ApplicationController
 
     @trend_hops = trend_hops(@trends)
     @posts = get_trend_posts(@trends)
-    @blogs = get_trend_blogs(@trends)
+    @blogs = get_trend_blogs(@trend_search)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -147,7 +147,7 @@ class TrendsController < ApplicationController
   def trend_hops(trends)
     hops = []
     trends.each do |trend|
-      trend.trends.each do |hop|
+      trend.trends.order("trend_count DESC").limit(15).each do |hop|
         hops << hop
       end
     end
@@ -164,11 +164,15 @@ class TrendsController < ApplicationController
     posts
   end
 
-  def get_trend_blogs(trends)
+  def get_trend_blogs(trend)
     blogs =[]
-    trends.each do |trend|
-      EntryFeed.search(trend, :order => :published_at, :sort_mode => :asc).each do |blog|
+    EntryFeed.search(trend, :order => :published_at, :sort_mode => :asc).each do |blog|
         blogs << blog
+    end
+    if blogs.blank?
+      tr = Trend.where(:name => trend).first
+      EntryFeedTrend.where(:trend_id => tr.id).each do |blog|
+        blogs << blog.entry_feed
       end
     end
     blogs

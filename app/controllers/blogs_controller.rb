@@ -36,14 +36,10 @@ class BlogsController < ApplicationController
       selected_dates = params[:date_selected].split(",").first
       date_1 = selected_dates.first
       date_2 = selected_dates.last
-      @blogs = @blogs.find(:all, :conditions => ['published_at >= ? and published_at <= ?', date_1, date_2])
+      @blogs = @blogs.where('published_at >= ? and published_at <= ?', date_1, date_2)
     end
 
-    raise @blogs.inspect
-
-
-    @blogs = @blogs.order("published_at DESC") unless @blogs.blank?
-    @blogs = @blogs.page(params[:page]).per(10)
+    @blogs = @blogs.order("created_at DESC").page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb

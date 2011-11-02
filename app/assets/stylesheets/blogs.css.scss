@@ -337,6 +337,8 @@ $us: #FF3366;
 
   .blog-content {
     border-bottom: 1px solid #000;
+    overflow:auto;
+    height: 600px;
 
     p {
       font-size: 20px;

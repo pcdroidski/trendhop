@@ -14,7 +14,9 @@
         <span class="subsection_title">Recent posts: </span>
         <ul class="trend_post">
           <% trend.post_contents.each do |post| %>
-          <li>  <%= link_to post.content, post_path(post.posts.first), :id=> "post" %><br/></li>
+            <%if !post.posts.blank?%>
+              <li>  <%= link_to post.content, post_path(post.posts.first), :id=> "post" %><br/></li>
+            <%end%>
           <% end%>
         </ul>
       </div>

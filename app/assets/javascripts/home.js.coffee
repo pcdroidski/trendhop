@@ -6,14 +6,6 @@
 jQuery ->
   jQuery("#pop-down").hide()
 
-  $('#date-selector').DatePicker
-    flat: true,	format: 'Y-m-d', current: '2010-11-01', calendars: 1, mode: 'range',	starts: 1, date: ['2008-07-28','2008-07-31'], onChange: (formatted, dates) ->
-      $('#date_select').val(formatted)
-      return
-
-  return
-
-
   button_L = 0
   button_R = 10
 

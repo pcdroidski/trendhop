@@ -28,6 +28,8 @@ class EntryFeed < ActiveRecord::Base
      end
    end
 
+   # scope :date_select, lambda {|date1, date2| where("released_at between ? and ?", date1, date2)}
+
    def trended?(user)
     # raise user.posts.inspect
      if user.posts.where(:entry_feed_id => self.id).exists?

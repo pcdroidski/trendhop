@@ -50,11 +50,12 @@ class BlogsController < ApplicationController
   # GET /refresh
   #POST /refresh
   def refresh
-    @feeds = Feed.all
-    feed_array = []
-    @feeds.each do |f|
-      EntryFeed.create_from_feed(f)
-    end
+    Feed.update_all
+    # @feeds = Feed.all
+    # feed_array = []
+    # @feeds.each do |f|
+    #   EntryFeed.create_from_feed(f)
+    # end
 
     redirect_to blogs_path
     flash[:notice] = "Blogs successfully updated"

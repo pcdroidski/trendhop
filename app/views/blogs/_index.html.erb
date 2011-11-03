@@ -5,6 +5,7 @@
 
   <div class="blogs">
       <% @blogs.each do |blog| %>
+      <% raise @blogs.inspect%>
       <% if !blog.title.include?("Ad")%>
       <div class="blog">
         <div id="<%= blog.feed.feed_category.name.split(" ").first %>" class="fr blog_origins">

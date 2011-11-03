@@ -5,8 +5,9 @@ class Feed < ActiveRecord::Base
 
   belongs_to :feed_category
 
-  def update_all
-    self.each do |f|
+  def self.update_all
+    feeds = Feed.all
+    feeds.each do |f|
       EntryFeed.create_from_feed(f)
     end
   end

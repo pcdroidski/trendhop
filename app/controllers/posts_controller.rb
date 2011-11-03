@@ -137,8 +137,8 @@ class PostsController < ApplicationController
       if params[:post][:trends] != "[]"
         trends = params[:post][:trends].split(",")
         trends.each do |tr|
-          trend = delete_chars(tr)
-          trend_array << tr if !trend_array.include?(trend) || !trend.blank?
+          trend2 = delete_chars(tr)
+          trend_array << trend2 if !trend_array.include?(trend2) && !trend2.blank?
         end
       end
     end

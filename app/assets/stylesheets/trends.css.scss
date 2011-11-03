@@ -40,65 +40,83 @@ $post-border: #616D7E;
     margin: 5px 0 10px 0;
     display: block;
     border: 1px solid #000;
-    @include rounded-corners(5px);
 
+   .trend_title {
+     width: 100%;
+     text-align: center;
+     padding: 5px 0 5px 0;
+     display:block;
+     font-size: 25px;
+     color: $name-color;
+     background: $trend-color;
 
-
-    .trend_info {
-      display: block;
-      width: 180px;
-      height: 100%;
-
-      .trend_title {
-        text-align: center;
-        margin: 5px 5px 5px 5px;
-        display:block;
-
-        a {
-          margin-top: auto;
-          margin-bottom: auto;
-          font-size: 25px;
-          color: $trend-color;
-          text-decoration: none;
-          &:hover {
-            text-decoration: underline;
-            }
-
+      a {
+        margin-top: auto;
+        margin-bottom: auto;
+        color: $name-color;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
         }
-      }
-
-      span {
-        font-size: 12px;
-        color: $text-color;
-        margin-left: 10px;
       }
     }
 
-    .trend_posts{
+  .trend_info {
       display: block;
-      width: 100%;
+      width: 20%;
+      height: 100%;
+      font-size: 14px;
+      color: $text-color;
+    }
 
-      ul.trend_post {
+
+  .trend_contents{
+    width: 80%;
+
+    .trend_list{
+      display: block;
+      width: 49.7%;
+
+
+      .subsection_title{
+        background: #06F;
+        padding:3px;
+        width: 80%;
+        color: #fff;
+        font-size: 16px;
+        font-weight:bold;
+      }
+
+      ul.list_items {
         height: 90px;
         overflow: auto;
         padding:0;
         list-style: none;
-        margin: 0px 5px 5px 5px;
+        margin: 0px 2px 0px 0px;
+        border-right: 1px solid #000;
+        border-left: 1px solid #000;
 
         li {
-          width: 95%;
+          width: 99%;
           float: left;
           padding-bottom: 3px;
-          margin: 2px 0 2px 10px;
+          margin: 2px 0 2px 0px;
           font-size: 15px;
           border-bottom: 1px solid $post-border;
 
           a {
-            text-decoration: none;}
-          }
+            color: $trend-color;
+            text-decoration: none;
 
+            &:hover{
+              color: #fff;
+            }
+          }
         }
+
       }
+    }
+  }
 
       .trend_hops {
         border-top: 1px solid #000;

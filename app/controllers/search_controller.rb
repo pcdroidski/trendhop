@@ -14,9 +14,7 @@ class SearchController < ApplicationController
     select_array = [@trends.count, @posts.count, @users.count, @blogs.count]
     max = nil
     model_array.each do |set|
-
       if eval("@"+ set + ".count") >= select_array.max
-
         max = set
       end
     end

@@ -10,7 +10,7 @@
 
 <div class='content' id="blog">
   <div class="blog-title">
-     <%= @blog.title %>
+     <%= raw(@blog.title) %>
   </div>
 
   <div class="blog-info">
@@ -19,7 +19,7 @@
   <div class="clear"></div>
   <div class="blog-content">
     <p><%= sanitize(raw(@blog.content), :tags => %w(p blockquote)) %></p>
-    <b>Attached websites:</b>  <%= link_to @blog.url, @blog.url %>
+    <b>Attached websites:</b>  <%= link_to @blog.url, @blog.url, :target=>"_blank" %>
   </p>
 
   </div>

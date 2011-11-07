@@ -109,7 +109,7 @@
       <div class="trend_hops fl">
             <span class="subsection_title">Hop to related trends: </span>
             <ul class="trend_hop">
-              <%  @post1.trend_hop.each do |hop|%>
+              <%  @post1.trend_hop.first(5).each do |hop|%>
                 <li class="fl" id='hop'>  <%= link_to hop.name, trend_path(hop.name) %></li>
               <% end%>
               <% if @post1.trend_hop.blank?%>

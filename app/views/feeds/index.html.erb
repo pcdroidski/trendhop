@@ -5,7 +5,7 @@
 <%end%>
 
 <h1>Browse Through Feeds</h1>
-<% if can? :manage, @feeds %>
+<% if can? :manage, Feed %>
   <%= link_to 'Test New Feed & add', new_feed_path %><br/>
 
 <%end%>
@@ -23,7 +23,7 @@
             <% else %>
               <div class="fr option"><%= link_to "Unsubscribe", unsubscribe_feeds_path(:feed_id => feed.id), :id=>"unsubscribe" %></div>
             <%end%>
-            <% if can? :manage, feed %>
+            <% if can? :manage, Feed %>
               <div class="clear"></div>
               <div><%= link_to 'Edit', edit_feed_path(feed) %> | | <%= link_to 'Destroy', feed, :confirm => 'Are you sure?', :method => :delete %></div>
               <br/>

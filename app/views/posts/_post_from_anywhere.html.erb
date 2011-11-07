@@ -29,7 +29,7 @@
 
   <%else%>
     <%= f.fields_for :post_content do |post_form| %>
-      <div class="field_1" >
+      <div class="field_1" contenteditable="true">
         <%= post_form.text_field :content, :id => "trend_input", :value => "" %>
       </div>
       <div class="field" >

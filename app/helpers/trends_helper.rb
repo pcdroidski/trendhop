@@ -24,4 +24,12 @@ module TrendsHelper
     count
   end
 
+  def blog_counts(trends)
+    count = 0
+    trends.each do |trend|
+      count = count + trend.entry_feeds.count unless trend.entry_feeds.blank?
+    end
+    count
+  end
+
 end

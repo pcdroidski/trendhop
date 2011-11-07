@@ -9,6 +9,12 @@ class Ability
     else
       can :read, :all
 
+      if user.role =="moderator"
+        can :manage, Blog
+        can :manage, Feed
+        can :manage, EntryFeed
+      end
+
       if user.role == 'standard'
         can :update, User do |me|
           me == user

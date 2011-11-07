@@ -73,7 +73,7 @@ class Post < ActiveRecord::Base
 
   def trend_hop
     array = []
-    self.trends.each do |trend|
+    self.trends.order("trend_count DESC").each do |trend|
       trend.trend_hops.each do |hop|
         if !self.trends.include?(hop.trend) && !array.include?(hop.trend)
           array << hop.trend

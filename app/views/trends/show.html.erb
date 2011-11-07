@@ -15,8 +15,11 @@
     <div id="category">
       <%= pluralize(like_counts(@trends), "person", "people") %> like <%= @trend_search.humanize%>
     </div>
-    <div id="count">
+    <div id="category">
       <%= pluralize(trend_counts(@trends), "person is", "people are") %> trending <%= @trend_search.humanize%>
+    </div>
+    <div id="count">
+      <%= pluralize(blog_counts(@trends), "blog is", "blogs are") %> trending <%= @trend_search.humanize%>
     </div>
   </div>
   <div class="clear"></div>

@@ -5,14 +5,14 @@
 
   <div class="blogs">
       <% @blogs.each do |blog| %>
-      <% raise @blogs.inspect%>
+      <%# raise @blogs.inspect%>
       <% if !blog.title.include?("Ad")%>
       <div class="blog">
         <div id="<%= blog.feed.feed_category.name.split(" ").first %>" class="fr blog_origins">
           <%= blog.feed.name%>
         </div>
         <div class="blog_title fl">
-          <div class="fl" id="title"><%= link_to blog.title, blog_path(blog) %> </div>
+          <div class="fl" id="title"><%= link_to raw(blog.title), blog_path(blog) %> </div>
         </div>
           <span style="margin: 0 0 5px 10px; " class="fl">Posted: <%= blog.published_at %></span>
         <div class='clear'></div>

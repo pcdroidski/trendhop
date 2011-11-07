@@ -67,6 +67,7 @@ class EntryFeed < ActiveRecord::Base
       indexes summary
       indexes content
       indexes feed.name
+      indexes trends(:name), :as => :trend
 
       has published_at, :sortable => true
     end

@@ -29,8 +29,8 @@
 
   <%else%>
     <%= f.fields_for :post_content do |post_form| %>
-      <div class="field_1" contenteditable="true">
-        <%= post_form.text_field :content, :id => "trend_input", :value => "" %>
+      <div class="field_1">
+        <%= post_form.text_field :content, :id => "trend_input", :style => "display:hidden;" %>
       </div>
       <div class="field" >
         <%= f.hidden_field :trends, :id => "trends_form" %>

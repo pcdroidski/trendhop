@@ -202,27 +202,13 @@
 			if (settings.hide) {
 				$(this).hide();
 			}
-
 			id = $(this).attr('id')
-
-			if ($("#blog_trend_list").text() != null){
-          trend_list = $("#blog_trend_list").text().split(",");
-          trend_array = $.makeArray(trend_list);
-          console.log(trend_list)
-        	for (i=0; i<trend_array.length; i++) {
-      			$(this).quickAdd(trend_array[i]);
-      			console.log(trend_array[i])
-      		}
-          console.log(trend_list)
-			}
-
-
 			data = jQuery.extend({
 				pid:id,
 				real_input: '#'+id,
-				holder: '#'+id+'_tagsinput',
-				input_wrapper: '#'+id+'_addTag',
-				fake_input: '#'+id+'_tag'
+				holder: '#'+id+'_content',
+				input_wrapper: '#'+id+'_addTag'
+        // fake_input: '#'+id+'_tagsinput' //CHANGED FROM _tag
 			},settings);
 
 			delimiter[id] = data.delimiter;
@@ -234,106 +220,36 @@
 				tags_callbacks[id]['onChange'] = settings.onChange;
 			}
 
-			var markup = '<div id="'+id+'_tagsinput" class="tagsinput"><div id="'+id+'_addTag">';
+			var markup = '<div contenteditable="true" id="trend_input_content">';
+			markup = markup + '</div><div class="tags_clear"></div>';
 
-			if (settings.interactive) {
-				markup = markup + '<input id="'+id+'_tag" value="" data-default="'+settings.defaultText+'" />';
-			}
-
-			markup = markup + '</div><div class="tags_clear"></div></div>';
+			console.log("id", id)
 
 			$(markup).insertAfter(this);
 
-			$(data.holder).css('width',settings.width);
-			$(data.holder).css('height',settings.height);
-
-			if ($(data.real_input).val()!='') {
-				$.fn.trendsInput.importTags($(data.real_input),$(data.real_input).val());
-			}
-			if (settings.interactive) {
-				$(data.fake_input).val($(data.fake_input).attr('data-default'));
-				$(data.fake_input).css('color',settings.placeholderColor);
-
-				$(data.holder).bind('click',data,function(event) {
-					$(event.data.fake_input).focus();
-				});
-
-				$(data.fake_input).bind('focus',data,function(event) {
-					if ($(event.data.fake_input).val()==$(event.data.fake_input).attr('data-default')) {
-						$(event.data.fake_input).val('');
-					}
-					$(event.data.fake_input).css('color','#000000');
-				});
-
-				if (settings.autocomplete_url != undefined) {
-				  autocomplete_options = {source: settings.autocomplete_url};
-				  for (attrname in settings.autocomplete) {
-				    autocomplete_options[attrname] = settings.autocomplete[attrname];
-				  }
-
-				  if (jQuery.Autocompleter !== undefined) {
-				    $(data.fake_input).autocomplete(settings.autocomplete_url, settings.autocomplete);
-				    $(data.fake_input).bind('result',data,function(event,data,formatted) {
-              if (data) {
-                d = data + "";
-                $(event.data.real_input).addTag(d,{focus:true,unique:(settings.unique)});
-              }
-            });
-				  } else if (jQuery.ui.autocomplete !== undefined) {
-					  $(data.fake_input).autocomplete(autocomplete_options);
-					  $(data.fake_input).bind('autocompleteselect',data,function(event,ui) {
-  					  $(event.data.real_input).addTag(ui.item.value,{focus:true,unique:(settings.unique)});
-  					  return false;
-            });
-				  }
+			$("#trend_input_content").css('width',settings.width);
+			$("#trend_input_content").css('height',settings.height);
 
 
-				} else {
-						// if a user tabs out of the field, create a new tag
-						// this is only available if autocomplete is not used.
-						$(data.fake_input).bind('blur',data,function(event) {
-							var d = $(this).attr('data-default');
-							if ($(event.data.fake_input).val()!='' && $(event.data.fake_input).val()!=d) {
-								if( (event.data.minChars <= $(event.data.fake_input).val().length) && (!event.data.maxChars || (event.data.maxChars >= $(event.data.fake_input).val().length)) )
-									$(event.data.real_input).addTag($(event.data.fake_input).val(),{focus:true,unique:(settings.unique)});
-							} else {
-								$(event.data.fake_input).val($(event.data.fake_input).attr('data-default'));
-								$(event.data.fake_input).css('color',settings.placeholderColor);
-							}
-							return false;
-						});
+		  // TEST TES TEST!!! when user types "#"- start the tagging process
+		  $("#trend_input_content").keypress(function(event) {
+			  if (event.which==35 ) {
+          // var trending = '<a contenteditable="true" id="current_tag" class="tag"';
+          //         $('#trend_input_content').append(trending);
+          $('#trend_input_content').keypress(function(event) {
+            if (event.which==13){
+             input_stuff = $("#trend_input_content").text();
+             console.log(input_stuff)
+             //?? MAYBE?? Can you add in an input box after "#" is pressed
+            }
+          });
 
-				}
-				// if user types a comma, create a new tag
-				$(data.fake_input).bind('keypress',data,function(event) {
-					if (event.which==event.data.delimiter.charCodeAt(0) || event.which==13 ) {
-						if( (event.data.minChars <= $(event.data.fake_input).val().length) && (!event.data.maxChars || (event.data.maxChars >= $(event.data.fake_input).val().length)) )
-							$(event.data.real_input).addTag($(event.data.fake_input).val(),{focus:true,unique:(settings.unique)});
+			  }
+		  });
 
-						return false;
-					}
-				});
-				//Delete last tag on backspace
-				data.removeWithBackspace && $(data.fake_input).bind('keydown', function(event)
-				{
-					if(event.keyCode == 8 && $(this).val() == '')
-					{
-						 event.preventDefault();
-						 var last_tag = $(this).closest('.tagsinput').find('.tag:last').text();
-						 var id = $(this).attr('id').replace(/_tag$/, '');
-						 last_tag = last_tag.replace(/[\s]+x$/, '');
-						 $('#' + id).removeTag(escape(last_tag));
-						 $(this).trigger('focus');
-					};
-				});
-				$(data.fake_input).blur();
-			} // if settings.interactive
-			return false;
-		});
-
-		return this;
-
-	};
+	  });
+    return this;
+  };
 
 	$.fn.trendsInput.updateTagsField = function(obj,tagslist, trendText) {
 		id = $(obj).attr('id');

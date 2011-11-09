@@ -48,88 +48,66 @@
 
 	};
 
-	$.fn.addTag = function(value,options) {
-			var options = jQuery.extend({focus:false,callback:true},options);
-			this.each(function() {
+	$.fn.addTag = function(value,text) {
 				id = $(this).attr('id');
-
-				inputTrendText = inputTrendText + value + " ";
-
-        // var tagslist = $(this).val().split(delimiter[id]);
-        // if (tagslist[0] == '') {
-        //  tagslist = new Array();
-        // }
-
+				text = text + value + " ";
 				value = jQuery.trim(value);
+				skipTag = false;
+				if (value !='') {
+	          $('#trend_input_content').append(
+	            $('<a contenteditable="false" data-is-processed="1" style="margin: 0 5px 0 1px; width: auto; background: green; color: white; padding: 0 2px 0 2px;" class="tag">').text(value),
+	            $("</a>")
+            );
+              // $('<span>').addClass('tag').attr('id','tag_'+(trend_number+"")).append(
+              //                 $('<span>').text(value).append('&nbsp;&nbsp;'),
+              //                 $('<a>', {
+              //                     href  : '#',
+              //                     title : 'Removing tag',
+              //                     id: trend_number+"",
+              //                     text  : 'x'
+              //                 }).click(function () {
+              //                    return $('#' + id).removeTag(escape(value), this);
+              //                 })
+              //             )).insertBefore('#' + id + '_addTag');
 
-				array = value.split("#")
-				real_array = $.makeArray(array)
-
-				var the_trend = real_array[real_array.length-1]
-        old_text = real_array[real_array.length-2]
-        value = jQuery.trim(the_trend);
-
-				if (options.unique) {
-					skipTag = $(tagslist).tagExist(value);
-				} else {
-					skipTag = false;
-				}
-
-				if (value !='' && skipTag != true) {
-				          $('<span>').addClass('text_holder').append(
-				            $('<span class="fl">').text(old_text).append("</span>"),
-                    $('<span>').addClass('tag').attr('id','tag_'+(trend_number+"")).append(
-                        $('<span>').text(value).append('&nbsp;&nbsp;'),
-                        $('<a>', {
-                            href  : '#',
-                            title : 'Removing tag',
-                            id: trend_number+"",
-                            text  : 'x'
-                        }).click(function () {
-                           return $('#' + id).removeTag(escape(value), this);
-                        })
-                    )).insertBefore('#' + id + '_addTag');
-                   $("#trends_container").append(
-                      $('<span>').addClass('tag').attr('id','tag_'+(trend_number+"")).append(
-                            $('<span>').text(value).append('&nbsp;&nbsp;'),
-                            $('<a>', {
-                                href  : '#',
-                                title : 'Removing tag',
-                                id: trend_number+"",
-                                text  : 'x'
-                            }).click(function () {
-                                set_num = trend_number;
-                                return $('#' + id).removeTag(escape(value), this);
-                            })
-                        ));
+           $("#trends_container").append(
+              $('<span>').addClass('tag').attr('id','tag_'+(trend_number+"")).append(
+                    $('<span>').text(value).append('&nbsp;&nbsp;'),
+                    $('<a>', {
+                        href  : '#',
+                        title : 'Removing tag',
+                        id: trend_number+"",
+                        text  : 'x'
+                    }).click(function () {
+                        set_num = trend_number;
+                        return $('#' + id).removeTag(escape(value), this);
+                    })
+                ));
 
 					tagslist.push(value);
 					trend_number = trend_number + 1;
 
 					console.log(tagslist)
 
-					$('#'+id+'_tag').val('');
-					if (options.focus) {
-						$('#'+id+'_tag').focus();
-					} else {
-						$('#'+id+'_tag').blur();
-					}
+          // $('#'+id+'_tag').val('');
+          // if (options.focus) {
+          //  $('#'+id+'_tag').focus();
+          // } else {
+          //  $('#'+id+'_tag').blur();
+          // }
 
-					if (options.callback && tags_callbacks[id] && tags_callbacks[id]['onAddTag']) {
-						var f = tags_callbacks[id]['onAddTag'];
-						f(value);
-					}
-					if(tags_callbacks[id] && tags_callbacks[id]['onChange'])
-					{
-						var i = tagslist.length;
-						var f = tags_callbacks[id]['onChange'];
-						f($(this), tagslist[i]);
-					}
+					// if (options.callback && tags_callbacks[id] && tags_callbacks[id]['onAddTag']) {
+					//             var f = tags_callbacks[id]['onAddTag'];
+					//             f(value);
+					//           }
+					//           if(tags_callbacks[id] && tags_callbacks[id]['onChange'])
+					//           {
+					//             var i = tagslist.length;
+					//             var f = tags_callbacks[id]['onChange'];
+					//             f($(this), tagslist[i]);
+					//           }
 				}
-        // $.fn.tagsInput.updateTagsField(this,tagslist);
         $.fn.trendsInput.updateTagsField(this,tagslist,inputTrendText);
-
-			});
 
 			return false;
 		};
@@ -234,13 +212,36 @@
 		  // TEST TES TEST!!! when user types "#"- start the tagging process
 		  $("#trend_input_content").keypress(function(event) {
 			  if (event.which==35 ) {
-          // var trending = '<a contenteditable="true" id="current_tag" class="tag"';
-          //         $('#trend_input_content').append(trending);
-          $('#trend_input_content').keypress(function(event) {
-            if (event.which==13){
-             input_stuff = $("#trend_input_content").text();
-             console.log(input_stuff)
-             //?? MAYBE?? Can you add in an input box after "#" is pressed
+          var trending = '<input id="add_tag" style="font-size:15px; color: white; font-weight:bold; background: green;" >';
+          $('#trend_input_content').append(trending);
+          $("#add_tag").focus();
+          $('#add_tag').keypress(function(event) {
+
+            if (event.which==13|| event.which==44){
+               input_stuff = $("#trend_input_content").text();
+               input_trend = $("#add_tag").val();
+               console.log("text", input_stuff)
+               console.log("trend",input_trend)
+               $.fn.addTag(input_trend, input_stuff);
+               atext = $("#trend_input_content").text();
+               test = atext.toString();
+               pos = test.length
+               $("#add_tag").blur().remove();
+               $("#trend_input_content").focus();
+               var divy = document.getElementById("trend_input_content");
+               divy.onkeypress = function(evt) {
+                   evt = evt || window.event;
+                   var charCode = (typeof evt.which == "undefined") ? evt.keyCode : evt.which;
+                   if (charCode) {
+                       var charStr = String.fromCharCode(charCode);
+                       var greek = convertCharToGreek(charStr);
+                       insertTextAtCursor(greek);
+                       return false;
+                   }
+               }
+
+               return false;
+
             }
           });
 
@@ -257,6 +258,43 @@
 	  $("#trends_form").val(tagslist.join(delimiter[id]))
 	  $(obj).val(trendText);
 	};
+
+// START TEST
+  var greekChars = {
+      "a": "\u03b1"
+      // Add character mappings here
+  };
+
+//   http://stackoverflow.com/questions/2940882/need-to-set-cursor-position-to-the-end-of-a-contenteditable-div-issue-with-sele
+//
+  function convertCharToGreek(charStr) {
+      return greekChars[charStr] || "[Greek]";
+  }
+
+  function insertTextAtCursor(text) {
+      var sel, range, textNode;
+      if (window.getSelection) {
+          sel = window.getSelection();
+          if (sel.getRangeAt && sel.rangeCount) {
+              range = sel.getRangeAt(0);
+              range.deleteContents();
+              textNode = document.createTextNode(text);
+              range.insertNode(textNode);
+
+              // Move caret to the end of the newly inserted text node
+              range.setStart(textNode, textNode.length);
+              range.setEnd(textNode, textNode.length);
+              sel.removeAllRanges();
+              sel.addRange(range);
+          }
+      } else if (document.selection && document.selection.createRange) {
+          range = document.selection.createRange();
+          range.pasteHTML(text);
+      }
+  }
+
+  // END TEST
+
 
 	$.fn.trendsInput.importTags = function(obj,val) {
 		$(obj).val('');

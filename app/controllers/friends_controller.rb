@@ -59,15 +59,14 @@ class FriendsController < ApplicationController
   # PUT /friends/1
   # PUT /friends/1.json
   def update
-    @friend = UserFriend.find(params[:id])
-
+    @friend = UserFriend.find(params[:real_id])
     respond_to do |format|
-      if @friend.update_attributes(params[:friend])
-        format.html { redirect_to @friend, :notice => 'Friend was successfully updated.' }
-        format.json { head :ok }
+      if @friend.update_attributes(params[:user_friend])
+        # format.html { redirect_to root_path, :notice => 'Friend was successfully updated.' }
+        # format.json { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.json { render :json => @friend.errors, :status => :unprocessable_entity }
+        # format.html { render :action => root_path }
+        # format.json { render :json => @friend.errors, :status => :unprocessable_entity }
       end
     end
   end

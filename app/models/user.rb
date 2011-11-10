@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   has_many :user_friends, :dependent => :destroy
   has_many :friends, :through => :user_friends
-  
+
   has_many :user_following_trends
   has_many :trends, :through => :user_following_trends
 
@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
   # def role_symbols
   #   [role.to_sym]
   # end
+  def friend_group(user)
+    friend = UserFriend.where(:user_id => user.id, :friend_id=> self.id).first
+  end
+
 
   def full_name
     [first_name,last_name].join(" ")

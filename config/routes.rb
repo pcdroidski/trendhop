@@ -25,6 +25,8 @@ Trendhop::Application.routes.draw do
 
   resources :groups
 
+  resources :friends
+
   resources :search
 
   resources :posts do

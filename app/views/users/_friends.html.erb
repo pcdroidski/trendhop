@@ -1,0 +1,22 @@
+<ul>
+<% @friends.each do |friend|%>
+  <% @user_friend = friend.friend_group(current_user)%>
+  <%# raise @user_friend.inspect%>
+  <%# raise current_user.groups.inspect%>
+  <li>
+    <div>
+      <div class="fl"><%= friend.full_name %></div>
+      <div class='fl'>
+      <%if @user != current_user%>
+        <%= @user_friend.name %>
+      <% else%>
+        <%= form_for @user_friend, :url => {:controller => :friends, :action => :update, :real_id => @user_friend.id}, :remote => true do |f|%>
+            <%= f.collection_select(:group_id, current_user.groups, :id, :name, :prompt => true ) %>
+        <%end%>
+      <%end%>
+      </div>
+
+    </div>
+  </li>
+<% end%>
+</ul>

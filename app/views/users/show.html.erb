@@ -148,9 +148,7 @@
     </div>
   <% when "friends"%>
   <% if !@friends.blank? %>
-    <% @friends.each do |friend|%>
-      <p><%= friend.full_name %> </p>
-    <% end%>
+    <%= render :partial => "users/friends"%>
   <% else%>
     <p>You have no friends?!?! </p>
   <%end%>

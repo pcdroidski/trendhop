@@ -44,7 +44,14 @@ jQuery ->
 
   # Article trend button
   $("#trend-article-button").click ->
-    $("#main-home-background").toggleClass("darken-background")
+    windowHeight = document.documentElement.clientHeight
+    console.log(windowHeight)
+    $("#darken-background").css "height": windowHeight
+
+    $("#darken-background").css	"opacity": "0.7"
+
+    $("#darken-background").fadeToggle("slow")
+
     $("#drop-down-button").toggleClass("open-menu")
     $(".profile-menu").toggleClass("plus-menu")
     $("#trend-something").show()
@@ -59,7 +66,13 @@ jQuery ->
 
   # MAin drop down
   $("#drop-down-button").click ->
-    $("#main-home-background").toggleClass("darken-background")
+    windowHeight = document.documentElement.clientHeight
+    console.log(windowHeight)
+    $("#darken-background").css "height": windowHeight
+    $("#darken-background").css	"opacity": "0.9"
+
+    $("#darken-background").fadeToggle("slow");
+
     $("#drop-down-button").toggleClass("open-menu")
     $(".profile-menu").toggleClass("plus-menu")
     $("#current-now").show()
@@ -83,10 +96,22 @@ jQuery ->
     $("#trend-now-button").removeClass("inactive").addClass("active")
     return
 
+# If you click on the background- diabled bakcgournd blur
+  $("#darken-background").click ->
+    $("#darken-background").fadeOut("slow")
+
+    $("#drop-down-button").removeClass("open-menu")
+    $("#pop-down").slideUp("fast")
+    $("#trend_input_content").val("")
+    false
+
+
   $("#cancel-trend").click ->
-    $("#main-home-background").toggleClass("darken-background")
+    $("#darken-background").fadeOut("slow")
+
     $("#drop-down-button").toggleClass("open-menu")
     $("#pop-down").slideToggle("fast")
+    $("#trend_input_content").val("")
     false
   # $("#trend-blog").click ->
   #   $("#pop-down").slideToggle("fast")

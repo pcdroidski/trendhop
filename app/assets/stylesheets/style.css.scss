@@ -15,14 +15,17 @@ $post-color: #0000FF;
   background: #0066FF;
 }
 
-.darken-background {
-  background: darken(#fff, 60%) !important;
-  z-index: 300;
-  height: 100% !important;
-  .section_title, .left_menu_post_select, .title, .title-trends, .title-trends li, .trend-body, .trend-section, .filter-link, #comment_post_body, #active-filter, .post-date, .untrend-button, .retrend-button, .trend-button, #comments_index {
-    background: darken(#fff, 60%) !important;
-
-  }
+#darken-background {
+  display:none;
+  position:fixed;
+  _position:absolute; /* hack for internet explorer 6*/
+  height:100%;
+  width:100%;
+  top:0;
+  left:0;
+  background:#000000;
+  border:1px solid #cecece;
+  z-index:30;
 
 }
 
@@ -129,9 +132,8 @@ $post-color: #0000FF;
       }
     }
     .bottom-info{
-      padding: 15px 0 1px 0;
       background: #D8D8D8;
-      height: 55px;
+      height: 30px;
 
       width: 100%;
 
@@ -183,9 +185,12 @@ $post-color: #0000FF;
   }
 
   #trends_container {
-    width: 98%;
-    height: 40px;
-    padding: 8px;
+    width: 95%;
+    margin: 5px 0 5px 10px;
+    min-height: 20px;
+    height: auto;
+    overflow: visible;
+    padding: 4px;
   }
 
   .cancel-action{

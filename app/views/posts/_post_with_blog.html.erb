@@ -8,7 +8,7 @@
             <% if list_trends(@post1) == "" %>
               a link from <b><%= @post1.entry_feed.feed.name unless @post1.entry_feed.blank?%></b>
             <% else%>
-              <%= raw(list_trends(@post1)) %> with a link!
+              <%= raw(list_trends(@post1)) %> with a link from <b><%= @post1.entry_feed.feed.name unless @post1.entry_feed.blank?%></b>
             <%end%>
 
           <% if @post1.retrend%>

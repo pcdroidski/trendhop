@@ -152,6 +152,18 @@
 				tags_callbacks[id]['onChange'] = settings.onChange;
 			}
 
+			if ($("#blog_trend_list").text() != null){
+        trend_list = $("#blog_trend_list").text().split(",");
+        trend_array = $.makeArray(trend_list);
+        console.log(trend_list)
+
+        for (i=0; i<trend_array.length; i++) {
+        	$(this).quickAdd(trend_array[i]);
+        		console.log(trend_array[i])
+        	}
+          console.log(trend_list)
+      }
+
 			var markup = '<div contenteditable="true" id="trend_input_content">';
 			markup = markup + '</div><div class="tags_clear"></div>';
 

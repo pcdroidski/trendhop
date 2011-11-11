@@ -18,12 +18,17 @@
       </div>
       <div class="field" >
         <% blog_trend_list = ""%>
+
         <% @blog.trends.each do |bt|%>
           <% blog_trend_list = blog_trend_list +", "+ bt.name %>
         <%end%>
+
         <%= f.hidden_field :trends, :id => "trends_form" %>
+
         <p style="margin: 0 0 0 5px; font-size: 18px;">Trends you will be posting: </p>
-        <div style="display: none !important;" id="blog_trend_list"><%=blog_trend_list%></div>
+        <div style="display: none !important;" id="blog_trend_list">
+          <%= blog_trend_list %>
+        </div>
         <div id="trends_container"></div>
       </div>
 

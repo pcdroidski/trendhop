@@ -65,7 +65,34 @@ $trend-color: #339966;
 
     }
   }
+  .friends_show {
+    padding: 0;
+    margin: 5px 0 10px 5px;
+    list-style: none;
+
+    li {
+      padding: 5px;
+      border-bottom: 2px solid grey;
+      height: 25px;
+
+      .name {
+        width: 70%;
+        font-size: 18px;
+      }
+
+      .group {
+
+        #user_friend_group_id {
+          font-size: 18px;
+          width: 200px;
+        }
+
+      }
+    }
+  }
+
 }
+
 
 #user_search{
 

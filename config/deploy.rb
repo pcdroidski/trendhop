@@ -118,7 +118,7 @@ end
 
  after "deploy", "deploy:migrate"
  after "deploy", "deploy:cleanup"
- after "deploy", "deploy:update_crontab"
+ # after "deploy", "deploy:update_crontab"
  #after "deploy", "deploy:assets"
 
  # Configure thinking sphinx

@@ -43,6 +43,7 @@ class EntryFeed < ActiveRecord::Base
 
    def self.add_entries(entries, feed)
      entries.each do |entry|
+       raise entry.inspect
        unless exists? :guid => entry.id
          create!(
            :feed_id       => feed.id,

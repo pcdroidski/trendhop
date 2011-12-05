@@ -1,0 +1,25 @@
+
+<div class="trends_stat">
+  <div class="top_options">
+    <span><%= @render_name%></span>
+  </div>
+  <div class="middle_content">
+    <div class="left_options fl">
+      <div class="top">
+        <span>Categories</span>
+      </div>
+      <ul class="cat_lists">
+        <li>All</li>
+        <% FeedCategories.each do |cat|%>
+          <li><%= cat.name%></li>
+        <%end%>
+      </ul>
+    </div>
+    <div class="right_list fl">
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="bottom_options">
+  </div>
+
+</div>

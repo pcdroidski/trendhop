@@ -42,9 +42,9 @@ class Trend < ActiveRecord::Base
   private
 
   def self.entry_feed_trend(trend)
-    trend_find = Trend.where(:name => trend).first
+    trend_get = trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").delete("?").delete(".").delete(",").delete("<").delete(">").delete("/").delete('\\').delete("-")
+    trend_find = Trend.where(:name => trend_get).first
     if trend_find.blank?
-      trend_get = trend.delete("!").delete("@").delete("#").delete("*").delete("(").delete(")").delete("?").delete(".").delete(",").delete("<").delete(">").delete("/").delete('\\').delete("-")
       create!(
         :name         => trend_get,
         :trend_count  => 0,
